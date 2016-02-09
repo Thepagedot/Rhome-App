@@ -5,7 +5,7 @@ using Android.Content;
 using Android.Views;
 using System.Collections.Generic;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public class HomeMaticChannelAdapter : ArrayAdapter<HomeMaticChannel>
     {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Thepagedot.Rhome.Demo.Shared.Models;
+using Thepagedot.Rhome.App.Shared.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 
-namespace Thepagedot.Rhome.Demo.Shared.Services
+namespace Thepagedot.Rhome.App.Shared.Services
 {
     public class SettingsService
     {

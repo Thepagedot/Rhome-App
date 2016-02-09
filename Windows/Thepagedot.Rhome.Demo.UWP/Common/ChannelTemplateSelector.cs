@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Thepagedot.Rhome.Demo.UWP.Common
+namespace Thepagedot.Rhome.App.UWP.Common
 {
     public class ChannelTemplateSelector : DataTemplateSelector
     {

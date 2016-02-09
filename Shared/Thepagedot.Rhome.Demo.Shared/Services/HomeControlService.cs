@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.HomeMatic.Services;
 
-namespace Thepagedot.Rhome.Demo.Shared.Services
+namespace Thepagedot.Rhome.App.Shared.Services
 {
     public class HomeControlService
     {

@@ -2,7 +2,7 @@
 using Android.Widget;
 using Android.Views;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public static class ScollingHelpers
     {

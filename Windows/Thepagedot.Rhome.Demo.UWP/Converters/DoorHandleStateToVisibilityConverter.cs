@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Thepagedot.Rhome.HomeMatic.Models;
 
-namespace Thepagedot.Rhome.Demo.UWP.Converters
+namespace Thepagedot.Rhome.App.UWP.Converters
 {
     public sealed class DoorHandleStateToVisibilityConverter : IValueConverter
     {

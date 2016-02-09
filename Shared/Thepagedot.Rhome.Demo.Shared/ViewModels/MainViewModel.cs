@@ -7,10 +7,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.Base.Models;
-using Thepagedot.Rhome.Demo.Shared.Services;
+using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
 
-namespace Thepagedot.Rhome.Demo.Shared.ViewModels
+namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class MainViewModel : AsyncViewModelBase
     {
@@ -45,7 +45,6 @@ namespace Thepagedot.Rhome.Demo.Shared.ViewModels
             _SettingsService = settingsService;
             _HomeControlService = homeControlService;
 
-            //var appTitle = _ResourceService.GetString("AppTitle");
 
             if (IsInDesignMode)
             {

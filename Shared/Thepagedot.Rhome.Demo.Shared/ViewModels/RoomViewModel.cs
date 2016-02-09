@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 
-namespace Thepagedot.Rhome.Demo.Shared.ViewModels
+namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class RoomViewModel : AsyncViewModelBase
     {

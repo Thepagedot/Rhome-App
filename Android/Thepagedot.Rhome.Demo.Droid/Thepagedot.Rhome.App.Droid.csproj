@@ -181,9 +181,9 @@
       <Project>{EF0E99DF-41E4-4CB3-A6DB-B8D911E6A3BB}</Project>
       <Name>Thepagedot.Rhome.HomeMatic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Thepagedot.Rhome.Demo.Shared\Thepagedot.Rhome.Demo.Shared.csproj">
+    <ProjectReference Include="..\..\Shared\Thepagedot.Rhome.Demo.Shared\Thepagedot.Rhome.App.Shared.csproj">
       <Project>{E787A5C5-262C-4F6C-85C8-6096E40F9E08}</Project>
-      <Name>Thepagedot.Rhome.Demo.Shared</Name>
+      <Name>Thepagedot.Rhome.App.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

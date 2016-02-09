@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Thepagedot.Rhome.Base.Models;
-using Thepagedot.Rhome.Demo.UWP.Views;
+using Thepagedot.Rhome.App.UWP.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace Thepagedot.Rhome.Demo.UWP
+namespace Thepagedot.Rhome.App.UWP
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -66,9 +66,10 @@ namespace Thepagedot.Rhome.Demo.UWP
             Frame.Navigate(typeof(RoomPage));
         }
 
-        private void MenuSettings_Click(object sender, RoutedEventArgs e)
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Frame.Navigate(typeof(SettingsPage));
+            if (e.ClickedItem == MenuSettings)
+                Frame.Navigate(typeof(SettingsPage));
         }
 
         #region Room Grid

@@ -15,7 +15,7 @@ using Thepagedot.Rhome.HomeMatic.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     [Activity(Label = "Rhome", MainLauncher = true)]
     public class MainActivity : AppCompatActivity

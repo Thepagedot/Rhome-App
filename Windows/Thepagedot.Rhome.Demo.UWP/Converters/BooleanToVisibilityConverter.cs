@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace Thepagedot.Rhome.Demo.UWP.Converters
+namespace Thepagedot.Rhome.App.UWP.Converters
 {
     /// <summary>
     /// Value converter that translates true to <see cref="Visibility.Visible"/> and false to

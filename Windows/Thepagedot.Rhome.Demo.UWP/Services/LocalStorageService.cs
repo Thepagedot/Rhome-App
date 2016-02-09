@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Thepagedot.Rhome.Demo.Shared.Models;
-using Thepagedot.Rhome.Demo.Shared.Services;
+using Thepagedot.Rhome.App.Shared.Models;
+using Thepagedot.Rhome.App.Shared.Services;
 using Windows.Storage;
 
-namespace Thepagedot.Rhome.Demo.UWP.Services
+namespace Thepagedot.Rhome.App.UWP.Services
 {
     public class LocalStorageService : ILocalStorageService
     {

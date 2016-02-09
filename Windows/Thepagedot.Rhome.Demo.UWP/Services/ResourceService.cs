@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Thepagedot.Rhome.Demo.Shared.Services;
+using Thepagedot.Rhome.App.Shared.Services;
 using Windows.ApplicationModel.Resources;
 
-namespace Thepagedot.Rhome.Demo.UWP.Services
+namespace Thepagedot.Rhome.App.UWP.Services
 {
     public class ResourceService : IResourceService
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Thepagedot.Rhome.Demo.Shared.ViewModels
+namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class AsyncViewModelBase : ViewModelBase
     {

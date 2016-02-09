@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public class RoomAdapter : ArrayAdapter<Room>
     {

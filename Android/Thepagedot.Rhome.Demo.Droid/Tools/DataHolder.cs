@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Android.Content;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public class DataHolder
     {
@@ -56,7 +56,7 @@ namespace Thepagedot.Rhome.Demo.Droid
             }
             else
             {
-                Settings.Configuration = new Thepagedot.Rhome.Demo.Shared.Models.Configuration();
+                Settings.Configuration = new Thepagedot.Rhome.App.Shared.Models.Configuration();
             }
         }
 

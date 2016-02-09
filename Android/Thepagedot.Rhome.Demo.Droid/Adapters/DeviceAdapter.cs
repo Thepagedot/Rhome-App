@@ -7,7 +7,7 @@ using Android.Views;
 using System.Linq;
 using Thepagedot.Rhome.Base.Models;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public class DeviceAdapter : ArrayAdapter<Device>
     {

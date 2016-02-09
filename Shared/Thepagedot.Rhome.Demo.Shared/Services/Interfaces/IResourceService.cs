@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Thepagedot.Rhome.Demo.Shared.Services
+namespace Thepagedot.Rhome.App.Shared.Services
 {
     public interface IResourceService
     {

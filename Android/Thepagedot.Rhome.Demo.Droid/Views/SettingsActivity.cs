@@ -19,7 +19,7 @@ using Thepagedot.Rhome.HomeMatic.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.Base.Models;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     [Activity(Label = "Settings", ParentActivity = typeof(MainActivity))]			
 	public class SettingsActivity : AppCompatActivity

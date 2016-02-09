@@ -12,7 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Thepagedot.Rhome.HomeMatic.Models;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {	
     public static class HomeMaticLayout
     {

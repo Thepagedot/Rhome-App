@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Android.Views;
 using Thepagedot.Rhome.Base.Models;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public class CentralUnitAdapter : BaseAdapter<CentralUnit>
     {

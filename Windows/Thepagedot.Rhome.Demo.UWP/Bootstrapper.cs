@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Thepagedot.Rhome.Demo.Shared.Services;
-using Thepagedot.Rhome.Demo.Shared.ViewModels;
-using Thepagedot.Rhome.Demo.UWP.Services;
+using Thepagedot.Rhome.App.Shared.Services;
+using Thepagedot.Rhome.App.Shared.ViewModels;
+using Thepagedot.Rhome.App.UWP.Services;
 
-namespace Thepagedot.Rhome.Demo.UWP
+namespace Thepagedot.Rhome.App.UWP
 {
     public class Bootstrapper
     {

@@ -15,7 +15,7 @@ using Android.Support.V7.App;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Android.Support.V4.Widget;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     [Activity(Label = "Room", ParentActivity = typeof(MainActivity))]			
     public class RoomActivity : AppCompatActivity

@@ -1,4 +1,4 @@
-namespace Thepagedot.Rhome.Demo.Droid.Helpers
+namespace Thepagedot.Rhome.App.Droid.Helpers
 {
     public static class StringExtensions
     {

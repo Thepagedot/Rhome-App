@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Thepagedot.Rhome.Demo.UWP.Views
+namespace Thepagedot.Rhome.App.UWP.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -35,6 +35,9 @@ namespace Thepagedot.Rhome.Demo.UWP.Views
         {
             base.OnNavigatedTo(e);
             await App.Bootstrapper.SettingsViewModel.InitializeAsync();
+
+            BrandComboBox.ItemsSource = Enum.GetValues(typeof(CentralUnitBrand));
+            BrandComboBox.SelectedIndex = 0;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -45,23 +48,6 @@ namespace Thepagedot.Rhome.Demo.UWP.Views
         private async void AddCentralUnitMenu_Click(object sender, RoutedEventArgs e)
         {
             await AddEditHomeControlSystemDialog.ShowAsync();
-        }
-
-        private async void AddEditHomeControlSystemDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            // TODO: Error handline
-            // TODO: differen Brands
-            var ccu = new Ccu(tbxName.Text, tbxAddress.Text);
-            await App.Bootstrapper.SettingsViewModel.AddCentralUnitAsync(ccu);
-        }
-
-        private async void MenuDelete_Click(object sender, RoutedEventArgs e)
-        {
-            var centralUnit = (CentralUnit)(sender as FrameworkElement).DataContext;
-            if (centralUnit != null)
-            {
-                await App.Bootstrapper.SettingsViewModel.DeleteCentralUnitAsync(centralUnit);
-            }
         }
 
         private void Border_RightTapped(object sender, RightTappedRoutedEventArgs e)

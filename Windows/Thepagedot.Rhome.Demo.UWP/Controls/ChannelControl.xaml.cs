@@ -7,11 +7,11 @@ using Windows.UI.Xaml.Controls;
 using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.HomeMatic.Services;
-using Thepagedot.Rhome.Demo.UWP;
+using Thepagedot.Rhome.App.UWP;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Thepagedot.Rhome.Demo.UWP.Controls
+namespace Thepagedot.Rhome.App.UWP.Controls
 {
     public sealed partial class ChannelControl : UserControl
     {

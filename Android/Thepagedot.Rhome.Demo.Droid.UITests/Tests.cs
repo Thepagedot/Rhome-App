@@ -6,7 +6,7 @@ using Xamarin.UITest;
 using Xamarin.UITest.Android;
 using Xamarin.UITest.Queries;
 
-namespace Thepagedot.Rhome.Demo.Droid.UITests
+namespace Thepagedot.Rhome.App.Droid.UITests
 {
     [TestFixture]
     public class Tests

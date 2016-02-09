@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.Base.Models;
-using Thepagedot.Rhome.Demo.Shared.Services;
+using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
+using GalaSoft.MvvmLight.Command;
 
-namespace Thepagedot.Rhome.Demo.Shared.ViewModels
+namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class SettingsViewModel : AsyncViewModelBase
     {
@@ -21,12 +22,80 @@ namespace Thepagedot.Rhome.Demo.Shared.ViewModels
             set { _CentralUnits = value; RaisePropertyChanged();  }
         }
 
+        #region New CentralUnit fields
+
+        private string _NewCentralUnitName;
+        public string NewCentralUnitName
+        {
+            get { return _NewCentralUnitName; }
+            set { _NewCentralUnitName = value; RaisePropertyChanged(); }
+        }
+
+        private string _NewCentralUnitAddress;
+        public string NewCentralUnitAddress
+        {
+            get { return _NewCentralUnitAddress; }
+            set { _NewCentralUnitAddress = value; RaisePropertyChanged(); }
+        }
+
+        private CentralUnitBrand _NewCentralUnitBrand;
+        public CentralUnitBrand NewCentralUnitBrand
+        {
+            get { return _NewCentralUnitBrand; }
+            set { _NewCentralUnitBrand = value; RaisePropertyChanged(); }
+        }
+
+        #endregion
+
+        private RelayCommand _AddCentralUnitCommand;
+        public RelayCommand AddCentralUnitCommand
+        {
+            get
+            {
+                return _AddCentralUnitCommand ?? (_AddCentralUnitCommand = new RelayCommand(async () =>
+                {
+                    // Create new central unit depending on the selected brand
+                    CentralUnit centralUnit;
+                    switch (NewCentralUnitBrand)
+                    {
+                        default:
+                        case CentralUnitBrand.HomeMatic:
+                            centralUnit = new Ccu(NewCentralUnitName, NewCentralUnitAddress); break;
+                    }
+
+                    await AddCentralUnitAsync(centralUnit);
+                    ResetNewCentralUnitValues();
+                }));
+            }
+        }
+
+        private RelayCommand<CentralUnit> _DeleteCentralUnitCommand;
+        public RelayCommand<CentralUnit> DeleteCentralUnitCommand
+        {
+            get
+            {
+                return _DeleteCentralUnitCommand ?? (_DeleteCentralUnitCommand = new RelayCommand<CentralUnit>(async (centralUnit) =>
+                {
+                    await DeleteCentralUnitAsync(centralUnit);
+                }));
+            }
+        }
+
         public SettingsViewModel(SettingsService settingsService)
         {
             _SettingsService = settingsService;
 
             CentralUnits = new ObservableCollection<CentralUnit>();
             //CentralUnits.Add(new Ccu("Robby Demo", "192.168.0.14"));
+
+            ResetNewCentralUnitValues();
+        }
+
+        private void ResetNewCentralUnitValues()
+        {
+            NewCentralUnitName = "";
+            NewCentralUnitAddress = "";
+            NewCentralUnitBrand = 0;
         }
 
         public async Task InitializeAsync()
@@ -46,6 +115,7 @@ namespace Thepagedot.Rhome.Demo.Shared.ViewModels
         {
             // Add central unit to list and configuration
             CentralUnits.Add(centralUnit);
+
             _SettingsService.Configuration.CentralUnits.Add(centralUnit);
             _SettingsService.Refresh();
 

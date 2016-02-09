@@ -1,12 +1,12 @@
 ﻿using System;
 using Android.Content;
-using Thepagedot.Rhome.Demo.Shared.Models;
+using Thepagedot.Rhome.App.Shared.Models;
 using Newtonsoft.Json;
-using Thepagedot.Rhome.Demo.Droid.Helpers;
+using Thepagedot.Rhome.App.Droid.Helpers;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Thepagedot.Rhome.Demo.Droid
+namespace Thepagedot.Rhome.App.Droid
 {
     public static class Settings
     {

@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="Thepagedot.Rhome.Demo.UWP.App"
+    x:Class="Thepagedot.Rhome.App.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Thepagedot.Rhome.Demo.UWP"
+    xmlns:local="using:Thepagedot.Rhome.App.UWP"
     RequestedTheme="Light">
 
     <Application.Resources>

@@ -3,7 +3,7 @@ using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Newtonsoft.Json;
 
-namespace Thepagedot.Rhome.Demo.Shared.Models
+namespace Thepagedot.Rhome.App.Shared.Models
 {
     public class Configuration
     {
