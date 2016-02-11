@@ -84,7 +84,7 @@
             Grid.RowSpan="2"
             DisplayMode="CompactOverlay"
             IsPaneOpen="False"
-            OpenPaneLength="150">
+            OpenPaneLength="200">
 
             <SplitView.Pane>
                 <ListView
@@ -116,6 +116,15 @@
                                 FontSize="12"
                                 Text="" />
                             <Run Text="  Devices" />
+                        </TextBlock>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <TextBlock x:Name="MenuSystemVariables">
+                            <Run
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="12"
+                                Text="" />
+                            <Run Text="  System Variables" />
                         </TextBlock>
                     </ListViewItem>
                     <ListViewItem>
@@ -262,7 +271,7 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton
                 Command="{Binding RefreshCommand}"
                 Icon="Refresh"

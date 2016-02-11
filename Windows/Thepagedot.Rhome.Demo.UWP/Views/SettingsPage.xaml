@@ -18,7 +18,7 @@
             x:Name="AddEditHomeControlSystemDialog"
             Title="Add new home control system"
             Grid.RowSpan="2"
-            VerticalAlignment="Stretch"
+            VerticalAlignment="Center"
             Canvas.ZIndex="1"
             PrimaryButtonCommand="{Binding AddCentralUnitCommand}"
             PrimaryButtonText="Add"

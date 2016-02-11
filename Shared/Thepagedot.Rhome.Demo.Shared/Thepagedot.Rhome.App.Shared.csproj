@@ -8,8 +8,8 @@
     <ProjectGuid>{E787A5C5-262C-4F6C-85C8-6096E40F9E08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Thepagedot.Rhome.Demo.Shared</RootNamespace>
-    <AssemblyName>Thepagedot.Rhome.Demo.Shared</AssemblyName>
+    <RootNamespace>Thepagedot.Rhome.App.Shared</RootNamespace>
+    <AssemblyName>Thepagedot.Rhome.App.Shared</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,6 +55,7 @@
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="ViewModels\SystemVariableViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

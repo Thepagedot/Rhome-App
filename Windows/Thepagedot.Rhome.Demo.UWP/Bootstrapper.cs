@@ -26,13 +26,15 @@ namespace Thepagedot.Rhome.App.UWP
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<RoomViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<SystemVariableViewModel>();
         }
 
-        public HomeControlService HomeControlService { get { return SimpleIoc.Default.GetInstance<HomeControlService>(); } }
-        public SettingsService SettingsService { get { return SimpleIoc.Default.GetInstance<SettingsService>(); } }
+        public HomeControlService HomeControlService { get { return SimpleIoc.Default.GetInstance<HomeControlService>(); }}
+        public SettingsService SettingsService { get { return SimpleIoc.Default.GetInstance<SettingsService>(); }}
 
         public MainViewModel MainViewModel { get { return SimpleIoc.Default.GetInstance<MainViewModel>(); }}
         public RoomViewModel RoomViewModel { get { return SimpleIoc.Default.GetInstance<RoomViewModel>(); }}
-        public SettingsViewModel SettingsViewModel { get { return SimpleIoc.Default.GetInstance<SettingsViewModel>(); } }
+        public SettingsViewModel SettingsViewModel { get { return SimpleIoc.Default.GetInstance<SettingsViewModel>(); }}
+        public SystemVariableViewModel SystemVariableViewModel { get { return SimpleIoc.Default.GetInstance<SystemVariableViewModel>(); }}
     }
 }
