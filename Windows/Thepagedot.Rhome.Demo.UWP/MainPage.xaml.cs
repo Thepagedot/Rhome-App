@@ -72,6 +72,8 @@ namespace Thepagedot.Rhome.App.UWP
                 Frame.Navigate(typeof(SettingsPage));
             else if (e.ClickedItem == MenuSystemVariables)
                 Frame.Navigate(typeof(SystemVariablePage));
+            else if (e.ClickedItem == MenuPrograms)
+                Frame.Navigate(typeof(ProgramPage));
         }
 
         #region Room Grid

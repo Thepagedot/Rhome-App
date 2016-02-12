@@ -17,8 +17,6 @@ namespace Thepagedot.Rhome.App.UWP.Controls
     {
         public static readonly DependencyProperty DpChannel = DependencyProperty.Register("Channel", typeof(object), typeof(ChannelControl), new PropertyMetadata(default(object)));
 
-        private HomeMaticXmlApi _HomeMatic;
-
         public object Channel
         {
             get { return (object)this.GetValue(DpChannel); }
@@ -32,8 +30,6 @@ namespace Thepagedot.Rhome.App.UWP.Controls
             //    LoadDemoData();
 
             (this.Content as FrameworkElement).DataContext = this;
-
-            _HomeMatic = ((Bootstrapper)Application.Current.Resources["Bootstrapper"]).HomeControlService.HomeMatic;
         }
 
         //private void LoadDemoData()
@@ -50,11 +46,11 @@ namespace Thepagedot.Rhome.App.UWP.Controls
             var toggleSwitch = (sender as ToggleSwitch);
             if (toggleSwitch != null)
             {
-                var channel = toggleSwitch.DataContext as HomeMaticChannel;
-                if (channel != null)
+                var switcher = toggleSwitch.DataContext as Switcher;
+                if (switcher != null)
                 {
                     toggleSwitch.IsEnabled = false;
-                    await _HomeMatic.SendChannelUpdateAsync(channel.IseId, (sender as ToggleSwitch).IsOn);
+                    await switcher.SetStateAsync((sender as ToggleSwitch).IsOn);
                     toggleSwitch.IsEnabled = true;
                 }
             }
@@ -73,7 +69,7 @@ namespace Thepagedot.Rhome.App.UWP.Controls
                 if (shutter != null)
                 {
                     button.IsEnabled = false;
-                    await shutter.Up(_HomeMatic);
+                    await shutter.UpAsync();
                     button.IsEnabled = true;
                 }
             }
@@ -88,7 +84,7 @@ namespace Thepagedot.Rhome.App.UWP.Controls
                 if (shutter != null)
                 {
                     button.IsEnabled = false;
-                    await shutter.Down(_HomeMatic);
+                    await shutter.DownAsync();
                     button.IsEnabled = true;
                 }
             }
@@ -103,7 +99,7 @@ namespace Thepagedot.Rhome.App.UWP.Controls
                 if (shutter != null)
                 {
                     button.IsEnabled = false;
-                    await shutter.Stop(_HomeMatic);
+                    await shutter.StopAsync();
                     button.IsEnabled = true;
                 }
             }

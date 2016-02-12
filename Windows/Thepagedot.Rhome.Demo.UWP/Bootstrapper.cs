@@ -27,6 +27,7 @@ namespace Thepagedot.Rhome.App.UWP
             SimpleIoc.Default.Register<RoomViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<SystemVariableViewModel>();
+            SimpleIoc.Default.Register<ProgramViewModel>();
         }
 
         public HomeControlService HomeControlService { get { return SimpleIoc.Default.GetInstance<HomeControlService>(); }}
@@ -36,5 +37,6 @@ namespace Thepagedot.Rhome.App.UWP
         public RoomViewModel RoomViewModel { get { return SimpleIoc.Default.GetInstance<RoomViewModel>(); }}
         public SettingsViewModel SettingsViewModel { get { return SimpleIoc.Default.GetInstance<SettingsViewModel>(); }}
         public SystemVariableViewModel SystemVariableViewModel { get { return SimpleIoc.Default.GetInstance<SystemVariableViewModel>(); }}
+        public ProgramViewModel ProgramViewModel { get { return SimpleIoc.Default.GetInstance<ProgramViewModel>(); } }
     }
 }

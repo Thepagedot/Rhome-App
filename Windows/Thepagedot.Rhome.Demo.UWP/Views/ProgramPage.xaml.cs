@@ -21,19 +21,23 @@ namespace Thepagedot.Rhome.App.UWP.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RoomPage : Page
+    public sealed partial class ProgramPage : Page
     {
-        public RoomPage()
+        public ProgramPage()
         {
             this.InitializeComponent();
             SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) => { if (Frame.CanGoBack) Frame.GoBack(); };
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            await App.Bootstrapper.ProgramViewModel.RefreshAsync();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack) Frame.GoBack();
         }
-
-
     }
 }

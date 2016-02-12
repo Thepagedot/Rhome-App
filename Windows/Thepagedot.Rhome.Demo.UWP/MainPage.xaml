@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:Thepagedot.Rhome.App.Shared.ViewModels"
     x:Name="State"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -92,49 +93,64 @@
                     ItemClick="ListView_ItemClick"
                     SelectionMode="None">
                     <ListViewItem>
-                        <TextBlock>
-                            <Run
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
                                 FontFamily="Segoe MDL2 Assets"
-                                FontSize="12"
                                 Text="&#xE80F;" />
-                            <Run Text="  Home" />
-                        </TextBlock>
+                            <TextBlock Text="Home" />
+                        </StackPanel>
                     </ListViewItem>
                     <ListViewItem>
-                        <TextBlock>
-                            <Run
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
                                 FontFamily="Segoe MDL2 Assets"
-                                FontSize="12"
                                 Text="&#xE8A9;" />
-                            <Run Text="  Rooms" />
-                        </TextBlock>
+                            <TextBlock Text="Rooms" />
+                        </StackPanel>
                     </ListViewItem>
                     <ListViewItem>
-                        <TextBlock>
-                            <Run
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
                                 FontFamily="Segoe MDL2 Assets"
-                                FontSize="12"
-                                Text="" />
-                            <Run Text="  Devices" />
-                        </TextBlock>
+                                Text="&#xE975;" />
+                            <TextBlock Text="Devices" />
+                        </StackPanel>
                     </ListViewItem>
                     <ListViewItem>
-                        <TextBlock x:Name="MenuSystemVariables">
-                            <Run
+                        <StackPanel x:Name="MenuSystemVariables" Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
                                 FontFamily="Segoe MDL2 Assets"
-                                FontSize="12"
-                                Text="" />
-                            <Run Text="  System Variables" />
-                        </TextBlock>
+                                Text="&#xE71D;" />
+                            <TextBlock Text="System Variables" />
+                        </StackPanel>
                     </ListViewItem>
                     <ListViewItem>
-                        <TextBlock x:Name="MenuSettings">
-                            <Run
+                        <StackPanel x:Name="MenuPrograms" Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
                                 FontFamily="Segoe MDL2 Assets"
-                                FontSize="12"
+                                Text="&#59260;" />
+                            <TextBlock Text="Programs" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel x:Name="MenuSettings" Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
+                                FontFamily="Segoe MDL2 Assets"
                                 Text="&#xE713;" />
-                            <Run Text="  Settings" />
-                        </TextBlock>
+                            <TextBlock Text="Settings" />
+                        </StackPanel>
                     </ListViewItem>
                 </ListView>
             </SplitView.Pane>

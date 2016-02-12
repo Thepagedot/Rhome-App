@@ -19,35 +19,39 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         public RoomViewModel()
         {
-            var room = new HomeMaticRoom("Living room", 0, new List<int>());
-            room.Devices = new List<Device>
+            if (IsInDesignMode)
             {
-                new HomeMaticDevice("Testdevice 1", 0, "")
-                {
-                    Channels = new List<HomeMaticChannel>
-                    {
-                        new Switcher("Testswitcher", 1, 1, "", true)
-                    }
-                },
 
-                new HomeMaticDevice("Testdevice 2", 0, "")
+                var room = new HomeMaticRoom("Living room", 0, new List<int>());
+                room.Devices = new List<Device>
                 {
-                    Channels = new List<HomeMaticChannel>
+                    new HomeMaticDevice("Testdevice 1", 0, "")
                     {
-                        new Shutter("Testshutter", 1, 1, "", true)
-                    }
-                },
+                        Channels = new List<HomeMaticChannel>
+                        {
+                            new Switcher("Testswitcher", 1, 1, "", true, null)
+                        }
+                    },
 
-                new HomeMaticDevice("Testdevice 3", 0, "")
-                {
-                    Channels = new List<HomeMaticChannel>
+                    new HomeMaticDevice("Testdevice 2", 0, "")
                     {
-                        new TemperatureSlider("Testslider", 1, 1, "", true)
-                    }
-                }
-            };
+                        Channels = new List<HomeMaticChannel>
+                        {
+                            new Shutter("Testshutter", 1, 1, "", true, null)
+                        }
+                    },
 
-            CurrentRoom = room;
+                    new HomeMaticDevice("Testdevice 3", 0, "")
+                    {
+                        Channels = new List<HomeMaticChannel>
+                        {
+                            new TemperatureSlider("Testslider", 1, 1, "", true, null)
+                        }
+                    }
+                };
+
+                CurrentRoom = room;
+            }
         }
 
     }
