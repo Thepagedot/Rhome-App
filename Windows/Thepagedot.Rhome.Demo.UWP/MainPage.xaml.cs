@@ -26,18 +26,9 @@ namespace Thepagedot.Rhome.App.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private int _NumberOfColumns = 2;
-
         public MainPage()
         {
             this.InitializeComponent();
-            App.Bootstrapper.MainViewModel.ConnectionError += MainViewModel_ConnectionError;
-        }
-
-        private async void MainViewModel_ConnectionError(object sender, Shared.ViewModels.ConnectionErrorEventArgs e)
-        {
-            var dialog = new MessageDialog(e.Message, e.Title);
-            await dialog.ShowAsync();
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -45,7 +36,8 @@ namespace Thepagedot.Rhome.App.UWP
             base.OnNavigatedTo(e);
 
             // Init MainViewModel
-            await App.Bootstrapper.MainViewModel.RefreshAsync();
+            if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
+                await App.Bootstrapper.MainViewModel.RefreshAsync();
 
             // Initially set number od columns to the current state's value
             SetNumberOfColumnsByState(VisualStateManager.GetVisualStateGroups(MainGrid).First().CurrentState);
@@ -54,6 +46,19 @@ namespace Thepagedot.Rhome.App.UWP
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             HamburgerSplitView.IsPaneOpen = !HamburgerSplitView.IsPaneOpen;
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            // Close hamburger pane
+            HamburgerSplitView.IsPaneOpen = false;
+
+            if (e.ClickedItem == MenuSettings)
+                Frame.Navigate(typeof(SettingsPage));
+            else if (e.ClickedItem == MenuSystemVariables)
+                Frame.Navigate(typeof(SystemVariablePage));
+            else if (e.ClickedItem == MenuPrograms)
+                Frame.Navigate(typeof(ProgramPage));
         }
 
         private void gvRooms_ItemClick(object sender, ItemClickEventArgs e)
@@ -66,17 +71,9 @@ namespace Thepagedot.Rhome.App.UWP
             Frame.Navigate(typeof(RoomPage));
         }
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (e.ClickedItem == MenuSettings)
-                Frame.Navigate(typeof(SettingsPage));
-            else if (e.ClickedItem == MenuSystemVariables)
-                Frame.Navigate(typeof(SystemVariablePage));
-            else if (e.ClickedItem == MenuPrograms)
-                Frame.Navigate(typeof(ProgramPage));
-        }
-
         #region Room Grid
+
+        private int _NumberOfColumns = 2;
 
         private void gvRooms_SizeChanged(object sender, SizeChangedEventArgs e)
         {

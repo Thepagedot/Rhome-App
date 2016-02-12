@@ -81,7 +81,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public SettingsViewModel(SettingsService settingsService)
+        public SettingsViewModel(SettingsService settingsService, IDialogService dialogService, IResourceService resourceService)
+            : base(dialogService, resourceService)
         {
             _SettingsService = settingsService;
 

@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Thepagedot.Rhome.App.Shared.Services;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class AsyncViewModelBase : ViewModelBase
     {
+        #region Services
+
+        protected IDialogService _DialogService;
+        protected IResourceService _ResourceService;
+
+        #endregion
+
         #region Events
 
         public event ConnectionErrorEventHandler ConnectionError;
@@ -21,6 +29,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         #endregion
 
+        #region Properties
 
         private bool _IsLoading = false;
         public bool IsLoading
@@ -34,6 +43,22 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         {
             get { return _IsLoaded; }
             set { _IsLoaded = value; RaisePropertyChanged(); }
+        }
+
+        #endregion
+
+        public AsyncViewModelBase(IDialogService dialogService, IResourceService resourceService)
+        {
+            _DialogService = dialogService;
+            _ResourceService = resourceService;
+
+            // Register events
+            ConnectionError += AsyncViewModelBase_ConnectionError;
+        }
+
+        private async void AsyncViewModelBase_ConnectionError(object sender, ConnectionErrorEventArgs e)
+        {
+            await _DialogService.ShowMessageDialogAsync(_ResourceService.GetString("ConnectionErrorTitle"), _ResourceService.GetString("ConnectionErrorMessage"));
         }
     }
 

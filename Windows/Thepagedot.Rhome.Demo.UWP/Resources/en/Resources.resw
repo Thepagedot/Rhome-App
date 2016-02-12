@@ -120,4 +120,10 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Rhome</value>
   </data>
+  <data name="ConnectionErrorMessage" xml:space="preserve">
+    <value>Unfortunately we could not connect with your Home Control system. Please check your connection and try again.</value>
+  </data>
+  <data name="ConnectionErrorTitle" xml:space="preserve">
+    <value>Connection Error</value>
+  </data>
 </root>

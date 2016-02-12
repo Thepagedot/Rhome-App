@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 
@@ -17,11 +18,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             set { _CurrentRoom = value; RaisePropertyChanged(); }
         }
 
-        public RoomViewModel()
+        public RoomViewModel(IDialogService dialogService, IResourceService resourceService)
+            : base(dialogService, resourceService)
         {
             if (IsInDesignMode)
             {
-
                 var room = new HomeMaticRoom("Living room", 0, new List<int>());
                 room.Devices = new List<Device>
                 {

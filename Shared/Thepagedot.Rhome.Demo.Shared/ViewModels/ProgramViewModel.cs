@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.App.Shared.Services;
@@ -45,7 +46,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public ProgramViewModel(HomeControlService homeControlService)
+        public ProgramViewModel(HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
+            : base(dialogService, resourceService)
         {
             _HomeControlService = homeControlService;
 
@@ -58,7 +60,24 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         public async Task RefreshAsync()
         {
-            Programs = new ObservableCollection<Program>(await _HomeControlService.HomeMatic.GetProgramsAsync());
+            IsLoaded = false;
+            IsLoading = true;
+
+            if (_HomeControlService.HomeMatic != null)
+            {
+                try
+                {
+                    Programs = new ObservableCollection<Program>(await _HomeControlService.HomeMatic.GetProgramsAsync());
+                    IsLoaded = true;
+                }
+                catch (HttpRequestException)
+                {
+                    //TODO: Load strings from ResourceService
+                    RaiseConnectionError("Connection Error", "Failed to connect");
+                }
+            }
+
+            IsLoading = false;
         }
     }
 }

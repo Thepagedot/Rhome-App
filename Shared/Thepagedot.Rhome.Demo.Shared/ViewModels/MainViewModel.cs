@@ -14,7 +14,6 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class MainViewModel : AsyncViewModelBase
     {
-        private IResourceService _ResourceService;
         private ILocalStorageService _SettingsService;
         private HomeControlService _HomeControlService;
 
@@ -37,12 +36,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public MainViewModel(IResourceService resourceService, ILocalStorageService settingsService, HomeControlService homeControlService)
+        public MainViewModel(ILocalStorageService settingsService, HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
+            : base (dialogService, resourceService)
         {
-            _ResourceService = resourceService;
             _SettingsService = settingsService;
             _HomeControlService = homeControlService;
-
 
             if (IsInDesignMode)
             {
@@ -58,9 +56,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         public async Task RefreshAsync()
         {
             IsLoaded = false;
-
-            if (IsLoading || IsLoaded)
-                return;
+            IsLoading = true;
 
             if (_HomeControlService.HomeMatic != null)
             {

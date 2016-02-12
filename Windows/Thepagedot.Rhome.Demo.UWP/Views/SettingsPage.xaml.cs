@@ -28,7 +28,6 @@ namespace Thepagedot.Rhome.App.UWP.Views
         public SettingsPage()
         {
             this.InitializeComponent();
-            SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) => { if (Frame.CanGoBack) Frame.GoBack(); };
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

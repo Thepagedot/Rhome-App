@@ -19,6 +19,7 @@ namespace Thepagedot.Rhome.App.UWP
 
             SimpleIoc.Default.Register<IResourceService, ResourceService>();
             SimpleIoc.Default.Register<ILocalStorageService, LocalStorageService>();
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
 
             SimpleIoc.Default.Register<SettingsService>();
             SimpleIoc.Default.Register<HomeControlService>();

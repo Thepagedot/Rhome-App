@@ -26,13 +26,14 @@ namespace Thepagedot.Rhome.App.UWP.Views
         public SystemVariablePage()
         {
             this.InitializeComponent();
-            SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) => { if (Frame.CanGoBack) Frame.GoBack(); };
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            await App.Bootstrapper.SystemVariableViewModel.RefreshAsync();
+
+            if (!App.Bootstrapper.SystemVariableViewModel.IsLoaded && !App.Bootstrapper.SystemVariableViewModel.IsLoading)
+                await App.Bootstrapper.SystemVariableViewModel.RefreshAsync();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

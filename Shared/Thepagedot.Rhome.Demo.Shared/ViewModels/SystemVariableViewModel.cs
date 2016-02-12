@@ -35,7 +35,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public SystemVariableViewModel(HomeControlService homeControlService)
+        public SystemVariableViewModel(HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
+            : base(dialogService, resourceService)
         {
             _HomeControlService = homeControlService;
 
@@ -52,9 +53,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         public async Task RefreshAsync()
         {
             IsLoaded = false;
-
-            if (IsLoading || IsLoaded)
-                return;
+            IsLoading = true;
 
             if (_HomeControlService.HomeMatic != null)
             {
