@@ -30,14 +30,12 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         {
             get
             {
-                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(
-                    async () =>
-                    {
-                        await RefreshAsync();
-                    }));
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(async () =>
+                {
+                    await RefreshAsync();
+                }));
             }
         }
-
 
         public MainViewModel(IResourceService resourceService, ILocalStorageService settingsService, HomeControlService homeControlService)
         {
@@ -57,36 +55,28 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public async Task InitializeAsync()
+        public async Task RefreshAsync()
         {
-            // Prevent double loading
+            IsLoaded = false;
+
             if (IsLoading || IsLoaded)
                 return;
-
-            IsLoading = true;
 
             if (_HomeControlService.HomeMatic != null)
             {
                 try
                 {
                     Rooms = (await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync()).ToList();
+                    IsLoaded = true;
                 }
                 catch (HttpRequestException)
                 {
                     //TODO: Load strings from ResourceService
                     RaiseConnectionError("Connection Error", "Failed to connect");
                 }
-
             }
 
-            IsLoaded = true;
             IsLoading = false;
-        }
-
-        public async Task RefreshAsync()
-        {
-            IsLoaded = false;
-            await InitializeAsync();
         }
     }
 }

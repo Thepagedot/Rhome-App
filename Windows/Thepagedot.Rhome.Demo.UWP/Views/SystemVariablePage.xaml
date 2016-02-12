@@ -64,21 +64,27 @@
                             FontSize="18.667"
                             Style="{StaticResource SubheaderTextBlockStyle}"
                             Text="{Binding Name}" />
-
-                        <ListView
-                            Grid.Row="1"
-                            ItemsSource="{Binding Channels}"
-                            SelectionMode="None">
-
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                        </ListView>
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            FontSize="18.667"
+                            Style="{StaticResource SubheaderTextBlockStyle}"
+                            Text="{Binding ValueString}">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{StaticResource HomeMaticBlue}" />
+                            </TextBlock.Foreground>
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton
+                Command="{Binding RefreshCommand}"
+                Icon="Refresh"
+                Label="Refresh" />
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
