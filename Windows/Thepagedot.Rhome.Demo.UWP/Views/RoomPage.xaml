@@ -62,7 +62,10 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="18.667" />
+                        <TextBlock
+                            FontSize="18.667"
+                            Style="{StaticResource SubheaderTextBlockStyle}"
+                            Text="{Binding Name}" />
 
                         <ListView
                             Grid.Row="1"
@@ -88,4 +91,13 @@
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton
+                Command="{Binding RefreshCommand}"
+                Icon="Refresh"
+                Label="Refresh" />
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

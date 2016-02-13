@@ -1,8 +1,11 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
@@ -11,6 +14,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class RoomViewModel : AsyncViewModelBase
     {
+        private HomeControlService _HomeControlService;
+
         private Room _CurrentRoom;
         public Room CurrentRoom
         {
@@ -18,42 +23,49 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             set { _CurrentRoom = value; RaisePropertyChanged(); }
         }
 
-        public RoomViewModel(IDialogService dialogService, IResourceService resourceService)
-            : base(dialogService, resourceService)
+        private RelayCommand _RefreshCommand;
+        public RelayCommand RefreshCommand
         {
-            if (IsInDesignMode)
+            get
             {
-                var room = new HomeMaticRoom("Living room", 0, new List<int>());
-                room.Devices = new List<Device>
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(async () =>
                 {
-                    new HomeMaticDevice("Testdevice 1", 0, "")
-                    {
-                        Channels = new List<HomeMaticChannel>
-                        {
-                            new Switcher("Testswitcher", 1, 1, "", true, null)
-                        }
-                    },
-
-                    new HomeMaticDevice("Testdevice 2", 0, "")
-                    {
-                        Channels = new List<HomeMaticChannel>
-                        {
-                            new Shutter("Testshutter", 1, 1, "", true, null)
-                        }
-                    },
-
-                    new HomeMaticDevice("Testdevice 3", 0, "")
-                    {
-                        Channels = new List<HomeMaticChannel>
-                        {
-                            new TemperatureSlider("Testslider", 1, 1, "", true, null)
-                        }
-                    }
-                };
-
-                CurrentRoom = room;
+                    await RefreshAsync();
+                }));
             }
         }
 
+        public RoomViewModel(HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
+            : base(dialogService, resourceService)
+        {
+            _HomeControlService = homeControlService;
+
+            if (IsInDesignMode)
+            {
+                CurrentRoom = DesignData.GetDemoRoom();
+            }
+        }
+
+        public async Task RefreshAsync()
+        {
+            IsLoaded = false;
+            IsLoading = true;
+
+            if (_HomeControlService.HomeMatic != null)
+            {
+                try
+                {
+                    await _HomeControlService.HomeMatic.UpdateStatesForRoomAsync(_CurrentRoom);
+                    IsLoaded = true;
+                }
+                catch (HttpRequestException)
+                {
+                    //TODO: Load strings from ResourceService
+                    RaiseConnectionError("Connection Error", "Failed to connect");
+                }
+            }
+
+            IsLoading = false;
+        }
     }
 }

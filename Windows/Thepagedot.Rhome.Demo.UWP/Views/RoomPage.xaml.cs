@@ -28,6 +28,14 @@ namespace Thepagedot.Rhome.App.UWP.Views
             this.InitializeComponent();
         }
 
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (!App.Bootstrapper.RoomViewModel.IsLoading)
+                await App.Bootstrapper.RoomViewModel.RefreshAsync();
+        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack) Frame.GoBack();
