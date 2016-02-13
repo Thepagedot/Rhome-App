@@ -1,0 +1,2 @@
+MainPackage=D:\Source\Thepagedot\Rhome\Rhome-App\Windows\Thepagedot.Rhome.Demo.UWP\bin\ARM\Release\Upload\Thepagedot.Rhome.App.UWP_1.0.0.0_ARM.appx
+SymbolPackage=D:\Source\Thepagedot\Rhome\Rhome-App\Windows\Thepagedot.Rhome.Demo.UWP\AppPackages\Thepagedot.Rhome.App.UWP_1.0.0.0\Thepagedot.Rhome.App.UWP_1.0.0.0_ARM.appxsym
