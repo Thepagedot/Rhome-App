@@ -12,6 +12,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
     {
         private ILocalStorageService _LocalStorageService;
         private HomeControlService _HomeControlService;
+        private readonly string _ConfigFileName = "configuration.json";
 
         public Configuration Configuration { get; set; }
 
@@ -38,7 +39,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 
         public async Task LoadSettingsAsync()
         {
-            var configuration = await _LocalStorageService.LoadSettingsAsync();
+            var configuration = await _LocalStorageService.LoadFromFileAsync<Configuration>(_ConfigFileName);
             if (configuration != null)
             {
                 Configuration = configuration;
@@ -53,7 +54,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
         public async Task SaveSettingsAsync()
         {
             if (Configuration != null)
-                await _LocalStorageService.SaveSettingsAsync(Configuration);
+                await _LocalStorageService.SaveToFileAsync(_ConfigFileName, Configuration);
         }
     }
 }

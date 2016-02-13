@@ -58,6 +58,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         private async void AsyncViewModelBase_ConnectionError(object sender, ConnectionErrorEventArgs e)
         {
+            await ShowConnectionErrorMessageAsync();
+        }
+
+        protected async Task ShowConnectionErrorMessageAsync()
+        {
             await _DialogService.ShowMessageDialogAsync(_ResourceService.GetString("ConnectionErrorTitle"), _ResourceService.GetString("ConnectionErrorMessage"));
         }
     }

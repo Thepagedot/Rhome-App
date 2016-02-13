@@ -40,8 +40,27 @@ namespace Thepagedot.Rhome.App.Shared.Other
                         }
                     }
                 };
-
             return room;
+        }
+
+        public static List<Room> GetDemoRooms()
+        {
+            return new List<Room>
+                {
+                    new HomeMaticRoom("Bedroom", 0, new List<int>()),
+                    new HomeMaticRoom("Living room", 0, new List<int>()),
+                    new HomeMaticRoom("Kitchen", 0, new List<int>())
+                };
+        }
+
+        public static ObservableCollection<SystemVariable> GetDemoSystemVariables()
+        {
+            var list = new ObservableCollection<SystemVariable>();
+            list.Add(new SystemVariable(1, "Anwesenheit", "true", "", "", "", "", 2, 2, true, "", "nicht anwesend", "anwesend"));
+            list.Add(new SystemVariable(2, "Alarmzone 1", "", "", "", "", "", 2, 2, true, "", "ausgelöst", "nicht ausgelöst"));
+            list.Add(new SystemVariable(3, "Stringtest", "Lorem ipsum", "", "", "", "", 4, 11, true, "", "", ""));
+            list.Add(new SystemVariable(3, "List Test", "1", "Var1;Var2;Var3", "", "", "", 16, 29, true, "", "", ""));
+            return list;
         }
     }
 }

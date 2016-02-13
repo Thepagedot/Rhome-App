@@ -9,7 +9,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 {
     public interface ILocalStorageService
     {
-        Task SaveSettingsAsync(Configuration configuration);
-        Task<Configuration> LoadSettingsAsync();
+        Task SaveToFileAsync(string fileName, object content);
+        Task<T> LoadFromFileAsync<T>(string fileName);
     }
 }

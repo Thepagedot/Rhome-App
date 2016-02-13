@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
+using Thepagedot.Rhome.App.Shared.Other;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class MainViewModel : AsyncViewModelBase
     {
-        private ILocalStorageService _SettingsService;
+        private SettingsService _SettingsService;
         private HomeControlService _HomeControlService;
 
         private List<Room> _Rooms;
@@ -36,7 +37,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public MainViewModel(ILocalStorageService settingsService, HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
+        public MainViewModel(SettingsService settingsService, HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
             : base (dialogService, resourceService)
         {
             _SettingsService = settingsService;
@@ -44,12 +45,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
             if (IsInDesignMode)
             {
-                Rooms = new List<Room>
-                {
-                    new HomeMaticRoom("Bedroom", 0, new List<int>()),
-                    new HomeMaticRoom("Living room", 0, new List<int>()),
-                    new HomeMaticRoom("Kitchen", 0, new List<int>())
-                };
+                Rooms = DesignData.GetDemoRooms();
             }
         }
 
@@ -67,8 +63,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                 }
                 catch (HttpRequestException)
                 {
-                    //TODO: Load strings from ResourceService
-                    RaiseConnectionError("Connection Error", "Failed to connect");
+                    await ShowConnectionErrorMessageAsync();
                 }
             }
 

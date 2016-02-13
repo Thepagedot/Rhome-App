@@ -60,8 +60,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                 }
                 catch (HttpRequestException)
                 {
-                    //TODO: Load strings from ResourceService
-                    RaiseConnectionError("Connection Error", "Failed to connect");
+                    await ShowConnectionErrorMessageAsync();
                 }
             }
 

@@ -14,33 +14,33 @@ namespace Thepagedot.Rhome.App.UWP.Services
     public class LocalStorageService : ILocalStorageService
     {
         private readonly JsonSerializerSettings _JsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects };
-        private readonly string _FileName = "configuration.json";
 
-        public async Task SaveSettingsAsync(Configuration configuration)
+        public async Task SaveToFileAsync(string fileName, object content)
         {
-            var json = JsonConvert.SerializeObject(configuration, Formatting.Indented, _JsonSerializerSettings);
-            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(_FileName, CreationCollisionOption.ReplaceExisting);
+            var json = JsonConvert.SerializeObject(content, Formatting.Indented, _JsonSerializerSettings);
+            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 
             await FileIO.WriteTextAsync(file, json);
         }
 
-        public async Task<Configuration> LoadSettingsAsync()
+        public async Task<T> LoadFromFileAsync<T>(string fileName)
         {
-            Configuration configuration;
-
             try
             {
-                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(_FileName);
+                var file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
                 var json = await FileIO.ReadTextAsync(file);
 
-                configuration = JsonConvert.DeserializeObject<Configuration>(json, _JsonSerializerSettings);
+                T content = JsonConvert.DeserializeObject<T>(json, _JsonSerializerSettings);
+                return content;
             }
             catch (FileNotFoundException)
             {
-                configuration = null;
+                return default(T);
             }
-
-            return configuration;
+            catch (JsonException)
+            {
+                return default(T);
+            }
         }
     }
 }
