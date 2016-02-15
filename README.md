@@ -2,6 +2,10 @@
 # Rhome App
 Rhome is for for (R)emote (Home) and provides a unified smart home remote control .NET library. We are targeting a solution that unites all major smart home solutions in one layer to tidy up the mess of different manufacturers and apps. This cross platform application demontrates the usage of the library and gives you a neat smart home application for your mobile device.
 
+## Technology
+The Rhome app uses the [Rhome Framework](http://google.de) to communicate with your home control devices.
+It is written in C# and uses Xamarin, to provide a wide cross-platform solution for all devices.
+
 ## Ideas and Roadmap
 Trello: https://trello.com/b/Nrt0SyCH
 
