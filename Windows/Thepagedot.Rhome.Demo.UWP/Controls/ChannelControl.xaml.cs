@@ -8,6 +8,7 @@ using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.HomeMatic.Services;
 using Thepagedot.Rhome.App.UWP;
+using Thepagedot.Rhome.App.Shared.ViewModels;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -26,18 +27,16 @@ namespace Thepagedot.Rhome.App.UWP.Controls
         public ChannelControl()
         {
             this.InitializeComponent();
-            //if (DesignMode.DesignModeEnabled)
-            //    LoadDemoData();
+            if (DesignMode.DesignModeEnabled)
+                LoadDemoData();
 
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        //private void LoadDemoData()
-        //{
-        //    var room = MainViewModel.Current.RoomList.First() as HomeMaticRoom;
-        //    var device = room.Devices.First() as HomeMaticDevice;
-        //    Channel = device.Channels.First() as Switcher;
-        //}
+        private void LoadDemoData()
+        {
+            Channel = new Switcher("", 0, 0, "", true, null);
+        }
 
         #region Switcher
 
@@ -103,6 +102,19 @@ namespace Thepagedot.Rhome.App.UWP.Controls
                     button.IsEnabled = true;
                 }
             }
+        }
+
+        #endregion
+
+        #region Temperature Slider
+
+        private async void TemperatureSlider_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            var slider = (sender as Slider);
+            var temperatureSlider = slider.DataContext as TemperatureSlider;
+
+            if (temperatureSlider != null && slider.Value != temperatureSlider.Value)
+                await temperatureSlider.ChangeTemperatureAsync(slider.Value);
         }
 
         #endregion

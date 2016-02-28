@@ -169,12 +169,51 @@
                 </Grid>
             </DataTemplate>
 
+            <DataTemplate x:Name="TemperatureSliderTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Slider
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Maximum="30"
+                        Minimum="5"
+                        ValueChanged="TemperatureSlider_ValueChanged"
+                        Value="21">
+                        <Slider.Foreground>
+                            <SolidColorBrush Color="{StaticResource HomeMaticBlue}" />
+                        </Slider.Foreground>
+                    </Slider>
+                    <TextBlock
+                        x:Name="SliderValue"
+                        Grid.Column="1"
+                        Margin="0,3,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="25.5"
+                        FontWeight="Normal"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Text="21°C"
+                        TextAlignment="Right"
+                        TextWrapping="Wrap">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource HomeMaticBlue}" />
+                        </TextBlock.Foreground>
+                        <Run Text="{Binding Level}" />
+                        <Run Text="{Binding Unit}" />
+                    </TextBlock>
+                </Grid>
+            </DataTemplate>
+
             <common:ChannelTemplateSelector
                 x:Key="ChannelTemplateSelector"
                 ContactTemplate="{StaticResource ContactDataTemplate}"
                 DoorHandleTemplate="{StaticResource DoorHandleDataTemplate}"
                 ShutterTemplate="{StaticResource ShutterDataTemplate}"
-                SwitcherTemplate="{StaticResource SwitcherDataTemplate}" />
+                SwitcherTemplate="{StaticResource SwitcherDataTemplate}"
+                TemperatureSliderTemplate="{StaticResource TemperatureSliderTemplate}" />
 
         </ResourceDictionary>
     </UserControl.Resources>
