@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +36,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public RoomViewModel(HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
-            : base(dialogService, resourceService)
+        public RoomViewModel(
+            INavigationService navigationService,
+            IResourceService resourceService,
+            IDialogService dialogService,
+            HomeControlService homeControlService) : base(navigationService, resourceService, dialogService)
         {
             _HomeControlService = homeControlService;
 

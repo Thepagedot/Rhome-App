@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.App.UWP.Services;
+using Thepagedot.Rhome.App.UWP.Views;
 
 namespace Thepagedot.Rhome.App.UWP
 {
@@ -15,6 +17,7 @@ namespace Thepagedot.Rhome.App.UWP
             SimpleIoc.Default.Register<IResourceService, ResourceService>();
             SimpleIoc.Default.Register<ILocalStorageService, LocalStorageService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
+            SimpleIoc.Default.Register<INavigationService>(() => CreateNavigationService());
 
             SimpleIoc.Default.Register<SettingsService>();
             SimpleIoc.Default.Register<HomeControlService>();
@@ -33,6 +36,17 @@ namespace Thepagedot.Rhome.App.UWP
         public RoomViewModel RoomViewModel { get { return SimpleIoc.Default.GetInstance<RoomViewModel>(); }}
         public SettingsViewModel SettingsViewModel { get { return SimpleIoc.Default.GetInstance<SettingsViewModel>(); }}
         public SystemVariableViewModel SystemVariableViewModel { get { return SimpleIoc.Default.GetInstance<SystemVariableViewModel>(); }}
-        public ProgramViewModel ProgramViewModel { get { return SimpleIoc.Default.GetInstance<ProgramViewModel>(); } }
+        public ProgramViewModel ProgramViewModel { get { return SimpleIoc.Default.GetInstance<ProgramViewModel>(); }}
+
+        private INavigationService CreateNavigationService()
+        {
+            var navigationService = new NavigationService();
+            navigationService.Configure("Room", typeof(RoomPage));
+            navigationService.Configure("Settings", typeof(SettingsPage));
+            navigationService.Configure("SystemVariable", typeof(SystemVariablePage));
+            navigationService.Configure("Program", typeof(ProgramPage));
+
+            return navigationService;
+        }
     }
 }

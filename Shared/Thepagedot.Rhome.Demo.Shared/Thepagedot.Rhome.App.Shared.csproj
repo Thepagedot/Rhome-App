@@ -46,9 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Other\DesignData.cs" />
+    <Compile Include="Other\ViewNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HomeControlService.cs" />
-    <Compile Include="Services\Interfaces\IDialogService.cs" />
     <Compile Include="Services\Interfaces\IResourceService.cs" />
     <Compile Include="Services\Interfaces\ILocalStorageService.cs" />
     <Compile Include="Services\SettingsService.cs" />

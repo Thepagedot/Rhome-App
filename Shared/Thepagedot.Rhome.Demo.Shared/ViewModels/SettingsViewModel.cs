@@ -8,6 +8,7 @@ using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -81,8 +82,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public SettingsViewModel(SettingsService settingsService, IDialogService dialogService, IResourceService resourceService)
-            : base(dialogService, resourceService)
+        public SettingsViewModel(
+            INavigationService navigationService,
+            IResourceService resourceService,
+            IDialogService dialogService,
+            SettingsService settingsService) : base(navigationService, resourceService, dialogService)
         {
             _SettingsService = settingsService;
 

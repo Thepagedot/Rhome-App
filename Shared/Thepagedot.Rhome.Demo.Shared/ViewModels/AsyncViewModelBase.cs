@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,10 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
     {
         #region Services
 
-        protected IDialogService _DialogService;
+        protected INavigationService _NavigationService;
         protected IResourceService _ResourceService;
+        protected IDialogService _DialogService;
+
 
         #endregion
 
@@ -47,10 +50,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         #endregion
 
-        public AsyncViewModelBase(IDialogService dialogService, IResourceService resourceService)
+        public AsyncViewModelBase(INavigationService navigationService, IResourceService resourceService, IDialogService dialogService)
         {
-            _DialogService = dialogService;
+            _NavigationService = navigationService;
             _ResourceService = resourceService;
+            _DialogService = dialogService;
 
             // Register events
             ConnectionError += AsyncViewModelBase_ConnectionError;
@@ -63,7 +67,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         protected async Task ShowConnectionErrorMessageAsync()
         {
-            await _DialogService.ShowMessageDialogAsync(_ResourceService.GetString("ConnectionErrorTitle"), _ResourceService.GetString("ConnectionErrorMessage"));
+            await _DialogService.ShowMessage(_ResourceService.GetString("ConnectionErrorTitle"), _ResourceService.GetString("ConnectionErrorMessage"));
         }
     }
 

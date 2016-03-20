@@ -54,21 +54,17 @@ namespace Thepagedot.Rhome.App.UWP
             HamburgerSplitView.IsPaneOpen = false;
 
             if (e.ClickedItem == MenuSettings)
-                Frame.Navigate(typeof(SettingsPage));
+                App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null);
             else if (e.ClickedItem == MenuSystemVariables)
-                Frame.Navigate(typeof(SystemVariablePage));
+                App.Bootstrapper.MainViewModel.NavigateToSystemVariableCommand.Execute(null);
             else if (e.ClickedItem == MenuPrograms)
-                Frame.Navigate(typeof(ProgramPage));
+                App.Bootstrapper.MainViewModel.NavigateToProgramCommand.Execute(null);
         }
 
         private void gvRooms_ItemClick(object sender, ItemClickEventArgs e)
         {
-            // Set clicked room as current room
             var room = e.ClickedItem as Room;
-            App.Bootstrapper.RoomViewModel.CurrentRoom = room;
-
-            // Navigate to room page
-            Frame.Navigate(typeof(RoomPage));
+            App.Bootstrapper.MainViewModel.NavigateToRoomCommand.Execute(room);
         }
 
         #region Room Grid

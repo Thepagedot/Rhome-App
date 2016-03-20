@@ -10,6 +10,7 @@ using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.App.Shared.Other;
+using GalaSoft.MvvmLight.Views;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -17,6 +18,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
     {
         private SettingsService _SettingsService;
         private HomeControlService _HomeControlService;
+        private RoomViewModel _RoomViewModel;
 
         private List<Room> _Rooms;
         public List<Room> Rooms
@@ -37,11 +39,55 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             }
         }
 
-        public MainViewModel(SettingsService settingsService, HomeControlService homeControlService, IDialogService dialogService, IResourceService resourceService)
-            : base (dialogService, resourceService)
+        #region Navigation Commands
+
+        private RelayCommand<Room> _NavigateToRoomCommand;
+        public RelayCommand<Room> NavigateToRoomCommand
+        {
+            get
+            {
+                return _NavigateToRoomCommand ?? (_NavigateToRoomCommand = new RelayCommand<Room>((Room room) =>
+                {
+                    // TODO: Check if linking to the RoomViewModel may be a bad practise.
+                    // Alternative would be to navigate to the room page with the current room as parameter
+                    // The roompage then can set the current room of the room view model
+                    _RoomViewModel.CurrentRoom = room;
+                    _NavigationService.NavigateTo(ViewNames.Room);
+                }));
+            }
+        }
+
+        private RelayCommand _NavigateToSystemVariableCommand;
+        public RelayCommand NavigateToSystemVariableCommand
+        {
+            get { return _NavigateToSystemVariableCommand ?? (_NavigateToSystemVariableCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.SystemVariable); })); }
+        }
+
+        private RelayCommand _NavigateToProgramCommand;
+        public RelayCommand NavigateToProgramCommand
+        {
+            get { return _NavigateToProgramCommand ?? (_NavigateToProgramCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.Program); })); }
+        }
+
+        private RelayCommand _NavigateToSettingsCommand;
+        public RelayCommand NavigateToSettingsCommand
+        {
+            get { return _NavigateToSettingsCommand ?? (_NavigateToSettingsCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.Settings); }));}
+        }
+
+        #endregion
+
+        public MainViewModel(
+            INavigationService navigationService,
+            IResourceService resourceService,
+            IDialogService dialogService,
+            SettingsService settingsService,
+            HomeControlService homeControlService,
+            RoomViewModel roomViewModel) : base (navigationService, resourceService, dialogService)
         {
             _SettingsService = settingsService;
             _HomeControlService = homeControlService;
+            _RoomViewModel = roomViewModel;
 
             if (IsInDesignMode)
             {
