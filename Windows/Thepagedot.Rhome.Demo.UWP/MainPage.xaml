@@ -152,6 +152,16 @@
                             <TextBlock Text="Settings" />
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel x:Name="MenuAbout" Orientation="Horizontal">
+                            <TextBlock
+                                Width="35"
+                                Margin="5,0,0,0"
+                                FontFamily="Segoe MDL2 Assets"
+                                Text="&#xE11B;" />
+                            <TextBlock Text="About" />
+                        </StackPanel>
+                    </ListViewItem>
                 </ListView>
             </SplitView.Pane>
 

@@ -59,6 +59,8 @@ namespace Thepagedot.Rhome.App.UWP
                 App.Bootstrapper.MainViewModel.NavigateToSystemVariableCommand.Execute(null);
             else if (e.ClickedItem == MenuPrograms)
                 App.Bootstrapper.MainViewModel.NavigateToProgramCommand.Execute(null);
+            else if (e.ClickedItem == MenuAbout)
+                App.Bootstrapper.MainViewModel.NavigateToAboutCommand.Execute(null);
         }
 
         private void gvRooms_ItemClick(object sender, ItemClickEventArgs e)

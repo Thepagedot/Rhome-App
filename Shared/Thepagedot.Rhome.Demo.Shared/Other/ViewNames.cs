@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thepagedot.Rhome.App.Shared.Other
 {
+    //TODO: Convert into config file
     public static class ViewNames
     {
         public static string Main = "Main";
@@ -13,5 +14,6 @@ namespace Thepagedot.Rhome.App.Shared.Other
         public static string SystemVariable = "SystemVariable";
         public static string Program = "Program";
         public static string Settings = "Settings";
+        public static string About = "About";
     }
 }

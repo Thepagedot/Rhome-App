@@ -75,6 +75,12 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             get { return _NavigateToSettingsCommand ?? (_NavigateToSettingsCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.Settings); }));}
         }
 
+        private RelayCommand _NavigateToAboutCommand;
+        public RelayCommand NavigateToAboutCommand
+        {
+            get { return _NavigateToAboutCommand ?? (_NavigateToAboutCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.About); })); }
+        }
+
         #endregion
 
         public MainViewModel(

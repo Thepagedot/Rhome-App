@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.App.UWP.Services;
@@ -41,10 +42,11 @@ namespace Thepagedot.Rhome.App.UWP
         private INavigationService CreateNavigationService()
         {
             var navigationService = new NavigationService();
-            navigationService.Configure("Room", typeof(RoomPage));
-            navigationService.Configure("Settings", typeof(SettingsPage));
-            navigationService.Configure("SystemVariable", typeof(SystemVariablePage));
-            navigationService.Configure("Program", typeof(ProgramPage));
+            navigationService.Configure(ViewNames.Room, typeof(RoomPage));
+            navigationService.Configure(ViewNames.Settings, typeof(SettingsPage));
+            navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariablePage));
+            navigationService.Configure(ViewNames.Program, typeof(ProgramPage));
+            navigationService.Configure(ViewNames.About, typeof(AboutPage));
 
             return navigationService;
         }
