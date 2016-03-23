@@ -14,15 +14,19 @@ using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.HomeMatic.Services;
 using System.Linq;
 using System.Threading.Tasks;
+using Thepagedot.Rhome.App.Droid;
+using GalaSoft.MvvmLight.Helpers;
+using GalaSoft.MvvmLight.Views;
+using JimBobBennett.MvvmLight.AppCompat;
 
 namespace Thepagedot.Rhome.App.Droid
 {
     [Activity(Label = "Rhome", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : AppCompatActivityBase
     {
         DrawerLayout drawerLayout;
 
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -42,24 +46,23 @@ namespace Thepagedot.Rhome.App.Droid
             slSwipeContainer.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
             slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
 
-            // Init DataHolder
-            if (DataHolder.Current == null) new DataHolder();
-            await DataHolder.Current.Init();
-
             // Init GridView
             var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
-            gvRooms.Adapter = new RoomAdapter(this, 0, DataHolder.Current.Rooms);
+            gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
             gvRooms.ItemClick += GvRooms_ItemClick;
-			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));        
 
-            // Update status
-            await DataHolder.Current.Update();
-        }                        
+			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
+        }
 
-		protected override void OnResume()
+		protected override async void OnResume()
 		{
 			base.OnResume();
-			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
+
+            // Init MainViewModel
+            if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
+                await App.Bootstrapper.MainViewModel.RefreshAsync();
+
+            var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
 			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
 		}
 
@@ -67,14 +70,14 @@ namespace Thepagedot.Rhome.App.Droid
 		{
 			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
 			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
-            await DataHolder.Current.Update();
+            await App.Bootstrapper.MainViewModel.RefreshAsync();
             (sender as SwipeRefreshLayout).Refreshing = false;
-        }            
+        }
 
         void GvRooms_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
         {
-            DataHolder.Current.CurrentRoom = DataHolder.Current.Rooms.ElementAt(e.Position);
-            StartActivity(new Intent(this, typeof(RoomActivity)));
+            var room = App.Bootstrapper.MainViewModel.Rooms.ElementAt(e.Position);
+            App.Bootstrapper.MainViewModel.NavigateToRoomCommand.Execute(room);
         }
 
         void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
@@ -87,9 +90,9 @@ namespace Thepagedot.Rhome.App.Droid
                     Toast.MakeText(this, e.MenuItem.TitleFormatted + " clicked.", ToastLength.Short).Show();
                     break;
                 case Resource.Id.nav_settings:
-                    StartActivity(new Intent(this, typeof(SettingsActivity)));
-                    break;                   
+                    App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null);
+                    break;
             }
         }
-    }      
+    }
 }

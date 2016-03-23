@@ -72,7 +72,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         private RelayCommand _NavigateToSettingsCommand;
         public RelayCommand NavigateToSettingsCommand
         {
-            get { return _NavigateToSettingsCommand ?? (_NavigateToSettingsCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.Settings); }));}
+            get { return _NavigateToSettingsCommand ?? (_NavigateToSettingsCommand = new RelayCommand(() =>
+            {
+                var test = ViewNames.Settings;
+                _NavigationService.NavigateTo(test);
+            }));}
         }
 
         private RelayCommand _NavigateToAboutCommand;

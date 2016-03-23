@@ -5,47 +5,22 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Views;
 using Thepagedot.Rhome.Base.Models;
+using Thepagedot.Rhome.App.Droid;
+using Android.App;
 
 namespace Thepagedot.Rhome.App.Droid
 {
-    public class CentralUnitAdapter : BaseAdapter<CentralUnit>
+    public class CentralUnitAdapter
     {
-        private List<CentralUnit> items;      
-
-        public CentralUnitAdapter(List<CentralUnit> items) : base() 
+        public static View GetView(int position, CentralUnit centralUnit, View convertView)
         {
-            this.items = items;
-        }
+            var view = convertView ?? LayoutInflater.From(Application.Context).Inflate(Resource.Layout.HomeControlApiItem, null);
 
-        public override Android.Views.View GetView(int position, Android.Views.View convertView, Android.Views.ViewGroup parent)
-        {
-            var view = convertView ?? LayoutInflater.From(parent.Context).Inflate(Resource.Layout.HomeControlApiItem, parent, false);
-
-            view.FindViewById<TextView>(Resource.Id.tvName).Text = GetItem(position).Name;
-            view.FindViewById<TextView>(Resource.Id.tvAddress).Text = GetItem(position).Address;
-            view.FindViewById<TextView>(Resource.Id.tvBrand).Text = GetItem(position).Brand.ToString();
+            view.FindViewById<TextView>(Resource.Id.tvName).Text = centralUnit.Name;
+            view.FindViewById<TextView>(Resource.Id.tvAddress).Text = centralUnit.Address;
+            view.FindViewById<TextView>(Resource.Id.tvBrand).Text = centralUnit.Brand.ToString();
 
             return view;
         }
-
-        private CentralUnit GetItem(int position)
-        {
-            return items[position];
-        }
-
-        public override int Count
-        {
-            get { return items.Count; }
-        }
-
-        public override CentralUnit this[int position]
-        {
-            get { return items[position]; }
-        }
-
-        public override long GetItemId(int position)
-        {
-            return position;
-        }            
     }
 }

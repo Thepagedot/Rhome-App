@@ -11,13 +11,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Thepagedot.Rhome.HomeMatic.Models;
+using Thepagedot.Rhome.App.Droid;
 
 namespace Thepagedot.Rhome.App.Droid
-{	
+{
     public static class HomeMaticLayout
     {
         public static View For(Context context, HomeMaticChannel channel)
-        {               
+        {
             if (channel is Switcher)
                 return GetViewForSwitcher(context, channel);
             if (channel is Contact)
@@ -25,7 +26,7 @@ namespace Thepagedot.Rhome.App.Droid
             if (channel is DoorHandle)
                 return GetViewForDoorHandle(context, channel);
             if (channel is Information)
-                return GetViewForInformation(context, channel);                
+                return GetViewForInformation(context, channel);
             if (channel is TemperatureSlider)
                 return GetViewForTemperatureSlider(context, channel);
 
@@ -40,9 +41,9 @@ namespace Thepagedot.Rhome.App.Droid
             tbSwitcher.CheckedChange += async delegate(object sender, CompoundButton.CheckedChangeEventArgs e)
             {
                 if (e.IsChecked)
-                    await (channel as Switcher).OnAsync(DataHolder.Current.HomeMaticApi);
+                    await (channel as Switcher).OnAsync();
                 else
-                    await (channel as Switcher).OffAsync(DataHolder.Current.HomeMaticApi);
+                    await (channel as Switcher).OffAsync();
             };
 
             return view;
@@ -112,8 +113,8 @@ namespace Thepagedot.Rhome.App.Droid
             view.FindViewById<SeekBar>(Resource.Id.sbTemperature).ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) => {
                 view.FindViewById<TextView>(Resource.Id.tvState).Text = e.Progress + temperatureSlider.Unit;
             };
-            view.FindViewById<SeekBar>(Resource.Id.sbTemperature).StopTrackingTouch += async (object sender, SeekBar.StopTrackingTouchEventArgs e) => 
-                    await temperatureSlider.ChangeTemperatureAsync(e.SeekBar.Progress, DataHolder.Current.HomeMaticApi);
+            view.FindViewById<SeekBar>(Resource.Id.sbTemperature).StopTrackingTouch += async (object sender, SeekBar.StopTrackingTouchEventArgs e) =>
+                    await temperatureSlider.ChangeTemperatureAsync(e.SeekBar.Progress);
 
             return view;
         }
