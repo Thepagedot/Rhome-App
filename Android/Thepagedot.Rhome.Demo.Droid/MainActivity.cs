@@ -33,6 +33,7 @@ namespace Thepagedot.Rhome.App.Droid
             SetContentView(Resource.Layout.Main);
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
+			this.CompatMode();
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             // Init navigation drawer
