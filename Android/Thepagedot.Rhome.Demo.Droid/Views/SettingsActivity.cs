@@ -51,7 +51,21 @@ namespace Thepagedot.Rhome.App.Droid
             // Init ListView of Central Units
             lvCentralUnits = FindViewById<ListView>(Resource.Id.lvCentralUnits);
             lvCentralUnits.Adapter = App.Bootstrapper.SettingsViewModel.CentralUnits.GetAdapter(CentralUnitAdapter.GetView);
+            lvCentralUnits.ItemLongClick += LvCentralUnits_ItemLongClick;
 		}
+
+        private void LvCentralUnits_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            var centralUnitToDelete = App.Bootstrapper.SettingsViewModel.CentralUnits.ElementAt(e.Position);
+            if (centralUnitToDelete != null)
+            {
+                var builder = new Android.Support.V7.App.AlertDialog.Builder(this);
+                builder.SetMessage(Resource.String.confirm_delete_message);
+                builder.SetPositiveButton(Resource.String.delete, (ev, se) => App.Bootstrapper.SettingsViewModel.DeleteCentralUnitCommand.Execute(centralUnitToDelete));
+                builder.SetNegativeButton(Android.Resource.String.Cancel, (ev, se) => { });
+                builder.Show();
+            }
+        }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {

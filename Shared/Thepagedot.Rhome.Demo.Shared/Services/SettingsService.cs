@@ -15,6 +15,8 @@ namespace Thepagedot.Rhome.App.Shared.Services
         private readonly string _ConfigFileName = "configuration.json";
 
         public Configuration Configuration { get; set; }
+        public bool IsLoaded { get; set; }
+
 
         public SettingsService(ILocalStorageService localStorageService, HomeControlService homeControlService)
         {
@@ -49,6 +51,8 @@ namespace Thepagedot.Rhome.App.Shared.Services
             {
                 Configuration = new Configuration();
             }
+
+            IsLoaded = true;
         }
 
         public async Task SaveSettingsAsync()

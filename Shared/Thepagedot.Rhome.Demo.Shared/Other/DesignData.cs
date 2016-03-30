@@ -43,9 +43,9 @@ namespace Thepagedot.Rhome.App.Shared.Other
             return room;
         }
 
-        public static List<Room> GetDemoRooms()
+        public static ObservableCollection<Room> GetDemoRooms()
         {
-            return new List<Room>
+            return new ObservableCollection<Room>
                 {
                     new HomeMaticRoom("Bedroom", 0, new List<int>()),
                     new HomeMaticRoom("Living room", 0, new List<int>()),

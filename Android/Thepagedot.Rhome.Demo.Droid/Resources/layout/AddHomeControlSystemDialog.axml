@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
+
         <EditText
             android:id="@+id/etIpAddress"
             android:layout_width="fill_parent"
@@ -37,6 +38,5 @@
         android:id="@+id/spBrand"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:entries="@array/brand_names" />
+        android:spinnerMode="dropdown" />
 </LinearLayout>

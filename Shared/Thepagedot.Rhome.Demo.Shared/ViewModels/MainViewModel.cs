@@ -11,6 +11,7 @@ using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.App.Shared.Other;
 using GalaSoft.MvvmLight.Views;
+using System.Collections.ObjectModel;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -20,8 +21,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         private HomeControlService _HomeControlService;
         private RoomViewModel _RoomViewModel;
 
-        private List<Room> _Rooms;
-        public List<Room> Rooms
+        private ObservableCollection<Room> _Rooms;
+        public ObservableCollection<Room> Rooms
         {
             get { return _Rooms; }
             set { _Rooms = value; RaisePropertyChanged(); }
@@ -99,6 +100,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             _HomeControlService = homeControlService;
             _RoomViewModel = roomViewModel;
 
+            //Rooms = new ObservableCollection<Room>();
+
             if (IsInDesignMode)
             {
                 Rooms = DesignData.GetDemoRooms();
@@ -110,11 +113,14 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             IsLoaded = false;
             IsLoading = true;
 
+            if (!_SettingsService.IsLoaded)
+                await _SettingsService.LoadSettingsAsync();
+
             if (_HomeControlService.HomeMatic != null)
             {
                 try
                 {
-                    Rooms = (await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync()).ToList();
+                    Rooms = new ObservableCollection<Room>(await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync());
                     IsLoaded = true;
                 }
                 catch (HttpRequestException)

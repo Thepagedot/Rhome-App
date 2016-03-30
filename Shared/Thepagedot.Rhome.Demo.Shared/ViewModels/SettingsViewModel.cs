@@ -105,9 +105,6 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
         public async Task InitializeAsync()
         {
-            if (_SettingsService.Configuration == null)
-                await _SettingsService.LoadSettingsAsync();
-
             CentralUnits = new ObservableCollection<CentralUnit>(_SettingsService.Configuration.CentralUnits);
         }
 

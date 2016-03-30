@@ -12,8 +12,18 @@ using Android.Widget;
 
 namespace Thepagedot.Rhome.App.Droid
 {
+    [Application]
     public class App : Application
     {
         public static Bootstrapper Bootstrapper = new Bootstrapper();
+
+        public App(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+        {
+        }
+
+        public override async void OnCreate()
+        {
+            base.OnCreate();
+        }
     }
 }

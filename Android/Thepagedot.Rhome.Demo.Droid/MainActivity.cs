@@ -26,7 +26,7 @@ namespace Thepagedot.Rhome.App.Droid
     {
         DrawerLayout drawerLayout;
 
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -47,21 +47,22 @@ namespace Thepagedot.Rhome.App.Droid
             slSwipeContainer.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
             slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
 
+            // Init MainViewModel
+            if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
+                await App.Bootstrapper.MainViewModel.RefreshAsync();
+
             // Init GridView
             var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
+            var adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
             gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
             gvRooms.ItemClick += GvRooms_ItemClick;
 
 			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
         }
 
-		protected override async void OnResume()
+		protected override void OnResume()
 		{
 			base.OnResume();
-
-            // Init MainViewModel
-            if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
-                await App.Bootstrapper.MainViewModel.RefreshAsync();
 
             var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
 			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
