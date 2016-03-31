@@ -19,17 +19,14 @@
             <TextView
                 android:id="@+id/tvName"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/PrimaryFontColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <TextView
                 android:id="@+id/tvAddress"
-                android:textColor="@color/PrimaryFontColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <TextView
                 android:id="@+id/tvBrand"
-                android:textColor="@color/PrimaryFontColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

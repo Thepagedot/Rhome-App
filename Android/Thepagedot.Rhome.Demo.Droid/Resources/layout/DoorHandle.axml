@@ -13,12 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/PrimaryFontColor"
         android:layout_gravity="center" />
     <TextView
         android:id="@+id/tvState"
         android:text="Open"
-        android:textColor="@color/PrimaryFontColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />

@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Thepagedot.Tools.Xamarin.Android;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -19,6 +20,7 @@ namespace Thepagedot.Rhome.App.Droid
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 
 			// Create your application here
 		}

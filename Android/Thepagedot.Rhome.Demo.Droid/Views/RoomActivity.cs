@@ -15,6 +15,7 @@ using Android.Support.V7.App;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Android.Support.V4.Widget;
 using Thepagedot.Rhome.App.Droid;
+using Thepagedot.Tools.Xamarin.Android;
 using GalaSoft.MvvmLight.Helpers;
 using GalaSoft.MvvmLight.Views;
 using JimBobBennett.MvvmLight.AppCompat;
@@ -28,6 +29,7 @@ namespace Thepagedot.Rhome.App.Droid
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Room);
+			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
             Title = App.Bootstrapper.RoomViewModel.CurrentRoom.Name;
 
             // Init toolbar

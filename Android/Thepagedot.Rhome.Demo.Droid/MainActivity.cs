@@ -18,6 +18,7 @@ using Thepagedot.Rhome.App.Droid;
 using GalaSoft.MvvmLight.Helpers;
 using GalaSoft.MvvmLight.Views;
 using JimBobBennett.MvvmLight.AppCompat;
+using Thepagedot.Tools.Xamarin.Android;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -33,7 +34,7 @@ namespace Thepagedot.Rhome.App.Droid
             SetContentView(Resource.Layout.Main);
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
-			this.CompatMode();
+			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             // Init navigation drawer

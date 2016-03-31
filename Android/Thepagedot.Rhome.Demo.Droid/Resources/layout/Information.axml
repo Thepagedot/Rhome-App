@@ -10,7 +10,6 @@
     <TextView
         android:id="@+id/tvName"
         android:text="Information Name"
-        android:textColor="@color/PrimaryFontColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -18,7 +17,6 @@
     <TextView
         android:id="@+id/tvContent"
         android:text="TEMPERATURE: 18.0°C"
-        android:textColor="@color/PrimaryFontColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="false"

@@ -23,6 +23,7 @@ using GalaSoft.MvvmLight.Helpers;
 using GalaSoft.MvvmLight.Views;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Rhome.App.Shared.ViewModels;
+using Thepagedot.Tools.Xamarin.Android;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -44,6 +45,7 @@ namespace Thepagedot.Rhome.App.Droid
             SetContentView(Resource.Layout.Settings);
             SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.toolbar));
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 
             SettingsViewModel = App.Bootstrapper.SettingsViewModel;
             await SettingsViewModel.InitializeAsync();
