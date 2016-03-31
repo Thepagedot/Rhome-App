@@ -52,9 +52,8 @@ namespace Thepagedot.Rhome.App.Droid
             if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
                 await App.Bootstrapper.MainViewModel.RefreshAsync();
 
-            // Init GridView
-            var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
-            var adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
+			// Init GridView
+			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
             gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
             gvRooms.ItemClick += GvRooms_ItemClick;
 
