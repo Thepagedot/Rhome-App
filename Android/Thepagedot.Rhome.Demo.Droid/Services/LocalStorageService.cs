@@ -29,7 +29,7 @@ namespace Thepagedot.Rhome.App.Droid.Services
                 {
                     using (var stream = new StreamReader(file))
                     {
-                        json = await stream.ReadToEndAsync();
+						json = await stream.ReadToEndAsync();
                     }
                 }
 

@@ -13,6 +13,14 @@
       android:id="@+id/nav_devices"
       android:icon="@drawable/ic_devices_black_24dp"
       android:title="Devices" />
+	<item
+      android:id="@+id/nav_system_variables"
+      android:icon="@drawable/ic_devices_black_24dp"
+      android:title="System Variables" />
+	<item
+      android:id="@+id/nav_programs"
+      android:icon="@drawable/ic_devices_black_24dp"
+      android:title="Programs" />
   </group>
 
   <item android:title="Miscellaneous">
