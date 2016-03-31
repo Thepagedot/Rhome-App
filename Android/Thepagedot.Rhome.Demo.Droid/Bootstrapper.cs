@@ -56,8 +56,8 @@ namespace Thepagedot.Rhome.App.Droid
             var navigationService = new AppCompatNavigationService();
             navigationService.Configure(ViewNames.Room, typeof(RoomActivity));
             navigationService.Configure(ViewNames.Settings, typeof(SettingsActivity));
-            //navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariablePage));
-            //navigationService.Configure(ViewNames.Program, typeof(ProgramPage));
+			navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariableActivity));
+			navigationService.Configure(ViewNames.Program, typeof(ProgramActivity));
             //navigationService.Configure(ViewNames.About, typeof(AboutPage));
 
             return navigationService;
