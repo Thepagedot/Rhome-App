@@ -46,12 +46,19 @@ namespace Thepagedot.Rhome.App.Droid
             var lvDevices = FindViewById<ListView>(Resource.Id.lvDevices);
             lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView);
         }
+        protected override async void OnResume()
+        {
+            base.OnResume();
+
+            if (!App.Bootstrapper.RoomViewModel.IsLoading)
+                await App.Bootstrapper.RoomViewModel.RefreshAsync();
+        }
+
 
         async void SlSwipeContainer_Refresh (object sender, EventArgs e)
         {
             await App.Bootstrapper.RoomViewModel.RefreshAsync();
             (sender as SwipeRefreshLayout).Refreshing = false;
-            //(FindViewById<ListView>(Resource.Id.lvDevices).Adapter as DeviceAdapter).NotifyDataSetChanged();
         }
     }
 }

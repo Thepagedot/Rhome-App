@@ -19,10 +19,10 @@ namespace Thepagedot.Rhome.App.Droid
 	[Activity(Label = "Programs", ParentActivity = typeof(MainActivity))]
 	public class ProgramActivity : AppCompatActivity
 	{
-		protected override void OnCreate(Bundle savedInstanceState)
+		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ProgramItem);
+            SetContentView(Resource.Layout.Programs);
 
             // Init toolbar
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
@@ -30,9 +30,10 @@ namespace Thepagedot.Rhome.App.Droid
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 
-            var lvPrograms = FindViewById<ListView>(Resource.Id.lvPrograms);
-            lvPrograms.Adapter = App.Bootstrapper.ProgramViewModel.Programs.GetAdapter(ProgramAdapter.GetView);
+            // Init program listview
+            if (!App.Bootstrapper.ProgramViewModel.IsLoaded && !App.Bootstrapper.ProgramViewModel.IsLoading)
+                await App.Bootstrapper.ProgramViewModel.RefreshAsync();
+            FindViewById<ListView>(Resource.Id.lvPrograms).Adapter = App.Bootstrapper.ProgramViewModel.Programs.GetAdapter(ProgramAdapter.GetView);
         }
-	}
+    }
 }
-

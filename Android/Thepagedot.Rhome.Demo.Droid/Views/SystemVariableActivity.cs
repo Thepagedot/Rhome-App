@@ -19,7 +19,7 @@ namespace Thepagedot.Rhome.App.Droid
 	[Activity(Label = "System Variables", ParentActivity = typeof(MainActivity))]
 	public class SystemVariableActivity : AppCompatActivity
 	{
-		protected override void OnCreate(Bundle savedInstanceState)
+		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SystemVariables);
@@ -30,9 +30,11 @@ namespace Thepagedot.Rhome.App.Droid
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 
-            var lvSystemVariables = FindViewById<ListView>(Resource.Id.lvSystemVariables);
-            lvSystemVariables.Adapter = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
-		}
-	}
+            // Init system variable list view
+            if (!App.Bootstrapper.SystemVariableViewModel.IsLoaded && !App.Bootstrapper.SystemVariableViewModel.IsLoading)
+                await App.Bootstrapper.SystemVariableViewModel.RefreshAsync();
+            FindViewById<ListView>(Resource.Id.lvSystemVariables).Adapter = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
+        }
+    }
 }
 
