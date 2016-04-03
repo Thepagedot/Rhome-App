@@ -30,7 +30,7 @@
                         android:layout_height="180dip"
                         android:src="@drawable/house"
                         android:scaleType="centerCrop" />
-                    <GridView
+                    <Thepagedot.Tools.Xamarin.Android.ExpandableHeightGridView
                         android:id="@+id/gvRooms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

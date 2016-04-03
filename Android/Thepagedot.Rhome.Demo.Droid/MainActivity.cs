@@ -53,11 +53,12 @@ namespace Thepagedot.Rhome.App.Droid
                 await App.Bootstrapper.MainViewModel.RefreshAsync();
 
 			// Init GridView
-			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
+			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
             gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
             gvRooms.ItemClick += GvRooms_ItemClick;
+			gvRooms.IsExpanded = true;
 
-			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
+			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
         }
 
 		protected override void OnResume()
@@ -65,7 +66,7 @@ namespace Thepagedot.Rhome.App.Droid
 			base.OnResume();
 
             var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
-			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
+			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
 		}
 
         async void SlSwipeContainer_Refresh (object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace Thepagedot.Rhome.App.Droid
 				case Resource.Id.nav_settings: App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); break;
 				case Resource.Id.nav_system_variables: App.Bootstrapper.MainViewModel.NavigateToSystemVariableCommand.Execute(null); break;
 				case Resource.Id.nav_programs: App.Bootstrapper.MainViewModel.NavigateToProgramCommand.Execute(null); break;
-					
+
             }
         }
     }
