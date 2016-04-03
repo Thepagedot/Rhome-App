@@ -10,10 +10,10 @@ namespace Thepagedot.Rhome.App.Droid
 	{
 		public static View GetView(int position, SystemVariable systemVariable, View convertView)
 		{
-			var view = convertView ?? LayoutInflater.From(Application.Context).Inflate(Resource.Layout.SystemVariable, null);
+			var view = convertView ?? LayoutInflater.From(Application.Context).Inflate(Resource.Layout.SystemVariableItem, null);
 
 			view.FindViewById<TextView>(Resource.Id.tvName).Text = systemVariable.Name;
-			view.FindViewById<TextView>(Resource.Id.tvValue).Text =  $"{systemVariable.Value} {systemVariable.Unit}";
+            view.FindViewById<TextView>(Resource.Id.tvValue).Text = systemVariable.ValueString;
 
 			return view;
 		}

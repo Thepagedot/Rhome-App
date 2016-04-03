@@ -10,12 +10,12 @@ namespace Thepagedot.Rhome.App.Droid
 	{
 		public static View GetView(int position, Program program, View convertView)
 		{
-			var view = convertView ?? LayoutInflater.From(Application.Context).Inflate(Resource.Layout.SystemVariable, null);
+			var view = convertView ?? LayoutInflater.From(Application.Context).Inflate(Resource.Layout.ProgramItem, null);
 
 			view.FindViewById<TextView>(Resource.Id.tvName).Text = program.Name;
-			//view.FindViewById<TextView>(Resource.Id.btnStart) = 
+            view.FindViewById<Button>(Resource.Id.btnRun).Click += (s, e) => App.Bootstrapper.ProgramViewModel.RunCommand.Execute(program);
 
-			return view;
+            return view;
 		}
 	}
 }
