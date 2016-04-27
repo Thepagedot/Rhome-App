@@ -25,6 +25,8 @@ namespace Thepagedot.Rhome.App.Droid
     [Activity(Label = "Room", ParentActivity = typeof(MainActivity))]
     public class RoomActivity : AppCompatActivityBase
     {
+        ListView lvDevices;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -43,7 +45,7 @@ namespace Thepagedot.Rhome.App.Droid
             slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
 
             // Init ListView
-            var lvDevices = FindViewById<ListView>(Resource.Id.lvDevices);
+            lvDevices = FindViewById<ListView>(Resource.Id.lvDevices);
             lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView);
         }
         protected override async void OnResume()
@@ -51,13 +53,17 @@ namespace Thepagedot.Rhome.App.Droid
             base.OnResume();
 
             if (!App.Bootstrapper.RoomViewModel.IsLoading)
+            {
                 await App.Bootstrapper.RoomViewModel.RefreshAsync();
+                lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView); // TODO: Solve this via clever data binding!
+            }
         }
 
 
         async void SlSwipeContainer_Refresh (object sender, EventArgs e)
         {
             await App.Bootstrapper.RoomViewModel.RefreshAsync();
+            lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView); // TODO: Solve this via clever data binding!
             (sender as SwipeRefreshLayout).Refreshing = false;
         }
     }
