@@ -27,26 +27,38 @@
                     android:descendantFocusability="blocksDescendants">
                     <RelativeLayout
                         android:layout_width="match_parent"
+                        android:background="#ffffffff"
                         android:layout_height="180dip">
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/house"
-                            android:scaleType="centerCrop" />
+                            android:scaleType="centerCrop"
+                            android:alpha="0.7" />
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_centerHorizontal="true"
                             android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="75dip"
+                                android:layout_height="75dip"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/Circle" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/welcomeHome" />
+                                android:text="@string/welcomeHome"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/text_header" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/welcomeHomeStatus" />
+                                android:text="@string/welcomeHomeStatus"
+                                android:textColor="#ff000000"
+                                android:textSize="@dimen/text_subheader"
+                                android:layout_gravity="center_horizontal" />
                         </LinearLayout>
                     </RelativeLayout>
                     <Thepagedot.Tools.Xamarin.Android.ExpandableHeightGridView
