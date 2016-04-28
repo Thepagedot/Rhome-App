@@ -59,7 +59,6 @@ namespace Thepagedot.Rhome.App.Droid
             }
         }
 
-
         async void SlSwipeContainer_Refresh (object sender, EventArgs e)
         {
             await App.Bootstrapper.RoomViewModel.RefreshAsync();

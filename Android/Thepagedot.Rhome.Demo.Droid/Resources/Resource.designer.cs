@@ -2745,6 +2745,12 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f09001d
 			public const int tilted = 2131296285;
 			
+			// aapt resource value: 0x7f090027
+			public const int welcomeHome = 2131296295;
+			
+			// aapt resource value: 0x7f090028
+			public const int welcomeHomeStatus = 2131296296;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
