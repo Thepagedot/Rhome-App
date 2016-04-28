@@ -18,6 +18,7 @@ using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Droid;
 using Thepagedot.Rhome.App.Droid.Services;
 using JimBobBennett.MvvmLight.AppCompat;
+using Thepagedot.Rhome.App.Droid.Views;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -40,6 +41,7 @@ namespace Thepagedot.Rhome.App.Droid
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<SystemVariableViewModel>();
             SimpleIoc.Default.Register<ProgramViewModel>();
+            SimpleIoc.Default.Register<MessageViewModel>();
         }
 
         public HomeControlService HomeControlService { get { return SimpleIoc.Default.GetInstance<HomeControlService>(); } }
@@ -50,11 +52,13 @@ namespace Thepagedot.Rhome.App.Droid
         public SettingsViewModel SettingsViewModel { get { return SimpleIoc.Default.GetInstance<SettingsViewModel>(); } }
         public SystemVariableViewModel SystemVariableViewModel { get { return SimpleIoc.Default.GetInstance<SystemVariableViewModel>(); } }
         public ProgramViewModel ProgramViewModel { get { return SimpleIoc.Default.GetInstance<ProgramViewModel>(); } }
+        public MessageViewModel MessageViewModel { get { return SimpleIoc.Default.GetInstance<MessageViewModel>(); } }
 
         private INavigationService CreateNavigationService()
         {
             var navigationService = new AppCompatNavigationService();
             navigationService.Configure(ViewNames.Room, typeof(RoomActivity));
+            navigationService.Configure(ViewNames.Messages, typeof(MessagesActivity));
             navigationService.Configure(ViewNames.Settings, typeof(SettingsActivity));
 			navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariableActivity));
 			navigationService.Configure(ViewNames.Program, typeof(ProgramActivity));

@@ -70,13 +70,24 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             get { return _NavigateToProgramCommand ?? (_NavigateToProgramCommand = new RelayCommand(() => { _NavigationService.NavigateTo(ViewNames.Program); })); }
         }
 
+        private RelayCommand _NavigateToMessagesCommand;
+        public RelayCommand NavigateToMessagesCommand
+        {
+            get
+            {
+                return _NavigateToMessagesCommand ?? (_NavigateToMessagesCommand = new RelayCommand(() =>
+                {
+                    _NavigationService.NavigateTo(ViewNames.Messages);
+                }));
+            }
+        }
+
         private RelayCommand _NavigateToSettingsCommand;
         public RelayCommand NavigateToSettingsCommand
         {
             get { return _NavigateToSettingsCommand ?? (_NavigateToSettingsCommand = new RelayCommand(() =>
             {
-                var test = ViewNames.Settings;
-                _NavigationService.NavigateTo(test);
+                _NavigationService.NavigateTo(ViewNames.Settings);
             }));}
         }
 

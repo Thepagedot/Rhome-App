@@ -13,6 +13,7 @@ namespace Thepagedot.Rhome.App.Shared.Other
         public static string Room = "Room";
         public static string SystemVariable = "SystemVariable";
         public static string Program = "Program";
+        public static string Messages = "Messages";
         public static string Settings = "Settings";
         public static string About = "About";
     }

@@ -46,6 +46,7 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="ViewModels\AsyncViewModelBase.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\ProgramViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
