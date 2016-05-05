@@ -186,6 +186,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Tools\Thepagedot.Tools\Thepagedot.Tools.csproj">
+      <Project>{96b6e816-b443-458c-99c0-8158f45d71c1}</Project>
+      <Name>Thepagedot.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Thepagedot.Rhome.Demo.Shared\Thepagedot.Rhome.App.Shared.csproj">
       <Project>{e787a5c5-262c-4f6c-85c8-6096e40f9e08}</Project>
       <Name>Thepagedot.Rhome.App.Shared</Name>

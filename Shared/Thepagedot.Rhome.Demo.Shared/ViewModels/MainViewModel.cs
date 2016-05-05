@@ -127,6 +127,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             if (!_SettingsService.IsLoaded)
                 await _SettingsService.LoadSettingsAsync();
 
+#if DEBUG
+            // Demo Mode
+            _HomeControlService.HomeMatic = new HomeMatic.Services.HomeMaticXmlApi(new Ccu("Mock", "localhost"), true);
+#endif
+
             if (_HomeControlService.HomeMatic != null)
             {
                 try
