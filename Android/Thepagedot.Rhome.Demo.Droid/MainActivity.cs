@@ -19,6 +19,8 @@ using GalaSoft.MvvmLight.Helpers;
 using GalaSoft.MvvmLight.Views;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Tools.Xamarin.Android;
+using HockeyApp;
+using HockeyApp.Metrics;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -36,6 +38,11 @@ namespace Thepagedot.Rhome.App.Droid
             SetSupportActionBar(toolbar);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
+            // Register Hockey App
+            CrashManager.Register(this, "cd1d9c28c27b48cf9cd9179d17496a5a");
+            MetricsManager.Register(this, Application, "cd1d9c28c27b48cf9cd9179d17496a5a");
+            UpdateManager.Register(this, "cd1d9c28c27b48cf9cd9179d17496a5a"); // Remove this for store builds!
 
             // Init navigation drawer
             FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
@@ -69,6 +76,18 @@ namespace Thepagedot.Rhome.App.Droid
 			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
 		}
 
+        protected override void OnPause()
+        {
+            base.OnPause();
+            UpdateManager.Unregister();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            UpdateManager.Unregister();
+        }
+
         async void SlSwipeContainer_Refresh (object sender, EventArgs e)
 		{
 			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
@@ -89,14 +108,12 @@ namespace Thepagedot.Rhome.App.Droid
 
             switch (e.MenuItem.ItemId)
             {
-                default:
-                    Toast.MakeText(this, e.MenuItem.TitleFormatted + " clicked.", ToastLength.Short).Show();
-                    break;
+                default: Toast.MakeText(this, e.MenuItem.TitleFormatted + " clicked. Not implemented yet.", ToastLength.Short).Show(); break;
 				case Resource.Id.nav_settings: App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); break;
 				case Resource.Id.nav_system_variables: App.Bootstrapper.MainViewModel.NavigateToSystemVariableCommand.Execute(null); break;
 				case Resource.Id.nav_programs: App.Bootstrapper.MainViewModel.NavigateToProgramCommand.Execute(null); break;
 				case Resource.Id.nav_messages: App.Bootstrapper.MainViewModel.NavigateToMessagesCommand.Execute(null); break;
-
+				case Resource.Id.nav_about: App.Bootstrapper.MainViewModel.NavigateToAboutCommand.Execute(null); break;
             }
         }
     }

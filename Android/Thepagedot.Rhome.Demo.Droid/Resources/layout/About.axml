@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+    <RelativeLayout
+        android:padding="@dimen/default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+        <TextView
+            android:id="@+id/tvVersionLabel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Version: " />
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="1.0.0"
+            android:layout_toRightOf="@id/tvVersionLabel"
+            android:layout_alignTop="@id/tvVersionLabel" />
+    </RelativeLayout>
+</RelativeLayout>

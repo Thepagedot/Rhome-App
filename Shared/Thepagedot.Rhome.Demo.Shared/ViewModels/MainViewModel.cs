@@ -129,7 +129,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
 #if DEBUG
             // Demo Mode
-            _HomeControlService.HomeMatic = new HomeMatic.Services.HomeMaticXmlApi(new Ccu("Mock", "localhost"), true);
+            //_HomeControlService.HomeMatic = new HomeMatic.Services.HomeMaticXmlApi(new Ccu("Mock", "localhost"), true);
 #endif
 
             if (_HomeControlService.HomeMatic != null)

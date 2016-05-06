@@ -37,7 +37,21 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkSkip />
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86,x86_64,arm64-v8a</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <Debugger>Xamarin</Debugger>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <DebugSymbols>False</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
@@ -51,6 +65,9 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19037, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\monoandroid1\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\..\Components\hockeyappandroid-4.1.0\lib\android\HockeySDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -105,6 +122,7 @@
     <Compile Include="Services\ResourceService.cs" />
     <Compile Include="Adapters\RoomAdapter.cs" />
     <Compile Include="Helpers\ScollingHelpers.cs" />
+    <Compile Include="Views\AboutActivity.cs" />
     <Compile Include="Views\MessagesActivity.cs" />
     <Compile Include="Views\SettingsActivity.cs" />
     <Compile Include="Views\RoomActivity.cs" />
@@ -132,6 +150,9 @@
     <AndroidResource Include="Resources\drawable\Circle.xml" />
     <AndroidResource Include="Resources\layout\Messages.axml">
       <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\About.axml">
+      <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +239,10 @@
     <AndroidResource Include="Resources\menu\MainMenu.xml" />
   </ItemGroup>
   <ItemGroup>
+    <XamarinComponentReference Include="hockeyappandroid">
+      <Visible>False</Visible>
+      <Version>4.1.0</Version>
+    </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportdesign">
       <Version>22.2.0.0</Version>
       <Visible>False</Visible>
@@ -232,6 +257,10 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Tools\Thepagedot.Tools.Xamarin.Android\Thepagedot.Tools.Xamarin.Android.csproj">
+      <Project>{97e52e8e-4936-4a86-ba09-899b04f3af62}</Project>
+      <Name>Thepagedot.Tools.Xamarin.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Thepagedot.Rhome.Demo.Shared\Thepagedot.Rhome.App.Shared.csproj">
       <Project>{E787A5C5-262C-4F6C-85C8-6096E40F9E08}</Project>
       <Name>Thepagedot.Rhome.App.Shared</Name>
@@ -243,10 +272,6 @@
     <ProjectReference Include="..\..\..\Rhome-Framework\HomeControl\Thepagedot.Rhome.HomeMatic\Thepagedot.Rhome.HomeMatic.csproj">
       <Project>{EF0E99DF-41E4-4CB3-A6DB-B8D911E6A3BB}</Project>
       <Name>Thepagedot.Rhome.HomeMatic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Tools\Thepagedot.Tools.Xamarin.Android\Thepagedot.Tools.Xamarin.Android.csproj">
-      <Project>{97E52E8E-4936-4A86-BA09-899B04F3AF62}</Project>
-      <Name>Thepagedot.Tools.Xamarin.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

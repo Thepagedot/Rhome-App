@@ -62,7 +62,7 @@ namespace Thepagedot.Rhome.App.Droid
             navigationService.Configure(ViewNames.Settings, typeof(SettingsActivity));
 			navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariableActivity));
 			navigationService.Configure(ViewNames.Program, typeof(ProgramActivity));
-            //navigationService.Configure(ViewNames.About, typeof(AboutPage));
+            navigationService.Configure(ViewNames.About, typeof(AboutActivity));
 
             return navigationService;
         }
