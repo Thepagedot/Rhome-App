@@ -12,7 +12,6 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 
-using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Android.Support.V4.Widget;
 using Thepagedot.Rhome.App.Droid;
 using Thepagedot.Tools.Xamarin.Android;
@@ -35,7 +34,7 @@ namespace Thepagedot.Rhome.App.Droid
             Title = App.Bootstrapper.RoomViewModel.CurrentRoom.Name;
 
             // Init toolbar
-            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
