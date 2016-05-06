@@ -39,7 +39,7 @@ namespace Thepagedot.Rhome.App.UWP
             if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
                 await App.Bootstrapper.MainViewModel.RefreshAsync();
 
-            // Initially set number od columns to the current state's value
+            // Initially set number of columns to the current state's value
             SetNumberOfColumnsByState(VisualStateManager.GetVisualStateGroups(MainGrid).First().CurrentState);
         }
 
