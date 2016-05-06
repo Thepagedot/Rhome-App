@@ -10,6 +10,7 @@ using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
+using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {

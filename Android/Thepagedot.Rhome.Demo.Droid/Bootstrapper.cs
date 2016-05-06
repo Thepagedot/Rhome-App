@@ -16,9 +16,10 @@ using Thepagedot.Rhome.App.Shared.ViewModels;
 using GalaSoft.MvvmLight.Views;
 using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Droid;
-using Thepagedot.Rhome.App.Droid.Services;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Rhome.App.Droid.Views;
+using Thepagedot.Tools;
+using Thepagedot.Tools.Xamarin.Android;
 
 namespace Thepagedot.Rhome.App.Droid
 {

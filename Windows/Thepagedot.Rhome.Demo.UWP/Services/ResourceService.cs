@@ -1,4 +1,5 @@
 ﻿using Thepagedot.Rhome.App.Shared.Services;
+using Thepagedot.Tools;
 using Windows.ApplicationModel.Resources;
 
 namespace Thepagedot.Rhome.App.UWP.Services

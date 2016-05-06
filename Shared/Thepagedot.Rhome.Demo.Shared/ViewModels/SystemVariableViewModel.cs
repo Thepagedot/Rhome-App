@@ -11,6 +11,7 @@ using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.HomeMatic.Models;
+using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {

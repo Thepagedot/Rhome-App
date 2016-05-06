@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.HomeMatic.Services;
 using System.Linq;
@@ -34,7 +33,7 @@ namespace Thepagedot.Rhome.App.Droid
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Main);
-            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
@@ -64,16 +63,11 @@ namespace Thepagedot.Rhome.App.Droid
             gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
             gvRooms.ItemClick += GvRooms_ItemClick;
 			gvRooms.IsExpanded = true;
-
-			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
         }
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-
-            var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
-			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
 		}
 
         protected override void OnPause()
@@ -108,7 +102,7 @@ namespace Thepagedot.Rhome.App.Droid
 
             switch (e.MenuItem.ItemId)
             {
-                default: Toast.MakeText(this, e.MenuItem.TitleFormatted + " clicked. Not implemented yet.", ToastLength.Short).Show(); break;
+                default: Toast.MakeText(this, e.MenuItem.TitleFormatted + " not implemented yet.", ToastLength.Short).Show(); break;
 				case Resource.Id.nav_settings: App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); break;
 				case Resource.Id.nav_system_variables: App.Bootstrapper.MainViewModel.NavigateToSystemVariableCommand.Execute(null); break;
 				case Resource.Id.nav_programs: App.Bootstrapper.MainViewModel.NavigateToProgramCommand.Execute(null); break;

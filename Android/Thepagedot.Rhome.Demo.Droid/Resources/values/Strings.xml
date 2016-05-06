@@ -18,4 +18,6 @@
 	<string name="welcomeHome">Welcome Home</string>
 	<string name="welcomeHomeStatus">You are at home.</string>
 	<string name="dismiss_all">Dismiss all</string>
+  <string name="change_name">Change name</string>
+  <string name="change_image">Change image</string>
 </resources>

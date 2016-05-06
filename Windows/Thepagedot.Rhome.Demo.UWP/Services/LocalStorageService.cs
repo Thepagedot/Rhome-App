@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.App.Shared.Models;
 using Thepagedot.Rhome.App.Shared.Services;
+using Thepagedot.Tools;
 using Windows.Storage;
 
 namespace Thepagedot.Rhome.App.UWP.Services

@@ -12,6 +12,7 @@ using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.App.Shared.Other;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
+using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -49,7 +50,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             {
                 return _NavigateToRoomCommand ?? (_NavigateToRoomCommand = new RelayCommand<Room>((Room room) =>
                 {
-                    // TODO: Check if linking to the RoomViewModel may be a bad practise.
+                    // TODO: Check if linking to the RoomViewModel may be a bad practice.
                     // Alternative would be to navigate to the room page with the current room as parameter
                     // The roompage then can set the current room of the room view model
                     _RoomViewModel.CurrentRoom = room;

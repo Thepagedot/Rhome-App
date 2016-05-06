@@ -9,6 +9,7 @@ using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.HomeMatic.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {

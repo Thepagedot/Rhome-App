@@ -2277,14 +2277,20 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f0600a7
 			public const int media_actions = 2131099815;
 			
-			// aapt resource value: 0x7f0600c5
-			public const int menu_add = 2131099845;
+			// aapt resource value: 0x7f0600c7
+			public const int menu_add = 2131099847;
 			
 			// aapt resource value: 0x7f0600bc
 			public const int menu_dismiss_all = 2131099836;
 			
 			// aapt resource value: 0x7f0600bb
 			public const int menu_refresh = 2131099835;
+			
+			// aapt resource value: 0x7f0600c6
+			public const int menu_room_change_image = 2131099846;
+			
+			// aapt resource value: 0x7f0600c5
+			public const int menu_room_change_name = 2131099845;
 			
 			// aapt resource value: 0x7f06001d
 			public const int middle = 2131099677;
@@ -2869,7 +2875,10 @@ namespace Thepagedot.Rhome.App.Droid
 			public const int NavMenu = 2131492866;
 			
 			// aapt resource value: 0x7f0c0003
-			public const int SettingsMenu = 2131492867;
+			public const int RoomMenu = 2131492867;
+			
+			// aapt resource value: 0x7f0c0004
+			public const int SettingsMenu = 2131492868;
 			
 			static Menu()
 			{
@@ -2958,6 +2967,12 @@ namespace Thepagedot.Rhome.App.Droid
 			
 			// aapt resource value: 0x7f090015
 			public const int bottom_sheet_behavior = 2131296277;
+			
+			// aapt resource value: 0x7f090073
+			public const int change_image = 2131296371;
+			
+			// aapt resource value: 0x7f090072
+			public const int change_name = 2131296370;
 			
 			// aapt resource value: 0x7f090016
 			public const int character_counter_pattern = 2131296278;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.App.Shared.Services;
+using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {

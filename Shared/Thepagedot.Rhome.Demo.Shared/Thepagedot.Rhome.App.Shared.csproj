@@ -41,8 +41,6 @@
     <Compile Include="Other\ViewNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HomeControlService.cs" />
-    <Compile Include="Services\Interfaces\IResourceService.cs" />
-    <Compile Include="Services\Interfaces\ILocalStorageService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="ViewModels\AsyncViewModelBase.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -85,6 +83,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Tools\Thepagedot.Tools\Thepagedot.Tools.csproj">
+      <Project>{96b6e816-b443-458c-99c0-8158f45d71c1}</Project>
+      <Name>Thepagedot.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Rhome-Framework\HomeControl\Thepagedot.Rhome.Base\Thepagedot.Rhome.Base.csproj">
       <Project>{FEF4C43A-4D06-477E-BE6F-8709EA321397}</Project>
       <Name>Thepagedot.Rhome.Base</Name>
