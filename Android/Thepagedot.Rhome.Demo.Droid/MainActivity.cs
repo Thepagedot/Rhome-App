@@ -38,10 +38,14 @@ namespace Thepagedot.Rhome.App.Droid
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
+#if (!DEBUG)
+
             // Register Hockey App
             CrashManager.Register(this, App.HockeyAppKey);
             MetricsManager.Register(this, Application, App.HockeyAppKey);
             UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
+
+#endif
 
             // Init navigation drawer
             FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
