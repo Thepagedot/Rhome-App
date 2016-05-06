@@ -60,19 +60,19 @@ namespace Thepagedot.Rhome.App.Droid
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Menu.RoomMenu, menu);
+            //MenuInflater.Inflate(Resource.Menu.RoomMenu, menu);
             return base.OnCreateOptionsMenu(menu);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            switch (item.ItemId)
-            {
-                default: Toast.MakeText(this, item.TitleFormatted + " not implemented yet.", ToastLength.Short).Show(); break;
-                case Resource.Id.menu_room_change_name:
-                    App.Bootstrapper.RoomViewModel.CurrentRoom.Name = "Robby's new name";
-                    break;
-            }
+            //switch (item.ItemId)
+            //{
+            //    default: Toast.MakeText(this, item.TitleFormatted + " not implemented yet.", ToastLength.Short).Show(); break;
+            //    case Resource.Id.menu_room_change_name:
+            //        App.Bootstrapper.RoomViewModel.CurrentRoom.Name = "Robby's new name";
+            //        break;
+            //}
 
             return base.OnOptionsItemSelected(item);
         }

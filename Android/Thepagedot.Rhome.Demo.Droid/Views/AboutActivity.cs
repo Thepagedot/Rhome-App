@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
+using Thepagedot.Tools.Xamarin.Android;
+using HockeyApp;
 
 namespace Thepagedot.Rhome.App.Droid.Views
 {
@@ -20,6 +22,10 @@ namespace Thepagedot.Rhome.App.Droid.Views
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.About);
+            this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
+
+            // Register Hockey App Feedback
+            FeedbackManager.Register(this, App.HockeyAppKey);
 
             // Init toolbar
             SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar));
@@ -28,6 +34,14 @@ namespace Thepagedot.Rhome.App.Droid.Views
             // Set version according to the AppManifest
             var tvVersion = FindViewById<TextView>(Resource.Id.tvVersion);
             tvVersion.Text = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
+
+            var btnFeedback = FindViewById<Button>(Resource.Id.btnFeedback);
+            btnFeedback.Click += BtnFeedback_Click;
+        }
+
+        private void BtnFeedback_Click(object sender, EventArgs e)
+        {
+            FeedbackManager.ShowFeedbackActivity(this);
         }
     }
 }

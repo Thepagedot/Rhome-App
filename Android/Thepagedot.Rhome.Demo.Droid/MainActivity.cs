@@ -39,9 +39,9 @@ namespace Thepagedot.Rhome.App.Droid
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
             // Register Hockey App
-            CrashManager.Register(this, "cd1d9c28c27b48cf9cd9179d17496a5a");
-            MetricsManager.Register(this, Application, "cd1d9c28c27b48cf9cd9179d17496a5a");
-            UpdateManager.Register(this, "cd1d9c28c27b48cf9cd9179d17496a5a"); // Remove this for store builds!
+            CrashManager.Register(this, App.HockeyAppKey);
+            MetricsManager.Register(this, Application, App.HockeyAppKey);
+            UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
 
             // Init navigation drawer
             FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;

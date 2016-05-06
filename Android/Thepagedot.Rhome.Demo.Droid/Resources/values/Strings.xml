@@ -14,10 +14,11 @@
 	<string name="add_home_control_system_title">Add new home control system</string>
 	<string name="edit_home_control_system_title">Edit home control system</string>
   <string name="delete">Delete</string>
-  <string name="confirm_delete_message">Do you really want to delete this cental unit?</string>
+  <string name="confirm_delete_message">Do you really want to delete this central unit?</string>
 	<string name="welcomeHome">Welcome Home</string>
 	<string name="welcomeHomeStatus">You are at home.</string>
 	<string name="dismiss_all">Dismiss all</string>
   <string name="change_name">Change name</string>
   <string name="change_image">Change image</string>
+  <string name="feedback">Feedback</string>
 </resources>

@@ -22,5 +22,12 @@
             android:text="1.0.0"
             android:layout_toRightOf="@id/tvVersionLabel"
             android:layout_alignTop="@id/tvVersionLabel" />
+        <Button
+            android:id="@+id/btnFeedback"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tvVersionLabel"
+            android:text="@string/feedback"
+            android:layout_marginTop="@dimen/default_margin" />
     </RelativeLayout>
 </RelativeLayout>
