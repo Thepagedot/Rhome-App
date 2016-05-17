@@ -1,2 +1,2 @@
-MainPackage=D:\Source\Thepagedot\Rhome\Rhome-App\Windows\Thepagedot.Rhome.Demo.UWP\bin\ARM\Release\Thepagedot.Rhome.App.UWP_1.1.0.0_ARM.appx
-SymbolPackage=D:\Source\Thepagedot\Rhome\Rhome-App\Windows\Thepagedot.Rhome.Demo.UWP\AppPackages\Thepagedot.Rhome.App.UWP_1.1.0.0_Test\Thepagedot.Rhome.App.UWP_1.1.0.0_ARM.appxsym
+MainPackage=D:\Source\Thepagedot\Rhome\Rhome-App\Windows\Thepagedot.Rhome.Demo.UWP\bin\ARM\Release\Thepagedot.Rhome.App.UWP_0.1.1.0_ARM.appx
+SymbolPackage=D:\Source\Thepagedot\Rhome\Rhome-App\Windows\Thepagedot.Rhome.Demo.UWP\AppPackages\Thepagedot.Rhome.App.UWP_0.1.1.0_Test\Thepagedot.Rhome.App.UWP_0.1.1.0_ARM.appxsym

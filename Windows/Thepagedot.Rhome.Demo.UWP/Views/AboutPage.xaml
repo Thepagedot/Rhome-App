@@ -37,10 +37,17 @@
                 Text="About" />
         </Grid>
 
-        <TextBlock
-            Grid.Row="1"
-            Padding="10"
-            Text="Version: Alpha 1.1" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock
+                Grid.Row="1"
+                Padding="10"
+                Text="Version:" />
+            <TextBlock
+                x:Name="tbkVersion"
+                Grid.Row="1"
+                Padding="10"
+                Text="0.0.1-alpha" />
+        </StackPanel>
 
     </Grid>
 </Page>

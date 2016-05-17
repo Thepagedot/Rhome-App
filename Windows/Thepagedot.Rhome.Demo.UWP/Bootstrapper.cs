@@ -6,6 +6,7 @@ using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.App.UWP.Services;
 using Thepagedot.Rhome.App.UWP.Views;
+using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.UWP
 {

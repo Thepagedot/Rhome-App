@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Thepagedot")]
 [assembly: AssemblyProduct("Thepagedot.Rhome.App.UWP")]
-[assembly: AssemblyCopyright("Copyright © Thepagedot 2015")]
+[assembly: AssemblyCopyright("Copyright © Thepagedot 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

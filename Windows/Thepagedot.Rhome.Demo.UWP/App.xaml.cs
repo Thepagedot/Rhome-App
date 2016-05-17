@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.HockeyApp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,9 @@ namespace Thepagedot.Rhome.App.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            // Register Hockey App
+            HockeyClient.Current.Configure("0ab2833844934ac3a800edd387c85996");
         }
 
         /// <summary>

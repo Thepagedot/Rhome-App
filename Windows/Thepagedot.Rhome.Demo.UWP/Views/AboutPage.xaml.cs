@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,14 @@ namespace Thepagedot.Rhome.App.UWP.Views
         public AboutPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            var version = Package.Current.Id.Version;
+            tbkVersion.Text = string.Format("{0}.{1}.{2}-alpha", version.Major, version.Minor, version.Build);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
