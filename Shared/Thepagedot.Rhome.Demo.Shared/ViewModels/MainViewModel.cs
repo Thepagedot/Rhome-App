@@ -143,18 +143,21 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			}
 #endif
 
-			// Load HomeMatic stuff
-			if (_HomeControlService.HomeMatic != null)
+			// Load HomeMatic
+			// Check connection
+			if (await _HomeControlService.HomeMatic.CheckConnectionAsync())
 			{
-				try
+
+				if (_HomeControlService.HomeMatic != null)
 				{
 					Rooms = new ObservableCollection<Room>(await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync());
 					IsLoaded = true;
 				}
-				catch (HttpRequestException)
-				{
-					await ShowConnectionErrorMessageAsync();
-				}
+			}
+			else
+			{
+				// CCU is not reachable
+				await ShowConnectionErrorMessageAsync();
 			}
 
 			IsLoading = false;

@@ -20,23 +20,30 @@ using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Tools.Xamarin.Android;
 using HockeyApp;
 using HockeyApp.Metrics;
+using Thepagedot.Rhome.App.Shared.ViewModels;
 
 namespace Thepagedot.Rhome.App.Droid
 {
-    [Activity(Label = "Rhome", MainLauncher = true)]
-    public class MainActivity : AppCompatActivityBase
-    {
-        DrawerLayout drawerLayout;
+	[Activity(Label = "Rhome", MainLauncher = true)]
+	public class MainActivity : AppCompatActivityBase
+	{
+		DrawerLayout drawerLayout;
 
-        protected override async void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+		public Binding RefreshBinding { get; set; }
+		public SwipeRefreshLayout SlSwipeRefreshLayout { get; set; }
+		public MainViewModel MainViewModel { get; set; }
 
-            SetContentView(Resource.Layout.Main);
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
+
+		protected override async void OnCreate(Bundle bundle)
+		{
+			base.OnCreate(bundle);
+
+			SetContentView(Resource.Layout.Main);
+			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			SetSupportActionBar(toolbar);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
-            drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+			MainViewModel = App.Bootstrapper.MainViewModel;
 
 #if (!DEBUG)
 
@@ -47,72 +54,80 @@ namespace Thepagedot.Rhome.App.Droid
 
 #endif
 
-            // Init navigation drawer
-            FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
-            var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
-            drawerLayout.SetDrawerListener(drawerToggle);
-            drawerToggle.SyncState();
+			// Init navigation drawer
+			FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
+			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
+			drawerLayout.SetDrawerListener(drawerToggle);
+			drawerToggle.SyncState();
 
-            // Init swipe to refresh
-            var slSwipeContainer = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
-            slSwipeContainer.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
-            slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
+			// Init swipe to refresh
+			SlSwipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
+			SlSwipeRefreshLayout.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
+			SlSwipeRefreshLayout.Refresh += SlSwipeContainer_Refresh;
 
-            // Init MainViewModel
-            if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
-                await App.Bootstrapper.MainViewModel.RefreshAsync();
+			SlSwipeRefreshLayout.Post(() =>
+			{
+				// Bindings
+				SlSwipeRefreshLayout.Refreshing = true;
+				RefreshBinding = this.SetBinding(() => MainViewModel.IsLoading, () => SlSwipeRefreshLayout.Refreshing, BindingMode.TwoWay);
+			});
+
+
+			// Init MainViewModel
+			if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
+				await App.Bootstrapper.MainViewModel.RefreshAsync();
 
 			// Init GridView
 			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
-            gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
-            gvRooms.ItemClick += GvRooms_ItemClick;
+			gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
+			gvRooms.ItemClick += GvRooms_ItemClick;
 			gvRooms.IsExpanded = true;
-        }
+		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
 		}
 
-        protected override void OnPause()
-        {
-            base.OnPause();
-            UpdateManager.Unregister();
-        }
+		protected override void OnPause()
+		{
+			base.OnPause();
+			UpdateManager.Unregister();
+		}
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            UpdateManager.Unregister();
-        }
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			UpdateManager.Unregister();
+		}
 
-        async void SlSwipeContainer_Refresh (object sender, EventArgs e)
+		async void SlSwipeContainer_Refresh(object sender, EventArgs e)
 		{
 			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
 			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
-            await App.Bootstrapper.MainViewModel.RefreshAsync();
-            (sender as SwipeRefreshLayout).Refreshing = false;
-        }
+			await App.Bootstrapper.MainViewModel.RefreshAsync();
+			(sender as SwipeRefreshLayout).Refreshing = false;
+		}
 
-        void GvRooms_ItemClick (object sender, AdapterView.ItemClickEventArgs e)
-        {
-            var room = App.Bootstrapper.MainViewModel.Rooms.ElementAt(e.Position);
-            App.Bootstrapper.MainViewModel.NavigateToRoomCommand.Execute(room);
-        }
+		void GvRooms_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+		{
+			var room = App.Bootstrapper.MainViewModel.Rooms.ElementAt(e.Position);
+			App.Bootstrapper.MainViewModel.NavigateToRoomCommand.Execute(room);
+		}
 
-        void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
-        {
-            drawerLayout.CloseDrawers();
+		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+		{
+			drawerLayout.CloseDrawers();
 
-            switch (e.MenuItem.ItemId)
-            {
-                default: Toast.MakeText(this, e.MenuItem.TitleFormatted + " not implemented yet.", ToastLength.Short).Show(); break;
+			switch (e.MenuItem.ItemId)
+			{
+				default: Toast.MakeText(this, e.MenuItem.TitleFormatted + " not implemented yet.", ToastLength.Short).Show(); break;
 				case Resource.Id.nav_settings: App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); break;
 				case Resource.Id.nav_system_variables: App.Bootstrapper.MainViewModel.NavigateToSystemVariableCommand.Execute(null); break;
 				case Resource.Id.nav_programs: App.Bootstrapper.MainViewModel.NavigateToProgramCommand.Execute(null); break;
 				case Resource.Id.nav_messages: App.Bootstrapper.MainViewModel.NavigateToMessagesCommand.Execute(null); break;
 				case Resource.Id.nav_about: App.Bootstrapper.MainViewModel.NavigateToAboutCommand.Execute(null); break;
-            }
-        }
-    }
+			}
+		}
+	}
 }
