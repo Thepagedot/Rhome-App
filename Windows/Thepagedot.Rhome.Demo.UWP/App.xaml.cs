@@ -49,7 +49,7 @@ namespace Thepagedot.Rhome.App.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            // Microsoft.HockeyApp.HockeyClient.Current.Configure("Your-App-ID");
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

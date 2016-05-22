@@ -9,57 +9,39 @@ using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.Shared.Services
 {
-    public class SettingsService
-    {
-        private ILocalStorageService _LocalStorageService;
-        private HomeControlService _HomeControlService;
-        private readonly string _ConfigFileName = "configuration.json";
+	public class SettingsService
+	{
+		private ILocalStorageService _LocalStorageService;
+		private readonly string _SettingsFileName = "settings.json";
 
-        public Configuration Configuration { get; set; }
-        public bool IsLoaded { get; set; }
+		public Settings Settings { get; set; }
+		public bool IsLoaded { get; set; }
 
 
-        public SettingsService(ILocalStorageService localStorageService, HomeControlService homeControlService)
-        {
-            _LocalStorageService = localStorageService;
-            _HomeControlService = homeControlService;
-        }
+		public SettingsService(ILocalStorageService localStorageService)
+		{
+			_LocalStorageService = localStorageService;
+		}
 
-        public void Refresh()
-        {
-            // Reset
-            _HomeControlService.HomeMatic = null;
+		public async Task LoadSettingsAsync()
+		{
+			var configuration = await _LocalStorageService.LoadFromFileAsync<Settings>(_SettingsFileName);
+			if (configuration != null)
+			{
+				Settings = configuration;
+			}
+			else
+			{
+				Settings = new Settings();
+			}
 
-            // Load central units
-            if (Configuration.CentralUnits != null)
-            {
-                // HomeMatic
-                var homeMaticCentral = Configuration.CentralUnits.FirstOrDefault(c => c.Brand == Base.Models.CentralUnitBrand.HomeMatic);
-                if (homeMaticCentral != null && homeMaticCentral is Ccu)
-                    _HomeControlService.HomeMatic = new HomeMatic.Services.HomeMaticXmlApi(homeMaticCentral as Ccu);
-            }
-        }
+			IsLoaded = true;
+		}
 
-        public async Task LoadSettingsAsync()
-        {
-            var configuration = await _LocalStorageService.LoadFromFileAsync<Configuration>(_ConfigFileName);
-            if (configuration != null)
-            {
-                Configuration = configuration;
-                Refresh();
-            }
-            else
-            {
-                Configuration = new Configuration();
-            }
-
-            IsLoaded = true;
-        }
-
-        public async Task SaveSettingsAsync()
-        {
-            if (Configuration != null)
-                await _LocalStorageService.SaveToFileAsync(_ConfigFileName, Configuration);
-        }
-    }
+		public async Task SaveSettingsAsync()
+		{
+			if (Settings != null)
+				await _LocalStorageService.SaveToFileAsync(_SettingsFileName, Settings);
+		}
+	}
 }
