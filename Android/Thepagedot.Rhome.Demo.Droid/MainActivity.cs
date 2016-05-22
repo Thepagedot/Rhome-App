@@ -1,25 +1,16 @@
 using System;
 
 using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
-using Thepagedot.Rhome.HomeMatic.Models;
-using Thepagedot.Rhome.HomeMatic.Services;
 using System.Linq;
-using System.Threading.Tasks;
-using Thepagedot.Rhome.App.Droid;
 using GalaSoft.MvvmLight.Helpers;
-using GalaSoft.MvvmLight.Views;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Tools.Xamarin.Android;
 using HockeyApp;
-using HockeyApp.Metrics;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 
 namespace Thepagedot.Rhome.App.Droid
@@ -27,12 +18,14 @@ namespace Thepagedot.Rhome.App.Droid
 	[Activity(Label = "Rhome", MainLauncher = true)]
 	public class MainActivity : AppCompatActivityBase
 	{
-		DrawerLayout drawerLayout;
-
-		public Binding RefreshBinding { get; set; }
-		public SwipeRefreshLayout SlSwipeRefreshLayout { get; set; }
 		public MainViewModel MainViewModel { get; set; }
 
+		// Public UI elements for binding
+		public SwipeRefreshLayout SlSwipeRefreshLayout { get; set; }
+		public DrawerLayout DrawerLayout { get; set; }
+
+		// Bindings
+		public Binding RefreshBinding { get; set; }
 
 		protected override async void OnCreate(Bundle bundle)
 		{
@@ -42,12 +35,12 @@ namespace Thepagedot.Rhome.App.Droid
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(toolbar);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
-			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+			DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 			MainViewModel = App.Bootstrapper.MainViewModel;
 
 #if (!DEBUG)
 
-            // Register Hockey App
+            // Register Hockey App if not in Debug mode
             CrashManager.Register(this, App.HockeyAppKey);
             MetricsManager.Register(this, Application, App.HockeyAppKey);
             UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
@@ -56,37 +49,25 @@ namespace Thepagedot.Rhome.App.Droid
 
 			// Init navigation drawer
 			FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
-			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
-			drawerLayout.SetDrawerListener(drawerToggle);
+			var drawerToggle = new ActionBarDrawerToggle(this, DrawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
+			DrawerLayout.SetDrawerListener(drawerToggle);
 			drawerToggle.SyncState();
 
 			// Init swipe to refresh
 			SlSwipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
 			SlSwipeRefreshLayout.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
 			SlSwipeRefreshLayout.Refresh += SlSwipeContainer_Refresh;
-
-			SlSwipeRefreshLayout.Post(() =>
-			{
-				// Bindings
-				SlSwipeRefreshLayout.Refreshing = true;
-				RefreshBinding = this.SetBinding(() => MainViewModel.IsLoading, () => SlSwipeRefreshLayout.Refreshing, BindingMode.TwoWay);
-			});
-
+			SlSwipeRefreshLayout.Post(() => { RefreshBinding = this.SetBinding(() => MainViewModel.IsLoading, () => SlSwipeRefreshLayout.Refreshing, BindingMode.TwoWay); });
 
 			// Init MainViewModel
-			if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
-				await App.Bootstrapper.MainViewModel.RefreshAsync();
+			if (!MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
+				await MainViewModel.RefreshAsync();
 
-			// Init GridView
+			// Init GridView (after ViewModel is initiated)
 			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
-			gvRooms.Adapter = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
+			gvRooms.Adapter = MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
 			gvRooms.ItemClick += GvRooms_ItemClick;
 			gvRooms.IsExpanded = true;
-		}
-
-		protected override void OnResume()
-		{
-			base.OnResume();
 		}
 
 		protected override void OnPause()
@@ -104,20 +85,21 @@ namespace Thepagedot.Rhome.App.Droid
 		async void SlSwipeContainer_Refresh(object sender, EventArgs e)
 		{
 			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
-			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin));
+			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin)); //TODO: Check if still needed
 			await App.Bootstrapper.MainViewModel.RefreshAsync();
 			(sender as SwipeRefreshLayout).Refreshing = false;
 		}
 
 		void GvRooms_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
 		{
-			var room = App.Bootstrapper.MainViewModel.Rooms.ElementAt(e.Position);
-			App.Bootstrapper.MainViewModel.NavigateToRoomCommand.Execute(room);
+			// User selected a room. Navigate to it.
+			var room = MainViewModel.Rooms.ElementAt(e.Position);
+			MainViewModel.NavigateToRoomCommand.Execute(room);
 		}
 
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{
-			drawerLayout.CloseDrawers();
+			DrawerLayout.CloseDrawers();
 
 			switch (e.MenuItem.ItemId)
 			{
