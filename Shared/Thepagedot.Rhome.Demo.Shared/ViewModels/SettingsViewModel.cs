@@ -25,6 +25,17 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			set { _CentralUnits = value; RaisePropertyChanged(); }
 		}
 
+		private bool _IsDemoMode;
+		public bool IsDemoMode
+		{
+			get { return _IsDemoMode; }
+			set
+			{
+				_IsDemoMode = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		#region New CentralUnit fields
 
 		private string _NewCentralUnitName;
@@ -98,19 +109,20 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			ResetNewCentralUnitValues();
 		}
 
-		private void ResetNewCentralUnitValues()
-		{
-			NewCentralUnitName = "";
-			NewCentralUnitAddress = "";
-			NewCentralUnitBrand = 0;
-		}
-
 		public async Task InitializeAsync()
 		{
 			if (!_SettingsService.IsLoaded)
 				await _SettingsService.LoadSettingsAsync();
 
 			CentralUnits = new ObservableCollection<CentralUnit>(_SettingsService.Settings.Configuration.CentralUnits);
+			IsDemoMode = true; //_SettingsService.Settings.IsDemoMode;
+		}
+
+		private void ResetNewCentralUnitValues()
+		{
+			NewCentralUnitName = "";
+			NewCentralUnitAddress = "";
+			NewCentralUnitBrand = 0;
 		}
 
 		public async Task SaveSettingsAsync()

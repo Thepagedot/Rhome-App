@@ -21,68 +21,55 @@ using JimBobBennett.MvvmLight.AppCompat;
 
 namespace Thepagedot.Rhome.App.Droid
 {
-    [Activity(Label = "Room", ParentActivity = typeof(MainActivity))]
-    public class RoomActivity : AppCompatActivityBase
-    {
-        ListView lvDevices;
+	[Activity(Label = "Room", ParentActivity = typeof(MainActivity))]
+	public class RoomActivity : AppCompatActivityBase
+	{
+		ListView lvDevices;
 
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Room);
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
+
+			// Init view
+			SetContentView(Resource.Layout.Room);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
-            Title = App.Bootstrapper.RoomViewModel.CurrentRoom.Name;
+			Title = App.Bootstrapper.RoomViewModel.CurrentRoom.Name;
+			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			SetSupportActionBar(toolbar);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            // Init toolbar
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			// Init swipe to refresh
+			var slSwipeContainer = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
+			slSwipeContainer.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
+			slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
 
-            // Init swipe to refresh
-            var slSwipeContainer = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
-            slSwipeContainer.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
-            slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
+			// Init ListView
+			lvDevices = FindViewById<ListView>(Resource.Id.lvDevices);
+			lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView);
+		}
 
-            // Init ListView
-            lvDevices = FindViewById<ListView>(Resource.Id.lvDevices);
-            lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView);
-        }
-        protected override async void OnResume()
-        {
-            base.OnResume();
+		protected override async void OnResume()
+		{
+			base.OnResume();
 
-            if (!App.Bootstrapper.RoomViewModel.IsLoading)
-            {
-                await App.Bootstrapper.RoomViewModel.RefreshAsync();
-                lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView); // TODO: Solve this via clever data binding!
-            }
-        }
+			if (!App.Bootstrapper.RoomViewModel.IsLoading)
+			{
+				await App.Bootstrapper.RoomViewModel.RefreshAsync();
+				lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView); // TODO: Solve this via clever data binding!
+			}
+		}
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            //MenuInflater.Inflate(Resource.Menu.RoomMenu, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			//MenuInflater.Inflate(Resource.Menu.RoomMenu, menu);
+			return base.OnCreateOptionsMenu(menu);
+		}
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            //switch (item.ItemId)
-            //{
-            //    default: Toast.MakeText(this, item.TitleFormatted + " not implemented yet.", ToastLength.Short).Show(); break;
-            //    case Resource.Id.menu_room_change_name:
-            //        App.Bootstrapper.RoomViewModel.CurrentRoom.Name = "Robby's new name";
-            //        break;
-            //}
-
-            return base.OnOptionsItemSelected(item);
-        }
-
-        async void SlSwipeContainer_Refresh (object sender, EventArgs e)
-        {
-            await App.Bootstrapper.RoomViewModel.RefreshAsync();
-            lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView); // TODO: Solve this via clever data binding!
-            (sender as SwipeRefreshLayout).Refreshing = false;
-        }
-    }
+		async void SlSwipeContainer_Refresh(object sender, EventArgs e)
+		{
+			await App.Bootstrapper.RoomViewModel.RefreshAsync();
+			lvDevices.Adapter = App.Bootstrapper.RoomViewModel.CurrentRoom.Devices.GetAdapter(DeviceAdapter.GetView); // TODO: Solve this via clever data binding!
+			(sender as SwipeRefreshLayout).Refreshing = false;
+		}
+	}
 }
-

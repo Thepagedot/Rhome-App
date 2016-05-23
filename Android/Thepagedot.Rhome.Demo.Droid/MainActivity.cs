@@ -18,6 +18,7 @@ namespace Thepagedot.Rhome.App.Droid
 	[Activity(Label = "Rhome", MainLauncher = true)]
 	public class MainActivity : AppCompatActivityBase
 	{
+		// ViewModel
 		public MainViewModel MainViewModel { get; set; }
 
 		// Public UI elements for binding
@@ -31,20 +32,20 @@ namespace Thepagedot.Rhome.App.Droid
 		{
 			base.OnCreate(bundle);
 
+			// Init view
 			SetContentView(Resource.Layout.Main);
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(toolbar);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 			DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
 			MainViewModel = App.Bootstrapper.MainViewModel;
 
 #if (!DEBUG)
-
             // Register Hockey App if not in Debug mode
             CrashManager.Register(this, App.HockeyAppKey);
             MetricsManager.Register(this, Application, App.HockeyAppKey);
             UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
-
 #endif
 
 			// Init navigation drawer
@@ -63,7 +64,7 @@ namespace Thepagedot.Rhome.App.Droid
 			if (!MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
 				await MainViewModel.RefreshAsync();
 
-			// Init GridView (after ViewModel is initiated)
+			// Init GridView (after ViewModel is loaded)
 			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
 			gvRooms.Adapter = MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
 			gvRooms.ItemClick += GvRooms_ItemClick;

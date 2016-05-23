@@ -22,19 +22,20 @@ namespace Thepagedot.Rhome.App.Droid
 		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.SystemVariables);
 
-            // Init toolbar
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
+			// Init view
+			SetContentView(Resource.Layout.SystemVariables);
+			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			SetSupportActionBar(toolbar);
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 
-            // Init system variable list view
-            if (!App.Bootstrapper.SystemVariableViewModel.IsLoaded && !App.Bootstrapper.SystemVariableViewModel.IsLoading)
-                await App.Bootstrapper.SystemVariableViewModel.RefreshAsync();
-            FindViewById<ListView>(Resource.Id.lvSystemVariables).Adapter = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
-        }
-    }
+			// Init system variable list view
+			if (!App.Bootstrapper.SystemVariableViewModel.IsLoaded && !App.Bootstrapper.SystemVariableViewModel.IsLoading)
+				await App.Bootstrapper.SystemVariableViewModel.RefreshAsync();
+
+			FindViewById<ListView>(Resource.Id.lvSystemVariables).Adapter = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
+		}
+	}
 }
 

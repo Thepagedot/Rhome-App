@@ -2274,26 +2274,26 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f0600b4
 			public const int lvPrograms = 2131099828;
 			
-			// aapt resource value: 0x7f0600ba
-			public const int lvSystemVariables = 2131099834;
+			// aapt resource value: 0x7f0600bc
+			public const int lvSystemVariables = 2131099836;
 			
 			// aapt resource value: 0x7f0600a8
 			public const int media_actions = 2131099816;
 			
+			// aapt resource value: 0x7f0600ca
+			public const int menu_add = 2131099850;
+			
+			// aapt resource value: 0x7f0600bf
+			public const int menu_dismiss_all = 2131099839;
+			
+			// aapt resource value: 0x7f0600be
+			public const int menu_refresh = 2131099838;
+			
+			// aapt resource value: 0x7f0600c9
+			public const int menu_room_change_image = 2131099849;
+			
 			// aapt resource value: 0x7f0600c8
-			public const int menu_add = 2131099848;
-			
-			// aapt resource value: 0x7f0600bd
-			public const int menu_dismiss_all = 2131099837;
-			
-			// aapt resource value: 0x7f0600bc
-			public const int menu_refresh = 2131099836;
-			
-			// aapt resource value: 0x7f0600c7
-			public const int menu_room_change_image = 2131099847;
-			
-			// aapt resource value: 0x7f0600c6
-			public const int menu_room_change_name = 2131099846;
+			public const int menu_room_change_name = 2131099848;
 			
 			// aapt resource value: 0x7f06001d
 			public const int middle = 2131099677;
@@ -2304,29 +2304,29 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f060016
 			public const int multiply = 2131099670;
 			
-			// aapt resource value: 0x7f0600c5
-			public const int nav_about = 2131099845;
-			
-			// aapt resource value: 0x7f0600c0
-			public const int nav_devices = 2131099840;
-			
-			// aapt resource value: 0x7f0600be
-			public const int nav_home = 2131099838;
-			
-			// aapt resource value: 0x7f0600c3
-			public const int nav_messages = 2131099843;
+			// aapt resource value: 0x7f0600c7
+			public const int nav_about = 2131099847;
 			
 			// aapt resource value: 0x7f0600c2
-			public const int nav_programs = 2131099842;
+			public const int nav_devices = 2131099842;
 			
-			// aapt resource value: 0x7f0600bf
-			public const int nav_rooms = 2131099839;
+			// aapt resource value: 0x7f0600c0
+			public const int nav_home = 2131099840;
+			
+			// aapt resource value: 0x7f0600c5
+			public const int nav_messages = 2131099845;
 			
 			// aapt resource value: 0x7f0600c4
-			public const int nav_settings = 2131099844;
+			public const int nav_programs = 2131099844;
 			
 			// aapt resource value: 0x7f0600c1
-			public const int nav_system_variables = 2131099841;
+			public const int nav_rooms = 2131099841;
+			
+			// aapt resource value: 0x7f0600c6
+			public const int nav_settings = 2131099846;
+			
+			// aapt resource value: 0x7f0600c3
+			public const int nav_system_variables = 2131099843;
 			
 			// aapt resource value: 0x7f0600a3
 			public const int nav_view = 2131099811;
@@ -2364,8 +2364,8 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f060030
 			public const int right = 2131099696;
 			
-			// aapt resource value: 0x7f0600bb
-			public const int sbTemperature = 2131099835;
+			// aapt resource value: 0x7f0600bd
+			public const int sbTemperature = 2131099837;
 			
 			// aapt resource value: 0x7f060017
 			public const int screen = 2131099671;
@@ -2472,11 +2472,14 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f0600a1
 			public const int svScroller = 2131099809;
 			
+			// aapt resource value: 0x7f0600b9
+			public const int swDemoMode = 2131099833;
+			
 			// aapt resource value: 0x7f06000d
 			public const int tabMode = 2131099661;
 			
-			// aapt resource value: 0x7f0600b8
-			public const int tbSwitcher = 2131099832;
+			// aapt resource value: 0x7f0600ba
+			public const int tbSwitcher = 2131099834;
 			
 			// aapt resource value: 0x7f0600af
 			public const int text = 2131099823;
@@ -2489,6 +2492,9 @@ namespace Thepagedot.Rhome.App.Droid
 			
 			// aapt resource value: 0x7f06006f
 			public const int textView1 = 2131099759;
+			
+			// aapt resource value: 0x7f0600b8
+			public const int textView2 = 2131099832;
 			
 			// aapt resource value: 0x7f060090
 			public const int text_headline = 2131099792;
@@ -2535,8 +2541,8 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f06007d
 			public const int tvState = 2131099773;
 			
-			// aapt resource value: 0x7f0600b9
-			public const int tvValue = 2131099833;
+			// aapt resource value: 0x7f0600bb
+			public const int tvValue = 2131099835;
 			
 			// aapt resource value: 0x7f06006b
 			public const int tvVersion = 2131099755;

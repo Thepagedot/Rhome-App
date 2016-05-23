@@ -17,8 +17,22 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@null"
         android:dividerHeight="0px"
-        android:id="@+id/lvCentralUnits" />
+        android:id="@+id/lvCentralUnits"
+        android:paddingBottom="@dimen/default_margin" />
+    <TextView
+        android:text="Misc"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:padding="@dimen/default_margin" />
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swDemoMode"
+        android:padding="@dimen/default_margin"
+        android:text="Demo Mode" />
 </LinearLayout>

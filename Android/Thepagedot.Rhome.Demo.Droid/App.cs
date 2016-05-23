@@ -12,10 +12,10 @@ using Android.Widget;
 
 namespace Thepagedot.Rhome.App.Droid
 {
-    public class App : Application
-    {
-        public static readonly string HockeyAppKey = "cd1d9c28c27b48cf9cd9179d17496a5a";
+	public class App : Application
+	{
+		public static readonly string HockeyAppKey = "cd1d9c28c27b48cf9cd9179d17496a5a";
 
-        public static Bootstrapper Bootstrapper = new Bootstrapper();
-    }
+		public static Bootstrapper Bootstrapper = new Bootstrapper();
+	}
 }

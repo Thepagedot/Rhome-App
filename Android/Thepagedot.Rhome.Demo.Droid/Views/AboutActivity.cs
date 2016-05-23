@@ -15,33 +15,29 @@ using HockeyApp;
 
 namespace Thepagedot.Rhome.App.Droid.Views
 {
-    [Activity(Label = "About", ParentActivity = typeof(MainActivity))]
-    public class AboutActivity : AppCompatActivity
-    {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.About);
-            this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
+	[Activity(Label = "About", ParentActivity = typeof(MainActivity))]
+	public class AboutActivity : AppCompatActivity
+	{
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
 
-            // Register Hockey App Feedback
-            FeedbackManager.Register(this, App.HockeyAppKey);
+			// Init view
+			SetContentView(Resource.Layout.About);
+			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
+			SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar));
+			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            // Init toolbar
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar));
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			// Register Hockey App Feedback
+			FeedbackManager.Register(this, App.HockeyAppKey);
 
-            // Set version according to the AppManifest
-            var tvVersion = FindViewById<TextView>(Resource.Id.tvVersion);
-            tvVersion.Text = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
+			// Set version according to the AppManifest
+			var tvVersion = FindViewById<TextView>(Resource.Id.tvVersion);
+			tvVersion.Text = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
 
-            var btnFeedback = FindViewById<Button>(Resource.Id.btnFeedback);
-            btnFeedback.Click += BtnFeedback_Click;
-        }
-
-        private void BtnFeedback_Click(object sender, EventArgs e)
-        {
-            FeedbackManager.ShowFeedbackActivity(this);
-        }
-    }
+			// Feedback button
+			var btnFeedback = FindViewById<Button>(Resource.Id.btnFeedback);
+			btnFeedback.Click += (sender, e) => FeedbackManager.ShowFeedbackActivity(this);
+		}
+	}
 }
