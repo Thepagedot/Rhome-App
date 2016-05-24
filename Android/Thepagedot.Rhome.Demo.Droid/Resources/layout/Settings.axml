@@ -7,7 +7,7 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
     <TextView
-        android:text="Home Control Systems"
+        android:text="@string/settings_homesystems_header"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:id="@+id/lvCentralUnits"
         android:paddingBottom="@dimen/default_margin" />
     <TextView
-        android:text="Misc"
+        android:text="@string/settings_misc_header"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,4 +35,14 @@
         android:id="@+id/swDemoMode"
         android:padding="@dimen/default_margin"
         android:text="Demo Mode" />
+    <TextView
+        android:text="@string/settings_demo_description"
+        android:textAppearance="@android:style/TextAppearance.Material.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:paddingRight="@dimen/default_margin"
+        android:paddingBottom="@dimen/default_margin"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingTop="@dimen/default_margin_half" />
 </LinearLayout>

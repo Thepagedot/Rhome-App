@@ -118,6 +118,7 @@ namespace Thepagedot.Rhome.App.Droid
 			var spinnerAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, items);
 			spinnerAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			dialogView.FindViewById<Spinner>(Resource.Id.spBrand).Adapter = spinnerAdapter;
+			dialogView.FindViewById<Spinner>(Resource.Id.spBrand).Enabled = false;
 
 			builder.Show();
 		}

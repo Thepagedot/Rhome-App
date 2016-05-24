@@ -16,6 +16,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 
 		public Settings Settings { get; set; }
 		public bool IsLoaded { get; set; }
+		private bool _HasChanges { get; set; }
 
 		public SettingsService(ILocalStorageService localStorageService)
 		{
@@ -41,6 +42,15 @@ namespace Thepagedot.Rhome.App.Shared.Services
 		{
 			if (Settings != null)
 				await _LocalStorageService.SaveToFileAsync(_SettingsFileName, Settings);
+
+			_HasChanges = true;
+		}
+
+		public bool HasChanges()
+		{
+			var result = _HasChanges;
+			_HasChanges = false;
+			return result;
 		}
 	}
 }

@@ -15,7 +15,7 @@ using Thepagedot.Rhome.App.Shared.ViewModels;
 
 namespace Thepagedot.Rhome.App.Droid
 {
-	[Activity(Label = "Rhome", MainLauncher = true)]
+	[Activity(Label = "Rhome Alpha", MainLauncher = true)]
 	public class MainActivity : AppCompatActivityBase
 	{
 		// ViewModel
@@ -65,9 +65,6 @@ namespace Thepagedot.Rhome.App.Droid
 		{
 			base.OnResume();
 
-			//TODO: Refresh only needed when settings changed, not every time
-			// Init MainViewModel
-			//if (!MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
 			await MainViewModel.RefreshAsync();
 
 			// Init GridView (after ViewModel is loaded)
@@ -92,8 +89,8 @@ namespace Thepagedot.Rhome.App.Droid
 		async void SlSwipeContainer_Refresh(object sender, EventArgs e)
 		{
 			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
-			ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin)); //TODO: Check if still needed
-			await App.Bootstrapper.MainViewModel.RefreshAsync();
+			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin)); //TODO: Check if still needed
+			await App.Bootstrapper.MainViewModel.RefreshAsync(true);
 			(sender as SwipeRefreshLayout).Refreshing = false;
 		}
 

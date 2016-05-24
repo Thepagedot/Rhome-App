@@ -124,10 +124,19 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			}
 		}
 
-		public async Task RefreshAsync()
+		/// <summary>
+		/// Refreshs the async.
+		/// </summary>
+		/// <returns>The async.</returns>
+		/// <param name="force">Force.</param>
+		public async Task RefreshAsync(bool force = false)
 		{
+			if (!force && (IsLoaded || IsLoading) && !_SettingsService.HasChanges())
+				return;
+
 			IsLoaded = false;
 			IsLoading = true;
+
 
 			// Init SettingsService
 			if (!_SettingsService.IsLoaded)

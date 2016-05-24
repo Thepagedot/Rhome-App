@@ -3241,6 +3241,15 @@ namespace Thepagedot.Rhome.App.Droid
 			// aapt resource value: 0x7f090062
 			public const int open_drawer = 2131296354;
 			
+			// aapt resource value: 0x7f090075
+			public const int settings_demo_description = 2131296373;
+			
+			// aapt resource value: 0x7f090077
+			public const int settings_homesystems_header = 2131296375;
+			
+			// aapt resource value: 0x7f090076
+			public const int settings_misc_header = 2131296374;
+			
 			// aapt resource value: 0x7f090013
 			public const int status_bar_notification_info_overflow = 2131296275;
 			
