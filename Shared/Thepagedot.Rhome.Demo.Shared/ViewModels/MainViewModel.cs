@@ -13,6 +13,7 @@ using Thepagedot.Rhome.App.Shared.Other;
 using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
 using Thepagedot.Tools;
+using Thepagedot.Rhome.HomeMatic.Services;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -133,30 +134,19 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 				await _SettingsService.LoadSettingsAsync();
 
 			// Init HomeControlService
-			await _HomeControlService.InitAsync(_SettingsService.Settings.Configuration);
-
-#if DEBUG
-			if (_SettingsService.Settings.IsDemoMode)
-			{
-				// Demo Mode
-				//_HomeControlService.HomeMatic = new HomeMatic.Services.HomeMaticXmlApi(new Ccu("Mock", "localhost"), true);
-			}
-#endif
+			await _HomeControlService.InitAsync(_SettingsService.Settings.Configuration, _SettingsService.Settings.IsDemoMode);
 
 			// Load HomeMatic
 			// Check connection
-			if (await _HomeControlService.HomeMatic.CheckConnectionAsync())
+			if (_HomeControlService.HomeMatic != null && await _HomeControlService.HomeMatic.CheckConnectionAsync())
 			{
-
-				if (_HomeControlService.HomeMatic != null)
-				{
-					Rooms = new ObservableCollection<Room>(await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync());
-					IsLoaded = true;
-				}
+				Rooms = new ObservableCollection<Room>(await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync());
+				IsLoaded = true;
 			}
 			else
 			{
 				// CCU is not reachable
+				Rooms = new ObservableCollection<Room>();
 				await ShowConnectionErrorMessageAsync();
 			}
 

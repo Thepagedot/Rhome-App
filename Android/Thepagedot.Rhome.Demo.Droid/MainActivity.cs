@@ -28,7 +28,7 @@ namespace Thepagedot.Rhome.App.Droid
 		// Bindings
 		public Binding RefreshBinding { get; set; }
 
-		protected override async void OnCreate(Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
@@ -51,7 +51,7 @@ namespace Thepagedot.Rhome.App.Droid
 			// Init navigation drawer
 			FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
 			var drawerToggle = new ActionBarDrawerToggle(this, DrawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
-			DrawerLayout.SetDrawerListener(drawerToggle);
+			DrawerLayout.AddDrawerListener(drawerToggle);
 			drawerToggle.SyncState();
 
 			// Init swipe to refresh
@@ -59,10 +59,16 @@ namespace Thepagedot.Rhome.App.Droid
 			SlSwipeRefreshLayout.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
 			SlSwipeRefreshLayout.Refresh += SlSwipeContainer_Refresh;
 			SlSwipeRefreshLayout.Post(() => { RefreshBinding = this.SetBinding(() => MainViewModel.IsLoading, () => SlSwipeRefreshLayout.Refreshing, BindingMode.TwoWay); });
+		}
 
+		protected override async void OnResume()
+		{
+			base.OnResume();
+
+			//TODO: Refresh only needed when settings changed, not every time
 			// Init MainViewModel
-			if (!MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
-				await MainViewModel.RefreshAsync();
+			//if (!MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
+			await MainViewModel.RefreshAsync();
 
 			// Init GridView (after ViewModel is loaded)
 			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);

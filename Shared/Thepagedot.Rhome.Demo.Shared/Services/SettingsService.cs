@@ -17,7 +17,6 @@ namespace Thepagedot.Rhome.App.Shared.Services
 		public Settings Settings { get; set; }
 		public bool IsLoaded { get; set; }
 
-
 		public SettingsService(ILocalStorageService localStorageService)
 		{
 			_LocalStorageService = localStorageService;
@@ -25,10 +24,10 @@ namespace Thepagedot.Rhome.App.Shared.Services
 
 		public async Task LoadSettingsAsync()
 		{
-			var configuration = await _LocalStorageService.LoadFromFileAsync<Settings>(_SettingsFileName);
-			if (configuration != null)
+			var settings = await _LocalStorageService.LoadFromFileAsync<Settings>(_SettingsFileName);
+			if (settings != null)
 			{
-				Settings = configuration;
+				Settings = settings;
 			}
 			else
 			{

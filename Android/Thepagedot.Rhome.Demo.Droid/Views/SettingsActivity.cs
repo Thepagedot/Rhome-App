@@ -31,14 +31,7 @@ namespace Thepagedot.Rhome.App.Droid
 	public class SettingsActivity : AppCompatActivityBase
 	{
 		// ViewModel
-		//public SettingsViewModel SettingsViewModel { get; set; }
-		public SettingsViewModel SettingsViewModel
-		{
-			get
-			{
-				return App.Bootstrapper.SettingsViewModel;
-			}
-		}
+		public SettingsViewModel SettingsViewModel { get; set; }
 
 		// Public UI elements for binding
 		public EditText EtName { get; set; }
@@ -61,13 +54,13 @@ namespace Thepagedot.Rhome.App.Droid
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			this.SetSystemBarBackground(Resource.Color.HomeMaticBlue);
 
-			//SettingsViewModel = App.Bootstrapper.SettingsViewModel;
+			SettingsViewModel = App.Bootstrapper.SettingsViewModel;
 			await SettingsViewModel.InitializeAsync();
 
 			SwDemoMode = FindViewById<Switch>(Resource.Id.swDemoMode);
-			SwDemoModeBinding = this.SetBinding(() => SettingsViewModel.IsDemoMode, () => SwDemoMode.Selected, BindingMode.TwoWay);
-
-			SettingsViewModel.IsDemoMode = true;
+			SwDemoModeBinding = this.SetBinding(() => SettingsViewModel.IsDemoMode, () => SwDemoMode.Checked, BindingMode.TwoWay);
+			SwDemoMode.Checked = SettingsViewModel.IsDemoMode; //TODO: Solve this via binding. Line above does not work
+			SwDemoMode.CheckedChange += (sender, e) => SettingsViewModel.IsDemoMode = SwDemoMode.Checked;
 
 			// Init ListView of Central Units
 			LvCentralUnits = FindViewById<ListView>(Resource.Id.lvCentralUnits);

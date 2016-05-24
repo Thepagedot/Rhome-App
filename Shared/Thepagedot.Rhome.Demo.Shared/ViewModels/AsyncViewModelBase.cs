@@ -18,7 +18,6 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 		protected IResourceService _ResourceService;
 		protected IDialogService _DialogService;
 
-
 		#endregion
 
 		#region Events

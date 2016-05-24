@@ -33,8 +33,21 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			{
 				_IsDemoMode = value;
 				RaisePropertyChanged();
+				RaiseSettingsChanged();
 			}
 		}
+
+		#region Events
+
+		public event SettingsChangedEventHandler SettingsChanged;
+		public delegate void SettingsChangedEventHandler(object sender, EventArgs e);
+		public void RaiseSettingsChanged()
+		{
+			if (SettingsChanged != null)
+				SettingsChanged(this, new EventArgs());
+		}
+
+		#endregion
 
 		#region New CentralUnit fields
 
@@ -105,8 +118,16 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			_SettingsService = settingsService;
 			_HomeControlService = homeControlService;
 
+			SettingsChanged += SettingsViewModel_SettingsChanged;
+
 			CentralUnits = new ObservableCollection<CentralUnit>();
 			ResetNewCentralUnitValues();
+		}
+
+		async void SettingsViewModel_SettingsChanged(object sender, EventArgs e)
+		{
+			_SettingsService.Settings.IsDemoMode = IsDemoMode;
+			await _SettingsService.SaveSettingsAsync();
 		}
 
 		public async Task InitializeAsync()
@@ -114,8 +135,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			if (!_SettingsService.IsLoaded)
 				await _SettingsService.LoadSettingsAsync();
 
-			CentralUnits = new ObservableCollection<CentralUnit>(_SettingsService.Settings.Configuration.CentralUnits);
-			IsDemoMode = true; //_SettingsService.Settings.IsDemoMode;
+			_CentralUnits = new ObservableCollection<CentralUnit>(_SettingsService.Settings.Configuration.CentralUnits);
+			_IsDemoMode = _SettingsService.Settings.IsDemoMode;
 		}
 
 		private void ResetNewCentralUnitValues()
@@ -123,11 +144,6 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			NewCentralUnitName = "";
 			NewCentralUnitAddress = "";
 			NewCentralUnitBrand = 0;
-		}
-
-		public async Task SaveSettingsAsync()
-		{
-			await _SettingsService.SaveSettingsAsync();
 		}
 
 		public async Task AddCentralUnitAsync(CentralUnit centralUnit)

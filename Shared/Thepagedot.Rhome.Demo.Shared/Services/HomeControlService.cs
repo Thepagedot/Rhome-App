@@ -25,7 +25,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 		/// </summary>
 		/// <returns></returns>
 		/// <param name="config">Configuration instance</param>
-		public async Task InitAsync(Configuration config = null)
+		public async Task InitAsync(Configuration config = null, bool isDemoMode = false)
 		{
 			// Load config from SettingsService, if none has been provided
 			if (config == null)
@@ -39,10 +39,18 @@ namespace Thepagedot.Rhome.App.Shared.Services
 			// Load central units
 			if (config.CentralUnits != null)
 			{
-				// HomeMatic
-				var homeMaticCentral = config.CentralUnits.FirstOrDefault(c => c.Brand == Base.Models.CentralUnitBrand.HomeMatic);
-				if (homeMaticCentral != null && homeMaticCentral is Ccu)
-					HomeMatic = new HomeMaticXmlApi(homeMaticCentral as Ccu);
+				if (isDemoMode)
+				{
+					// Demo Mode
+					HomeMatic = new HomeMaticXmlApi(new Ccu("Mock", "localhost"), true);
+				}
+				else
+				{
+					// HomeMatic
+					var homeMaticCentral = config.CentralUnits.FirstOrDefault(c => c.Brand == Base.Models.CentralUnitBrand.HomeMatic);
+					if (homeMaticCentral != null && homeMaticCentral is Ccu)
+						HomeMatic = new HomeMaticXmlApi(homeMaticCentral as Ccu);
+				}
 			}
 		}
 	}
