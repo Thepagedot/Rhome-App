@@ -22,7 +22,8 @@
             Canvas.ZIndex="1"
             PrimaryButtonCommand="{Binding AddCentralUnitCommand}"
             PrimaryButtonText="Add"
-            SecondaryButtonText="Cancel">
+            SecondaryButtonText="Cancel" 
+            d:IsHidden="True">
 
             <StackPanel>
                 <TextBox
@@ -71,6 +72,7 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -127,6 +129,15 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock
+                        FontSize="18.667"
+                        Padding="10"
+                        Style="{StaticResource SubheaderTextBlockStyle}"
+                        Text="Misc" />
+                    <ToggleSwitch Margin="10, 0" Header="Demo Mode" HorizontalAlignment="Stretch" IsOn="{Binding IsDemoMode}" />
+                </StackPanel>
             </Grid>
         </ScrollViewer>
     </Grid>
