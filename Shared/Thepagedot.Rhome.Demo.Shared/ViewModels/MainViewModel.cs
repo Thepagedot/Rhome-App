@@ -147,9 +147,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
 			// Load HomeMatic
 			// Check connection
-			if (_HomeControlService.HomeMatic != null && await _HomeControlService.HomeMatic.CheckConnectionAsync())
+			if (_HomeControlService.HomeControls.ContainsKey("HomeMatic") && await _HomeControlService.HomeControls["HomeMatic"].CheckConnectionAsync())
 			{
-				Rooms = new ObservableCollection<Room>(await _HomeControlService.HomeMatic.GetRoomsWidthDevicesAsync());
+				//var rooms = await _HomeControlService.MergeRooms();
+				var rooms = await _HomeControlService.HomeControls["HomeMatic"].GetRoomsWidthDevicesAsync();
+				Rooms = new ObservableCollection<Room>(rooms);
 				IsLoaded = true;
 			}
 			else

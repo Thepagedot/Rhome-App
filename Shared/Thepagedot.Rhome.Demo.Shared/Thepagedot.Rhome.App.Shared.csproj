@@ -51,6 +51,7 @@
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="ViewModels\SystemVariableViewModel.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\MergedRoom.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.App.Shared.Models;
+using Thepagedot.Rhome.Base.Interfaces;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Rhome.HomeMatic.Services;
 
@@ -13,7 +14,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 	{
 		private readonly SettingsService _SettingsService;
 
-		public HomeMaticXmlApi HomeMatic;
+		public Dictionary<string, IHomeControlApi> HomeControls;
 
 		public HomeControlService(SettingsService settingsService)
 		{
@@ -37,21 +38,47 @@ namespace Thepagedot.Rhome.App.Shared.Services
 			}
 
 			// Load central units
+			HomeControls = new Dictionary<string, IHomeControlApi>();
 			if (config.CentralUnits != null)
 			{
 				if (isDemoMode)
 				{
 					// Demo Mode
-					HomeMatic = new HomeMaticXmlApi(new Ccu("Mock", "localhost"), true);
+					HomeControls.Add("HomeMatic", new HomeMaticXmlApi(new Ccu("Mock", "localhost"), true));
 				}
 				else
 				{
 					// HomeMatic
 					var homeMaticCentral = config.CentralUnits.FirstOrDefault(c => c.Brand == Base.Models.CentralUnitBrand.HomeMatic);
 					if (homeMaticCentral != null && homeMaticCentral is Ccu)
-						HomeMatic = new HomeMaticXmlApi(homeMaticCentral as Ccu);
+						HomeControls.Add("HomeMatic", new HomeMaticXmlApi(homeMaticCentral as Ccu));
 				}
 			}
+		}
+
+		public async Task<List<MergedRoom>> MergeRooms()
+		{
+			var mergedRooms = new List<MergedRoom>();
+
+			// Check for every home control service
+			foreach (var homeControl in HomeControls)
+			{
+				var rooms = await homeControl.Value.GetRoomsWidthDevicesAsync();
+				foreach (var room in rooms)
+				{
+					var exisitngRoom = mergedRooms.FirstOrDefault(r => r.Name == room.Name);
+					if (exisitngRoom == null)
+					{
+						exisitngRoom = new MergedRoom { Name = room.Name };
+					}
+
+					//TODO: Add Room ID
+					//exisitngRoom.RoomIds.Add(room.Id);
+
+				}	
+			}
+
+			return mergedRooms;
 		}
 	}
 }
