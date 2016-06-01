@@ -11,8 +11,12 @@ using GalaSoft.MvvmLight.Helpers;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Tools.Xamarin.Android;
 using HockeyApp;
-using HockeyApp.Metrics;
+
 using Thepagedot.Rhome.App.Shared.ViewModels;
+
+#if (!DEBUG)
+using HockeyApp.Metrics;
+#endif
 
 namespace Thepagedot.Rhome.App.Droid
 {

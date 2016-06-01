@@ -42,11 +42,7 @@ namespace Thepagedot.Rhome.App.Droid
         public TextView TvHomeSystemsEmpty { get; set; }
 
         // Bindings
-        private Binding EtNameBinding;
-		private Binding EtIpAddressBinding;
-		public Binding SwDemoModeBinding;
-        public Binding TvHomeSystemsEmptyBinding;
-
+        private readonly List<Binding> _Bindings;
 
         protected override async void OnCreate(Bundle bundle)
 		{
@@ -62,12 +58,10 @@ namespace Thepagedot.Rhome.App.Droid
 			await SettingsViewModel.InitializeAsync();
 
 			SwDemoMode = FindViewById<Switch>(Resource.Id.swDemoMode);
-			SwDemoModeBinding = this.SetBinding(() => SettingsViewModel.IsDemoMode, () => SwDemoMode.Checked, BindingMode.TwoWay);
-			SwDemoMode.Checked = SettingsViewModel.IsDemoMode; //TODO: Solve this via binding. Line above does not work
-			SwDemoMode.CheckedChange += (sender, e) => SettingsViewModel.IsDemoMode = SwDemoMode.Checked;
+			_Bindings.Add(this.SetBinding(() => SettingsViewModel.IsDemoMode, () => SwDemoMode.Checked, BindingMode.TwoWay));
 
             TvHomeSystemsEmpty = FindViewById<TextView>(Resource.Id.tvHomeSystemsEmpty);
-            TvHomeSystemsEmptyBinding = this.SetBinding(() => SettingsViewModel.CentralUnits.Count, () => TvHomeSystemsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert);
+            _Bindings.Add(this.SetBinding(() => SettingsViewModel.CentralUnits.Count, () => TvHomeSystemsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert));
 
             // Init ListView of Central Units
             LvCentralUnits = FindViewById<ListView>(Resource.Id.lvCentralUnits);
@@ -99,8 +93,8 @@ namespace Thepagedot.Rhome.App.Droid
 			switch (item.ItemId)
 			{
 				case Resource.Id.menu_add:
-					ShowAddEditDialog(null);
-					break;
+                    ShowAddEditDialog(null);
+                    break;
 			}
 
 			return base.OnOptionsItemSelected(item);
@@ -116,9 +110,9 @@ namespace Thepagedot.Rhome.App.Droid
 
 			// Bindings
 			EtName = dialogView.FindViewById<EditText>(Resource.Id.etName);
-			EtNameBinding = this.SetBinding(() => SettingsViewModel.NewCentralUnitName, () => EtName.Text, BindingMode.TwoWay);
+            _Bindings.Add(this.SetBinding(() => SettingsViewModel.NewCentralUnitName, () => EtName.Text, BindingMode.TwoWay));
 			EtIpAddress = dialogView.FindViewById<EditText>(Resource.Id.etIpAddress);
-			EtIpAddressBinding = this.SetBinding(() => SettingsViewModel.NewCentralUnitAddress, () => EtIpAddress.Text, BindingMode.TwoWay);
+            _Bindings.Add(this.SetBinding(() => SettingsViewModel.NewCentralUnitAddress, () => EtIpAddress.Text, BindingMode.TwoWay));
 
 			// Fill spinner
 			var items = Enum.GetValues(typeof(CentralUnitBrand)).OfType<object>().Select(s => s.ToString()).ToArray();
