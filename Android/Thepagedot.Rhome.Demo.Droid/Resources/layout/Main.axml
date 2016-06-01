@@ -61,6 +61,21 @@
                                 android:layout_gravity="center_horizontal" />
                         </LinearLayout>
                     </RelativeLayout>
+                    <TextView
+                        android:text="@string/main_rooms_header"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/default_margin" />
+                    <TextView
+                        android:id="@+id/tvRoomsEmpty"
+                        android:text="@string/main_rooms_empty"
+                        android:textAppearance="@style/TextAppearance.Thepagedot.Tiny"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="@dimen/default_margin"
+                        android:paddingBottom="@dimen/default_margin"
+                        android:paddingLeft="@dimen/default_margin" />
                     <Thepagedot.Tools.Xamarin.Android.ExpandableHeightGridView
                         android:id="@+id/gvRooms"
                         android:layout_width="match_parent"

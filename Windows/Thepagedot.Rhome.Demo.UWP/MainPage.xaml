@@ -11,6 +11,9 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter" />
+    </Page.Resources>
     <Page.DataContext>
         <Binding Path="MainViewModel" Source="{StaticResource Bootstrapper}" />
     </Page.DataContext>
@@ -191,6 +194,8 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
@@ -259,9 +264,25 @@
                             </Grid>
                         </Grid>
 
+                        <TextBlock
+                            x:Uid="main_rooms_header"
+                            Grid.Row="1"
+                            FontSize="18.667"
+                            Padding="10"
+                            Style="{StaticResource SubheaderTextBlockStyle}"
+                            Text="Rooms" />
+
+                        <TextBlock
+                            x:Uid="main_rooms_empty"
+                            Grid.Row="2"
+                            Padding="10, 0, 10, 10"
+                            Style="{StaticResource TinyTextBlockStyle}"
+                            Text="Wondering why it is lonely here? Add a Home Control system in the settings to see your rooms here or create some at the rooms section!"
+                            Visibility="{Binding Rooms.Count, Converter={StaticResource IntToNegatedVisibilityConverter}}" />
+
                         <ListView
                             x:Name="gvRooms"
-                            Grid.Row="1"
+                            Grid.Row="3"
                             Margin="0,0,0,0"
                             IsItemClickEnabled="True"
                             ItemClick="gvRooms_ItemClick"

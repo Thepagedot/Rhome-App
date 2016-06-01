@@ -10,4 +10,9 @@
 
   	<style name="MyTheme" parent="MyTheme.Base">
   	</style>
+
+  <style name="TextAppearance.Thepagedot.Tiny" parent="@android:style/TextAppearance.Medium">
+    <item name="android:textSize">12sp</item>
+    <item name="android:textColor">@color/TinyFaded</item>
+  </style>
 </resources>

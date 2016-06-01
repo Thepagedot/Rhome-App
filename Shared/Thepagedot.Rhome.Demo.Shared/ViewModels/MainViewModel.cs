@@ -116,7 +116,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			_HomeControlService = homeControlService;
 			_RoomViewModel = roomViewModel;
 
-			//Rooms = new ObservableCollection<Room>();
+			Rooms = new ObservableCollection<Room>();
 
 			if (IsInDesignMode)
 			{
@@ -162,21 +162,23 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                     else
                     {
                         // CCU is not reachable
-                        Rooms = new ObservableCollection<Room>();
+                        Rooms.Clear();
                         IsLoaded = false;
                         await ShowConnectionErrorMessageAsync();
                     }
                 }
 
-                Rooms = new ObservableCollection<Room>(rooms);
+                Rooms.Clear();
+                foreach (var room in rooms)
+                    Rooms.Add(room);
             }
             else
             {
                 // Clear list, if no platform is available. Especially needed, after switching off demo mode.
-                Rooms = new ObservableCollection<Room>();
+                Rooms.Clear();
             }
 
-			IsLoading = false;
+            IsLoading = false;
 		}
 	}
 }

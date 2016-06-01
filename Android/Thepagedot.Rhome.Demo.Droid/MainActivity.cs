@@ -13,6 +13,8 @@ using Thepagedot.Tools.Xamarin.Android;
 using HockeyApp;
 
 using Thepagedot.Rhome.App.Shared.ViewModels;
+using System.Collections.Generic;
+using Thepagedot.Tools.Xamarin.Android.Converters;
 
 #if (!DEBUG)
 using HockeyApp.Metrics;
@@ -29,11 +31,12 @@ namespace Thepagedot.Rhome.App.Droid
 		// Public UI elements for binding
 		public SwipeRefreshLayout SlSwipeRefreshLayout { get; set; }
 		public DrawerLayout DrawerLayout { get; set; }
+        public TextView TvRoomsEmpty { get; set; }
 
-		// Bindings
-		public Binding RefreshBinding { get; set; }
+        // Bindings
+        private readonly List<Binding> _Bindings = new List<Binding>();
 
-		protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
@@ -63,8 +66,11 @@ namespace Thepagedot.Rhome.App.Droid
 			SlSwipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
 			SlSwipeRefreshLayout.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
 			SlSwipeRefreshLayout.Refresh += SlSwipeContainer_Refresh;
-			SlSwipeRefreshLayout.Post(() => { RefreshBinding = this.SetBinding(() => MainViewModel.IsLoading, () => SlSwipeRefreshLayout.Refreshing, BindingMode.TwoWay); });
-		}
+			SlSwipeRefreshLayout.Post(() => { _Bindings.Add(this.SetBinding(() => MainViewModel.IsLoading, () => SlSwipeRefreshLayout.Refreshing, BindingMode.TwoWay)); });
+
+            TvRoomsEmpty = FindViewById<TextView>(Resource.Id.tvRoomsEmpty);
+            _Bindings.Add(this.SetBinding(() => MainViewModel.Rooms.Count, () => TvRoomsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert));
+        }
 
 		protected override async void OnResume()
 		{
@@ -72,8 +78,8 @@ namespace Thepagedot.Rhome.App.Droid
 
 			await MainViewModel.RefreshAsync();
 
-			// Init GridView (after ViewModel is loaded)
-			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
+            // Init GridView (after ViewModel is loaded)
+            var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
 			gvRooms.Adapter = MainViewModel.Rooms.GetAdapter(RoomAdapter.GetView);
             var a = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
             var b = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetView);

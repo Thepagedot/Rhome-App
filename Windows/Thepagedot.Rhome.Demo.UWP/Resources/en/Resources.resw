@@ -126,6 +126,12 @@
   <data name="connection_failed_title" xml:space="preserve">
     <value>Connection Error</value>
   </data>
+  <data name="main_rooms_empty.Text" xml:space="preserve">
+    <value>Wondering why it is lonely here? Add a Home Control system in the settings to see your rooms here or create some at the rooms section!</value>
+  </data>
+  <data name="main_rooms_header.Text" xml:space="preserve">
+    <value>Rooms</value>
+  </data>
   <data name="settings_demo_description.Text" xml:space="preserve">
     <value>When the Demo Mode is activated, all other settings will be ignored. This is just for exploring the app without an actual connected home system.</value>
   </data>

@@ -25,4 +25,6 @@
 	<string name="settings_misc_header">Miscellaneous</string>
   <string name="settings_homesystems_header">Home Control Systems</string>
   <string name="settings_homesystems_empty">No Home control systems have been added yet. You can add one using the button below or discover the app in Demo Mode.</string>
+  <string name="main_rooms_header">Rooms</string>
+  <string name="main_rooms_empty">Wondering why it is lonely here? Add a Home Control system in the settings to see your rooms here or create some at the rooms section!</string>
 </resources>
