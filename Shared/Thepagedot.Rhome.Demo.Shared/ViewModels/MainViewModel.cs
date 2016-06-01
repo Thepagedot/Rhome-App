@@ -37,7 +37,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			{
 				return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(async () =>
 				{
-					await RefreshAsync();
+					await RefreshAsync(true);
 				}));
 			}
 		}

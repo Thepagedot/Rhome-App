@@ -36,8 +36,7 @@ namespace Thepagedot.Rhome.App.UWP
             base.OnNavigatedTo(e);
 
             // Init MainViewModel
-            if (!App.Bootstrapper.MainViewModel.IsLoaded && !App.Bootstrapper.MainViewModel.IsLoading)
-                await App.Bootstrapper.MainViewModel.RefreshAsync();
+            await App.Bootstrapper.MainViewModel.RefreshAsync();
 
             // Initially set number of columns to the current state's value
             SetNumberOfColumnsByState(VisualStateManager.GetVisualStateGroups(MainGrid).First().CurrentState);
