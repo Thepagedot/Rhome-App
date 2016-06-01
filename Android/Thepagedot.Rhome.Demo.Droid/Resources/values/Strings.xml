@@ -24,5 +24,5 @@
 	<string name="settings_demo_description">When the Demo Mode is activated, all other settings will be ignored. This is just for exploring the app without an actual connected home system.</string>
 	<string name="settings_misc_header">Miscellaneous</string>
   <string name="settings_homesystems_header">Home Control Systems</string>
-  <string name="settings_homesystems_empty">No Home control systems have been added yet.</string>
+  <string name="settings_homesystems_empty">No Home control systems have been added yet. You can add one using the button below or discover the app in Demo Mode.</string>
 </resources>

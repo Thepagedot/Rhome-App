@@ -203,9 +203,6 @@
     <AndroidResource Include="Resources\layout\DoorHandle.axml" />
     <AndroidResource Include="Resources\drawable\Room.jpg" />
     <AndroidResource Include="Resources\layout\Settings.axml" />
-    <AndroidResource Include="Resources\menu\SettingsMenu.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\AddHomeControlSystemDialog.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_add_white_24dp.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_add_white_24dp.png" />

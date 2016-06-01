@@ -25,6 +25,7 @@ using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Tools.Xamarin.Android;
 using Thepagedot.Tools.Xamarin.Android.Converters;
+using Android.Support.Design.Widget;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -63,6 +64,9 @@ namespace Thepagedot.Rhome.App.Droid
             TvHomeSystemsEmpty = FindViewById<TextView>(Resource.Id.tvHomeSystemsEmpty);
             _Bindings.Add(this.SetBinding(() => SettingsViewModel.CentralUnits.Count, () => TvHomeSystemsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert));
 
+			var btnAddHomeControl = FindViewById<FloatingActionButton>(Resource.Id.btnAddHomeControl);
+			btnAddHomeControl.Click += (sender, e) => ShowAddEditDialog(null);
+
             // Init ListView of Central Units
             LvCentralUnits = FindViewById<ListView>(Resource.Id.lvCentralUnits);
 			LvCentralUnits.Adapter = App.Bootstrapper.SettingsViewModel.CentralUnits.GetAdapter(CentralUnitAdapter.GetView);
@@ -80,24 +84,6 @@ namespace Thepagedot.Rhome.App.Droid
 				builder.SetNegativeButton(Android.Resource.String.Cancel, (ev, se) => { });
 				builder.Show();
 			}
-		}
-
-		public override bool OnCreateOptionsMenu(IMenu menu)
-		{
-			MenuInflater.Inflate(Resource.Menu.SettingsMenu, menu);
-			return true;
-		}
-
-		public override bool OnOptionsItemSelected(IMenuItem item)
-		{
-			switch (item.ItemId)
-			{
-				case Resource.Id.menu_add:
-                    ShowAddEditDialog(null);
-                    break;
-			}
-
-			return base.OnOptionsItemSelected(item);
 		}
 
 		private void ShowAddEditDialog(CentralUnit centralUnit)

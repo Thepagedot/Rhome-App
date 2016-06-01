@@ -4,12 +4,14 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar">
         <TextView
             android:text="@string/settings_homesystems_header"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -69,12 +71,13 @@
             android:layout_marginTop="@dimen/default_margin" />
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/btnAddHomeControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_done"
-        app:layout_anchor="@id/viewA"
-        app:layout_anchorGravity="bottom|right|end" />
+        android:src="@drawable/ic_add_white_24dp"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
