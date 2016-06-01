@@ -137,31 +137,43 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			IsLoaded = false;
 			IsLoading = true;
 
-
-			// Init SettingsService
-			if (!_SettingsService.IsLoaded)
+            // Init SettingsService
+            if (!_SettingsService.IsLoaded)
 				await _SettingsService.LoadSettingsAsync();
 
-			// Init HomeControlService
+            // Init HomeControlService
 			await _HomeControlService.InitAsync(_SettingsService.Settings.Configuration, _SettingsService.Settings.IsDemoMode);
 
-            // Load HomeMatic
-            // Check connection
-            if (_HomeControlService.Platforms.ContainsKey("HomeMatic"))
+            // Load data if any platforms are available
+            if (_HomeControlService.Platforms.Any())
             {
-                if (await _HomeControlService.Platforms["HomeMatic"].CheckConnectionAsync())
+                var rooms = new List<Room>();
+
+                foreach (var platform in _HomeControlService.Platforms)
                 {
-                    //var rooms = await _HomeControlService.MergeRooms();
-                    var rooms = await _HomeControlService.Platforms["HomeMatic"].GetRoomsWidthDevicesAsync();
-                    Rooms = new ObservableCollection<Room>(rooms);
-                    IsLoaded = true;
+                    // Check connection
+                    if (await platform.Value.CheckConnectionAsync())
+                    {
+                        // Load rooms
+                        var platformRooms = await platform.Value.GetRoomsWidthDevicesAsync();
+                        rooms.AddRange(platformRooms);
+                        IsLoaded = true;
+                    }
+                    else
+                    {
+                        // CCU is not reachable
+                        Rooms = new ObservableCollection<Room>();
+                        IsLoaded = false;
+                        await ShowConnectionErrorMessageAsync();
+                    }
                 }
-                else
-                {
-                    // CCU is not reachable
-                    Rooms = new ObservableCollection<Room>();
-                    await ShowConnectionErrorMessageAsync();
-                }
+
+                Rooms = new ObservableCollection<Room>(rooms);
+            }
+            else
+            {
+                // Clear list, if no platform is available. Especially needed, after switching off demo mode.
+                Rooms = new ObservableCollection<Room>();
             }
 
 			IsLoading = false;
