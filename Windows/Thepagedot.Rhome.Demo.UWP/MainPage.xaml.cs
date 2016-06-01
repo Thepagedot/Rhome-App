@@ -45,6 +45,7 @@ namespace Thepagedot.Rhome.App.UWP
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             HamburgerSplitView.IsPaneOpen = !HamburgerSplitView.IsPaneOpen;
+            MenuShadow.Visibility = Visibility.Visible;
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -94,5 +95,10 @@ namespace Thepagedot.Rhome.App.UWP
         }
 
         #endregion
+
+        private void HamburgerSplitView_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            MenuShadow.Visibility = Visibility.Collapsed;
+        }
     }
 }

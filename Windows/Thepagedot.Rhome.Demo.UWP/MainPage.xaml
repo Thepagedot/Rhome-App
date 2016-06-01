@@ -84,8 +84,8 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             DisplayMode="CompactOverlay"
-            IsPaneOpen="False"
-            OpenPaneLength="200">
+            OpenPaneLength="200"
+            PaneClosing="HamburgerSplitView_PaneClosing">
 
             <SplitView.Pane>
                 <ListView
@@ -138,7 +138,7 @@
                                 Width="35"
                                 Margin="5,0,0,0"
                                 FontFamily="Segoe MDL2 Assets"
-                                Text="&#59260;" />
+                                Text="&#xE77C;" />
                             <TextBlock Text="Programs" />
                         </StackPanel>
                     </ListViewItem>
@@ -165,134 +165,148 @@
                 </ListView>
             </SplitView.Pane>
 
-            <ScrollViewer
-                HorizontalScrollMode="Disabled"
-                IsHorizontalScrollChainingEnabled="False"
-                VerticalScrollBarVisibility="Auto"
-                VerticalScrollMode="Auto">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+            <Grid>
 
-                    <Grid
-                        x:Name="HeaderPanel"
-                        Height="200"
-                        VerticalAlignment="Top">
-                        <Image
-                            VerticalAlignment="Center"
-                            Source="Assets/House.jpg"
-                            Stretch="UniformToFill" />
-                        <Border Background="#5DFFFFFF" BorderThickness="0" />
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border
-                                Width="80"
-                                Height="80"
-                                Margin="0,0,0,2"
-                                Background="{ThemeResource AppBarBackgroundThemeBrush}"
-                                BorderBrush="Black"
-                                BorderThickness="1"
-                                CornerRadius="40">
-                                <ProgressRing
-                                    Width="50"
-                                    Height="50"
-                                    IsActive="{Binding IsLoading}" />
-                            </Border>
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                Foreground="Black"
-                                Style="{StaticResource SubheaderTextBlockStyle}"
-                                Text="Welcome Home"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap" />
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                Foreground="Black"
-                                Style="{StaticResource BaseTextBlockStyle}"
-                                Text="You are at home."
-                                TextAlignment="Center"
-                                TextWrapping="Wrap" />
-                        </StackPanel>
+
+                <ScrollViewer
+                    HorizontalScrollMode="Disabled"
+                    IsHorizontalScrollChainingEnabled="False"
+                    VerticalScrollBarVisibility="Auto"
+                    VerticalScrollMode="Auto">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
                         <Grid
-                            Margin="0,5,12,0"
-                            HorizontalAlignment="Right"
+                            x:Name="HeaderPanel"
+                            Height="200"
                             VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                Text="Connected"
-                                TextWrapping="Wrap" />
-                            <Border
-                                Grid.Column="1"
-                                Width="10"
-                                Height="10"
-                                Margin="3,0,0,0"
-                                HorizontalAlignment="Right"
+                            <Image
                                 VerticalAlignment="Center"
-                                Background="#FF3CBB42"
-                                BorderBrush="Black"
-                                BorderThickness="1"
-                                CornerRadius="5" />
-                        </Grid>
-                    </Grid>
-
-                    <ListView
-                        x:Name="gvRooms"
-                        Grid.Row="1"
-                        Margin="0,0,0,0"
-                        IsItemClickEnabled="True"
-                        ItemClick="gvRooms_ItemClick"
-                        ItemsSource="{Binding Rooms}"
-                        Padding="5"
-                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                        SelectionMode="None"
-                        ShowsScrollingPlaceholders="False"
-                        SizeChanged="gvRooms_SizeChanged">
-
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                                <Setter Property="VerticalAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="5" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid
-                                    Margin="0"
-                                    ItemWidth="175"
-                                    Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="White" BorderThickness="2">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="100" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-
-                                        <Image Source="Assets/Room.jpg" Stretch="UniformToFill" />
-                                        <TextBlock
-                                            Grid.Row="1"
-                                            Margin="10"
-                                            Style="{StaticResource BodyTextBlockStyle}"
-                                            Text="{Binding Name}" />
-                                    </Grid>
+                                Source="Assets/House.jpg"
+                                Stretch="UniformToFill" />
+                            <Border Background="#5DFFFFFF" BorderThickness="0" />
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border
+                                    Width="80"
+                                    Height="80"
+                                    Margin="0,0,0,2"
+                                    Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                                    BorderBrush="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="40">
+                                    <ProgressRing
+                                        Width="50"
+                                        Height="50"
+                                        IsActive="{Binding IsLoading}" />
                                 </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </ScrollViewer>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="Black"
+                                    Style="{StaticResource SubheaderTextBlockStyle}"
+                                    Text="Welcome Home"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="Black"
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Text="You are at home."
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Grid
+                                Margin="0,5,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Text="Connected"
+                                    TextWrapping="Wrap" />
+                                <Border
+                                    Grid.Column="1"
+                                    Width="10"
+                                    Height="10"
+                                    Margin="3,0,0,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Background="#FF3CBB42"
+                                    BorderBrush="Black"
+                                    BorderThickness="1"
+                                    CornerRadius="5" />
+                            </Grid>
+                        </Grid>
+
+                        <ListView
+                            x:Name="gvRooms"
+                            Grid.Row="1"
+                            Margin="0,0,0,0"
+                            IsItemClickEnabled="True"
+                            ItemClick="gvRooms_ItemClick"
+                            ItemsSource="{Binding Rooms}"
+                            Padding="5"
+                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                            SelectionMode="None"
+                            ShowsScrollingPlaceholders="False"
+                            SizeChanged="gvRooms_SizeChanged">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                    <Setter Property="Padding" Value="5" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid
+                                        Margin="0"
+                                        ItemWidth="175"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="White" BorderThickness="2">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="100" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Image Source="Assets/Room.jpg" Stretch="UniformToFill" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Margin="10"
+                                                Style="{StaticResource BodyTextBlockStyle}"
+                                                Text="{Binding Name}" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </ScrollViewer>
+                <Border
+                    x:Name="MenuShadow"
+                    Grid.Row="1"
+                    Margin="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="#7F000000"
+                    BorderThickness="0"
+                    Visibility="Collapsed" />
+
+            </Grid>
         </SplitView>
     </Grid>
 
