@@ -56,17 +56,20 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             IsLoaded = false;
             IsLoading = true;
 
-            if (_HomeControlService.HomeMatic != null)
+            Messages = new ObservableCollection<Message>();
+            try
             {
-                try
+                foreach (var platform in _HomeControlService.Platforms)
                 {
-                    Messages = new ObservableCollection<Message>(await _HomeControlService.HomeMatic.GetSystemNotificationsAsync());
-                    IsLoaded = true;
+                    var platformMessages = await platform.Value.GetSystemNotificationsAsync();
+                    foreach (var m in platformMessages)
+                        Messages.Add(m);
                 }
-                catch (HttpRequestException)
-                {
-                    await ShowConnectionErrorMessageAsync();
-                }
+                IsLoaded = true;
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionErrorMessageAsync();
             }
 
             IsLoading = false;

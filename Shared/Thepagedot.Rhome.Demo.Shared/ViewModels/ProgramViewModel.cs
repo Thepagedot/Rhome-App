@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Thepagedot.Rhome.App.Shared.Services;
+using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Tools;
 
@@ -59,7 +60,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             if (IsInDesignMode)
             {
                 Programs = new ObservableCollection<Program>();
-                Programs.Add(new Program(1, true, "", "Lorem ipsum", "amit die virtuellen Wired Kanäle der CCU angezeigt werden, muss der Name der Komponente auf der CCU in einen X Beliebigen umbenannt werden.", true, true, null));
+                Programs.Add(new HomeMaticProgram(1, true, "", "Lorem ipsum", "amit die virtuellen Wired Kanäle der CCU angezeigt werden, muss der Name der Komponente auf der CCU in einen X Beliebigen umbenannt werden.", true, true, null));
             }
         }
 
@@ -68,17 +69,20 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             IsLoaded = false;
             IsLoading = true;
 
-            if (_HomeControlService.HomeMatic != null)
+            Programs = new ObservableCollection<Program>();
+            try
             {
-                try
+                foreach (var platform in _HomeControlService.Platforms)
                 {
-                    Programs = new ObservableCollection<Program>(await _HomeControlService.HomeMatic.GetProgramsAsync());
-                    IsLoaded = true;
+                    var platformPrograms = await platform.Value.GetProgramsAsync();
+                    foreach (var p in platformPrograms)
+                        Programs.Add(p);
                 }
-                catch (HttpRequestException)
-                {
-                    await ShowConnectionErrorMessageAsync();
-                }
+                IsLoaded = true;
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionErrorMessageAsync();
             }
 
             IsLoading = false;

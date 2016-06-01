@@ -14,7 +14,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 	{
 		private readonly SettingsService _SettingsService;
 
-		public Dictionary<string, IHomeControlApi> HomeControls;
+		public Dictionary<string, IHomeControlPlatform> Platforms;
 
 		public HomeControlService(SettingsService settingsService)
 		{
@@ -38,20 +38,20 @@ namespace Thepagedot.Rhome.App.Shared.Services
 			}
 
 			// Load central units
-			HomeControls = new Dictionary<string, IHomeControlApi>();
+			Platforms = new Dictionary<string, IHomeControlPlatform>();
 			if (config.CentralUnits != null)
 			{
 				if (isDemoMode)
 				{
 					// Demo Mode
-					HomeControls.Add("HomeMatic", new HomeMaticXmlApi(new Ccu("Mock", "localhost"), true));
+					Platforms.Add("HomeMatic", new HomeMaticXmlApi(new Ccu("Mock", "localhost"), true));
 				}
 				else
 				{
 					// HomeMatic
 					var homeMaticCentral = config.CentralUnits.FirstOrDefault(c => c.Brand == Base.Models.CentralUnitBrand.HomeMatic);
 					if (homeMaticCentral != null && homeMaticCentral is Ccu)
-						HomeControls.Add("HomeMatic", new HomeMaticXmlApi(homeMaticCentral as Ccu));
+						Platforms.Add("HomeMatic", new HomeMaticXmlApi(homeMaticCentral as Ccu));
 				}
 			}
 		}
@@ -61,7 +61,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 			var mergedRooms = new List<MergedRoom>();
 
 			// Check for every home control service
-			foreach (var homeControl in HomeControls)
+			foreach (var homeControl in Platforms)
 			{
 				var rooms = await homeControl.Value.GetRoomsWidthDevicesAsync();
 				foreach (var room in rooms)
@@ -75,7 +75,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 					//TODO: Add Room ID
 					//exisitngRoom.RoomIds.Add(room.Id);
 
-				}	
+				}
 			}
 
 			return mergedRooms;

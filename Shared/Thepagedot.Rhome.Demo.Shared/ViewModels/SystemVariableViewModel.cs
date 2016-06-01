@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Thepagedot.Rhome.App.Shared.Other;
 using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.App.Shared.ViewModels;
+using Thepagedot.Rhome.Base.Models;
 using Thepagedot.Rhome.HomeMatic.Models;
 using Thepagedot.Tools;
 
@@ -57,17 +58,20 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             IsLoaded = false;
             IsLoading = true;
 
-            if (_HomeControlService.HomeMatic != null)
+            SystemVariables = new ObservableCollection<SystemVariable>();
+            try
             {
-                try
+                foreach (var platform in _HomeControlService.Platforms)
                 {
-                    SystemVariables = new ObservableCollection<SystemVariable>(await _HomeControlService.HomeMatic.GetSystemVariablesAsync());
-                    IsLoaded = true;
+                    var platformVariables = await platform.Value.GetSystemVariablesAsync();
+                    foreach (var v in platformVariables)
+                        SystemVariables.Add(v);
                 }
-                catch (HttpRequestException)
-                {
-                    await ShowConnectionErrorMessageAsync();
-                }
+                IsLoaded = true;
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionErrorMessageAsync();
             }
 
             IsLoading = false;

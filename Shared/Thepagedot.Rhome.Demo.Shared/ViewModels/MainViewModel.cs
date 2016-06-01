@@ -125,7 +125,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 		}
 
 		/// <summary>
-		/// Refreshs the async.
+		/// Refreshes the async.
 		/// </summary>
 		/// <returns>The async.</returns>
 		/// <param name="force">Force.</param>
@@ -145,21 +145,24 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			// Init HomeControlService
 			await _HomeControlService.InitAsync(_SettingsService.Settings.Configuration, _SettingsService.Settings.IsDemoMode);
 
-			// Load HomeMatic
-			// Check connection
-			if (_HomeControlService.HomeControls.ContainsKey("HomeMatic") && await _HomeControlService.HomeControls["HomeMatic"].CheckConnectionAsync())
-			{
-				//var rooms = await _HomeControlService.MergeRooms();
-				var rooms = await _HomeControlService.HomeControls["HomeMatic"].GetRoomsWidthDevicesAsync();
-				Rooms = new ObservableCollection<Room>(rooms);
-				IsLoaded = true;
-			}
-			else
-			{
-				// CCU is not reachable
-				Rooms = new ObservableCollection<Room>();
-				await ShowConnectionErrorMessageAsync();
-			}
+            // Load HomeMatic
+            // Check connection
+            if (_HomeControlService.Platforms.ContainsKey("HomeMatic"))
+            {
+                if (await _HomeControlService.Platforms["HomeMatic"].CheckConnectionAsync())
+                {
+                    //var rooms = await _HomeControlService.MergeRooms();
+                    var rooms = await _HomeControlService.Platforms["HomeMatic"].GetRoomsWidthDevicesAsync();
+                    Rooms = new ObservableCollection<Room>(rooms);
+                    IsLoaded = true;
+                }
+                else
+                {
+                    // CCU is not reachable
+                    Rooms = new ObservableCollection<Room>();
+                    await ShowConnectionErrorMessageAsync();
+                }
+            }
 
 			IsLoading = false;
 		}

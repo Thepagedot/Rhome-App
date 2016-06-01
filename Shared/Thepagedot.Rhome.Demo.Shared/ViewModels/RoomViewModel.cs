@@ -56,17 +56,17 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             IsLoaded = false;
             IsLoading = true;
 
-            if (_HomeControlService.HomeMatic != null)
+            try
             {
-                try
+                foreach (var platform in _HomeControlService.Platforms)
                 {
-                    await _HomeControlService.HomeMatic.UpdateStatesForRoomAsync(_CurrentRoom);
-                    IsLoaded = true;
+                    await platform.Value.UpdateStatesForRoomAsync(_CurrentRoom);
                 }
-                catch (HttpRequestException)
-                {
-                    await ShowConnectionErrorMessageAsync();
-                }
+                IsLoaded = true;
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionErrorMessageAsync();
             }
 
             IsLoading = false;
