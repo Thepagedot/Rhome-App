@@ -9,10 +9,34 @@
 
         <local:Bootstrapper x:Key="Bootstrapper" />
 
-        <!--  Colors  -->
+        <!-- Colors -->
+        <Color x:Key="RhomeBlue">#FF2196F3</Color>
         <Color x:Key="HomeMaticBlue">#FF071B7C</Color>
 
+
         <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{ThemeResource SystemChromeMediumLowColor}" />
+        <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextTrimming" Value="None" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+            <Setter Property="TextLineBounds" Value="Full" />
+        </Style>
+        <Style
+            x:Key="TinyTextBlockStyle"
+            BasedOn="{StaticResource BaseTextBlockStyle}"
+            TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumLowColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Application.Resources>
 

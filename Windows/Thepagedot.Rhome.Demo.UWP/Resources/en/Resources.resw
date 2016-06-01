@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppTitle" xml:space="preserve">
+  <data name="app_name" xml:space="preserve">
     <value>Rhome</value>
   </data>
-  <data name="ConnectionErrorMessage" xml:space="preserve">
+  <data name="connection_failed_message" xml:space="preserve">
     <value>Unfortunately we could not connect with your Home Control system. Please check your connection and try again.</value>
   </data>
-  <data name="ConnectionErrorTitle" xml:space="preserve">
+  <data name="connection_failed_title" xml:space="preserve">
     <value>Connection Error</value>
+  </data>
+  <data name="settings_demo_description.Text" xml:space="preserve">
+    <value>When the Demo Mode is activated, all other settings will be ignored. This is just for exploring the app without an actual connected home system.</value>
+  </data>
+  <data name="settings_demo_header.Header" xml:space="preserve">
+    <value>Demo Mode</value>
+  </data>
+  <data name="settings_homesystems_empty.Text" xml:space="preserve">
+    <value>No Home control systems have been added yet.</value>
+  </data>
+  <data name="settings_homesystems_header.Text" xml:space="preserve">
+    <value>Home Control Systems</value>
+  </data>
+  <data name="settings_misc_header.Text" xml:space="preserve">
+    <value>Miscellaneous</value>
   </data>
 </root>

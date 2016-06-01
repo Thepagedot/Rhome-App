@@ -38,8 +38,10 @@ namespace Thepagedot.Rhome.App.UWP
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+#if (!DEBUG)
             // Register Hockey App
             HockeyClient.Current.Configure("0ab2833844934ac3a800edd387c85996");
+#endif
         }
 
         /// <summary>
