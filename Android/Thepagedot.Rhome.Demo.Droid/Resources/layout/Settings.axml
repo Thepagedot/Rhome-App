@@ -13,9 +13,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:padding="@dimen/default_margin" />
+    <TextView
+        android:id="@+id/tvHomeSystemsEmpty"
+        android:text="@string/settings_homesystems_empty"
+        android:textAppearance="@android:style/TextAppearance.Material.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/default_margin"
+        android:paddingBottom="@dimen/default_margin"
+        android:paddingLeft="@dimen/default_margin" />
     <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@null"
@@ -34,7 +41,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/swDemoMode"
         android:padding="@dimen/default_margin"
-        android:text="Demo Mode" />
+        android:text="@string/settings_demo_header" />
     <TextView
         android:text="@string/settings_demo_description"
         android:textAppearance="@android:style/TextAppearance.Material.Caption"

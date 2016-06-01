@@ -24,6 +24,7 @@ using GalaSoft.MvvmLight.Views;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Tools.Xamarin.Android;
+using Thepagedot.Tools.Xamarin.Android.Converters;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -38,13 +39,16 @@ namespace Thepagedot.Rhome.App.Droid
 		public EditText EtIpAddress { get; set; }
 		public Switch SwDemoMode { get; set; }
 		public ListView LvCentralUnits { get; set; }
+        public TextView TvHomeSystemsEmpty { get; set; }
 
-		// Bindings
-		private Binding EtNameBinding;
+        // Bindings
+        private Binding EtNameBinding;
 		private Binding EtIpAddressBinding;
 		public Binding SwDemoModeBinding;
+        public Binding TvHomeSystemsEmptyBinding;
 
-		protected override async void OnCreate(Bundle bundle)
+
+        protected override async void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
@@ -62,13 +66,16 @@ namespace Thepagedot.Rhome.App.Droid
 			SwDemoMode.Checked = SettingsViewModel.IsDemoMode; //TODO: Solve this via binding. Line above does not work
 			SwDemoMode.CheckedChange += (sender, e) => SettingsViewModel.IsDemoMode = SwDemoMode.Checked;
 
-			// Init ListView of Central Units
-			LvCentralUnits = FindViewById<ListView>(Resource.Id.lvCentralUnits);
+            TvHomeSystemsEmpty = FindViewById<TextView>(Resource.Id.tvHomeSystemsEmpty);
+            TvHomeSystemsEmptyBinding = this.SetBinding(() => SettingsViewModel.CentralUnits.Count, () => TvHomeSystemsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert);
+
+            // Init ListView of Central Units
+            LvCentralUnits = FindViewById<ListView>(Resource.Id.lvCentralUnits);
 			LvCentralUnits.Adapter = App.Bootstrapper.SettingsViewModel.CentralUnits.GetAdapter(CentralUnitAdapter.GetView);
 			LvCentralUnits.ItemLongClick += LvCentralUnits_ItemLongClick;
 		}
 
-		private void LvCentralUnits_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        private void LvCentralUnits_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
 		{
 			var centralUnitToDelete = App.Bootstrapper.SettingsViewModel.CentralUnits.ElementAt(e.Position);
 			if (centralUnitToDelete != null)

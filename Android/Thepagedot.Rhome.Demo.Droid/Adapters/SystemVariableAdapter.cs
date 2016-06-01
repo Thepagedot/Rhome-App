@@ -3,6 +3,7 @@ using Thepagedot.Rhome.HomeMatic.Models;
 using Android.Views;
 using Android.App;
 using Android.Widget;
+using Thepagedot.Rhome.Base.Models;
 
 namespace Thepagedot.Rhome.App.Droid
 {

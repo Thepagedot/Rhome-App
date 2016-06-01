@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Rhome</string>
 	<string name="open_drawer">Open drawer</string>
 	<string name="close_drawer">Close drawer</string>
@@ -21,7 +20,9 @@
 	<string name="change_name">Change name</string>
 	<string name="change_image">Change image</string>
 	<string name="feedback">Feedback</string>
+  <string name="settings_demo_header">Demo Mode</string>
 	<string name="settings_demo_description">When the Demo Mode is activated, all other settings will be ignored. This is just for exploring the app without an actual connected home system.</string>
 	<string name="settings_misc_header">Miscellaneous</string>
-	<string name="settings_homesystems_header">Home Control Systems</string>
+  <string name="settings_homesystems_header">Home Control Systems</string>
+  <string name="settings_homesystems_empty">No Home control systems have been added yet.</string>
 </resources>

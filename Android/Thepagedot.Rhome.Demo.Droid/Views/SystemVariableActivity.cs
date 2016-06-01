@@ -12,13 +12,14 @@ using Android.Views;
 using Android.Widget;
 using Thepagedot.Tools.Xamarin.Android;
 using GalaSoft.MvvmLight.Helpers;
+using JimBobBennett.MvvmLight.AppCompat;
 using Android.Support.V7.App;
 
 namespace Thepagedot.Rhome.App.Droid
 {
 	[Activity(Label = "System Variables", ParentActivity = typeof(MainActivity))]
 	public class SystemVariableActivity : AppCompatActivity
-	{
+    {
 		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -35,7 +36,7 @@ namespace Thepagedot.Rhome.App.Droid
 				await App.Bootstrapper.SystemVariableViewModel.RefreshAsync();
 
 			FindViewById<ListView>(Resource.Id.lvSystemVariables).Adapter = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
-		}
+        }
 	}
 }
 

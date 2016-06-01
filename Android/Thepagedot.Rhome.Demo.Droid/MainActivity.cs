@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Helpers;
 using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Tools.Xamarin.Android;
 using HockeyApp;
+using HockeyApp.Metrics;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 
 namespace Thepagedot.Rhome.App.Droid
@@ -69,8 +70,11 @@ namespace Thepagedot.Rhome.App.Droid
 
 			// Init GridView (after ViewModel is loaded)
 			var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
-			gvRooms.Adapter = MainViewModel.Rooms.GetAdapter(RoomAdapter.GetNoteView);
-			gvRooms.ItemClick += GvRooms_ItemClick;
+			gvRooms.Adapter = MainViewModel.Rooms.GetAdapter(RoomAdapter.GetView);
+            var a = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
+            var b = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetView);
+
+            gvRooms.ItemClick += GvRooms_ItemClick;
 			gvRooms.IsExpanded = true;
 		}
 
