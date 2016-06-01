@@ -62,8 +62,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                 foreach (var platform in _HomeControlService.Platforms)
                 {
                     var platformMessages = await platform.Value.GetSystemNotificationsAsync();
-                    foreach (var m in platformMessages)
-                        Messages.Add(m);
+                    if (platformMessages != null)
+                    {
+                        foreach (var m in platformMessages)
+                            Messages.Add(m);
+                    }
                 }
                 IsLoaded = true;
             }

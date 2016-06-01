@@ -84,85 +84,100 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             DisplayMode="CompactOverlay"
-            OpenPaneLength="200"
+            IsPaneOpen="True"
+            OpenPaneLength="300"
             PaneClosing="HamburgerSplitView_PaneClosing">
 
             <SplitView.Pane>
-                <ListView
-                    IsItemClickEnabled="True"
-                    ItemClick="ListView_ItemClick"
-                    SelectionMode="None">
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE80F;" />
-                            <TextBlock Text="Home" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE8A9;" />
-                            <TextBlock Text="Rooms" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE975;" />
-                            <TextBlock Text="Devices" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel x:Name="MenuSystemVariables" Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE71D;" />
-                            <TextBlock Text="System Variables" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel x:Name="MenuPrograms" Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE77C;" />
-                            <TextBlock Text="Programs" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel x:Name="MenuSettings" Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE713;" />
-                            <TextBlock Text="Settings" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel x:Name="MenuAbout" Orientation="Horizontal">
-                            <TextBlock
-                                Width="35"
-                                Margin="5,0,0,0"
-                                FontFamily="Segoe MDL2 Assets"
-                                Text="&#xE11B;" />
-                            <TextBlock Text="About" />
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>
+                <Grid Padding="0">
+                    <ListView
+                        Margin="0"
+                        IsItemClickEnabled="True"
+                        ItemClick="ListView_ItemClick"
+                        Padding="0"
+                        SelectionMode="None">
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE80F;" />
+                                <TextBlock Text="Home" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE8A9;" />
+                                <TextBlock Text="Rooms" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE975;" />
+                                <TextBlock Text="Devices" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel x:Name="MenuSystemVariables" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE71D;" />
+                                <TextBlock Text="System Variables" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel x:Name="MenuPrograms" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE77C;" />
+                                <TextBlock Text="Programs" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel x:Name="MenuSystemMessages" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE206;" />
+                                <TextBlock Text="Messages" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel x:Name="MenuSettings" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE713;" />
+                                <TextBlock Text="Settings" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel x:Name="MenuAbout" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="35"
+                                    Margin="5,0,0,0"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE11B;" />
+                                <TextBlock Text="About" />
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </Grid>
             </SplitView.Pane>
 
             <Grid>

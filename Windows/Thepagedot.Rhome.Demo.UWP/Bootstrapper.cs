@@ -29,6 +29,7 @@ namespace Thepagedot.Rhome.App.UWP
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<SystemVariableViewModel>();
             SimpleIoc.Default.Register<ProgramViewModel>();
+            SimpleIoc.Default.Register<MessageViewModel>();
         }
 
         public HomeControlService HomeControlService { get { return SimpleIoc.Default.GetInstance<HomeControlService>(); }}
@@ -39,6 +40,7 @@ namespace Thepagedot.Rhome.App.UWP
         public SettingsViewModel SettingsViewModel { get { return SimpleIoc.Default.GetInstance<SettingsViewModel>(); }}
         public SystemVariableViewModel SystemVariableViewModel { get { return SimpleIoc.Default.GetInstance<SystemVariableViewModel>(); }}
         public ProgramViewModel ProgramViewModel { get { return SimpleIoc.Default.GetInstance<ProgramViewModel>(); }}
+        public MessageViewModel MessageViewModel { get { return SimpleIoc.Default.GetInstance<MessageViewModel>(); } }
 
         private INavigationService CreateNavigationService()
         {
@@ -47,6 +49,7 @@ namespace Thepagedot.Rhome.App.UWP
             navigationService.Configure(ViewNames.Settings, typeof(SettingsPage));
             navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariablePage));
             navigationService.Configure(ViewNames.Program, typeof(ProgramPage));
+            navigationService.Configure(ViewNames.Messages, typeof(MessagePage));
             navigationService.Configure(ViewNames.About, typeof(AboutPage));
 
             return navigationService;
