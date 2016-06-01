@@ -1,66 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-    <TextView
-        android:text="@string/settings_homesystems_header"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+        <TextView
+            android:text="@string/settings_homesystems_header"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:padding="@dimen/default_margin" />
+        <TextView
+            android:id="@+id/tvHomeSystemsEmpty"
+            android:text="@string/settings_homesystems_empty"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/default_margin"
+            android:paddingBottom="@dimen/default_margin"
+            android:paddingLeft="@dimen/default_margin" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:dividerHeight="0px"
+            android:id="@+id/lvCentralUnits" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin" />
+        <TextView
+            android:text="@string/settings_misc_header"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:padding="@dimen/default_margin" />
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swDemoMode"
+            android:padding="@dimen/default_margin"
+            android:text="@string/settings_demo_header" />
+        <TextView
+            android:text="@string/settings_demo_description"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:paddingRight="@dimen/default_margin"
+            android:paddingBottom="@dimen/default_margin"
+            android:paddingLeft="@dimen/default_margin"
+            android:paddingTop="@dimen/default_margin_half" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin" />
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-        android:padding="@dimen/default_margin" />
-    <TextView
-        android:id="@+id/tvHomeSystemsEmpty"
-        android:text="@string/settings_homesystems_empty"
-        android:textAppearance="@android:style/TextAppearance.Material.Caption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="@dimen/default_margin"
-        android:paddingBottom="@dimen/default_margin"
-        android:paddingLeft="@dimen/default_margin" />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:dividerHeight="0px"
-        android:id="@+id/lvCentralUnits" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin" />
-    <TextView
-        android:text="@string/settings_misc_header"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:padding="@dimen/default_margin" />
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/swDemoMode"
-        android:padding="@dimen/default_margin"
-        android:text="@string/settings_demo_header" />
-    <TextView
-        android:text="@string/settings_demo_description"
-        android:textAppearance="@android:style/TextAppearance.Material.Caption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:paddingRight="@dimen/default_margin"
-        android:paddingBottom="@dimen/default_margin"
-        android:paddingLeft="@dimen/default_margin"
-        android:paddingTop="@dimen/default_margin_half" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin" />
-</LinearLayout>
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_done"
+        app:layout_anchor="@id/viewA"
+        app:layout_anchorGravity="bottom|right|end" />
+</RelativeLayout>
