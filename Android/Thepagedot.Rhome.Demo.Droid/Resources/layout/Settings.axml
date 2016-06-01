@@ -27,8 +27,13 @@
         android:layout_height="wrap_content"
         android:divider="@null"
         android:dividerHeight="0px"
-        android:id="@+id/lvCentralUnits"
-        android:paddingBottom="@dimen/default_margin" />
+        android:id="@+id/lvCentralUnits" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin" />
     <TextView
         android:text="@string/settings_misc_header"
         android:textAppearance="?android:attr/textAppearanceMedium"
