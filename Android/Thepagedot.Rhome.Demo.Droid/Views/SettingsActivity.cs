@@ -42,7 +42,7 @@ namespace Thepagedot.Rhome.App.Droid
         public TextView TvHomeSystemsEmpty { get; set; }
 
         // Bindings
-        private readonly List<Binding> _Bindings;
+        private readonly List<Binding> _Bindings = new List<Binding>();
 
         protected override async void OnCreate(Bundle bundle)
 		{
