@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@style/MyTheme"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="Devicename"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvName"
-        android:textSize="16dip"
-        android:paddingTop="@dimen/default_margin"
-        android:paddingLeft="@dimen/default_margin"
-        android:paddingRight="@dimen/default_margin"
-        android:layout_alignParentLeft="true" />
-    <ImageView
-        android:src="@drawable/ic_battery_alert_black_24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivLowBat"
-        android:layout_alignParentRight="true"
-        android:paddingRight="@dimen/default_margin"
-        android:paddingTop="@dimen/default_margin"
-        android:layout_alignBottom="@id/tvName"
-        android:visibility="invisible" />
-    <ListView
-        android:id="@+id/lvChannels"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:divider="@null"
-        android:dividerHeight="0px"
-        android:layout_below="@id/tvName"
+
+    <android.support.v7.widget.CardView
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:theme="@style/MyTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_half"
+        android:layout_marginBottom="@dimen/default_margin_half">
+
+      <RelativeLayout
+          android:theme="@style/MyTheme"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+          <TextView
+              android:text="Devicename"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/tvName"
+              android:textSize="16dip"
+              android:paddingTop="@dimen/default_margin"
+              android:paddingLeft="@dimen/default_margin"
+              android:paddingRight="@dimen/default_margin"
+              android:layout_alignParentLeft="true" />
+          <ImageView
+              android:src="@drawable/ic_battery_alert_black_24dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/ivLowBat"
+              android:layout_alignParentRight="true"
+              android:paddingRight="@dimen/default_margin"
+              android:paddingTop="@dimen/default_margin"
+              android:layout_alignBottom="@id/tvName"
+              android:visibility="invisible" />
+          <ListView
+              android:id="@+id/lvChannels"
+              android:minWidth="25px"
+              android:minHeight="25px"
+              android:divider="@null"
+              android:dividerHeight="0px"
+              android:layout_below="@id/tvName"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" />
+      </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>

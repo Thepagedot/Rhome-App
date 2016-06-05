@@ -15,6 +15,10 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:divider="@null"
+            android:paddingTop="@dimen/default_margin_half"
+            android:paddingBottom="@dimen/default_margin_half"
+            android:dividerHeight="0px"
             android:id="@+id/lvDevices" />
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

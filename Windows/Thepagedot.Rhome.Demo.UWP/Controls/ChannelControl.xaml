@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
 
-            <!--  Converters  -->
+            <!-- Converters -->
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:BooleanToNegatedVisibilityConverter x:Key="BooleanToNegatedVisibilityConverter" />
             <converters:DoorHandleStateToVisibilityConverter x:Key="DoorHandleStateToVisibilityConverter" />
@@ -170,6 +170,7 @@
             </DataTemplate>
 
             <DataTemplate x:Name="TemperatureSliderTemplate">
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

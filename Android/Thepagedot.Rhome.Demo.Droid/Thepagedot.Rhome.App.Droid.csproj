@@ -227,7 +227,7 @@
   <ItemGroup>
     <XamarinComponentReference Include="hockeyappandroid">
       <Visible>False</Visible>
-      <Version>4.1.0</Version>
+      <Version>4.1.0.1</Version>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportdesign">
       <Visible>False</Visible>
