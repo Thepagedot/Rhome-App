@@ -247,7 +247,7 @@
                                 <TextBlock
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Bottom"
-                                    Text="Connected"
+                                    Text="{Binding StatusMessage}"
                                     TextWrapping="Wrap" />
                                 <Border
                                     Grid.Column="1"
@@ -256,7 +256,7 @@
                                     Margin="3,0,0,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Background="#FF3CBB42"
+                                    Background="#FFCCCCCC"
                                     BorderBrush="Black"
                                     BorderThickness="1"
                                     CornerRadius="5" />
