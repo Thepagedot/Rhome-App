@@ -30,6 +30,13 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			set { _Rooms = value; RaisePropertyChanged(); }
 		}
 
+		private string _StatusMessage;
+		public string StatusMessage
+		{
+			get { return _StatusMessage; }
+			set { _StatusMessage = value; RaisePropertyChanged(); }
+		}
+
 		private RelayCommand _RefreshCommand;
 		public RelayCommand RefreshCommand
 		{
@@ -137,9 +144,14 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			IsLoaded = false;
 			IsLoading = true;
 
-            // Init SettingsService
-            if (!_SettingsService.IsLoaded)
+			var connectionErrorOccured = false;
+
+			// Init SettingsService
+			if (!_SettingsService.IsLoaded)
+			{
+				StatusMessage = _ResourceService.GetString("status_loading_settings");
 				await _SettingsService.LoadSettingsAsync();
+			}
 
             // Init HomeControlService
 			await _HomeControlService.InitAsync(_SettingsService.Settings.Configuration, _SettingsService.Settings.IsDemoMode);
@@ -154,7 +166,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                     // Check connection
                     if (await platform.Value.CheckConnectionAsync())
                     {
-                        // Load rooms
+						// Load rooms
+						StatusMessage = string.Format(_ResourceService.GetString("status_loading_platform"), platform.Value.GetName());
                         var platformRooms = await platform.Value.GetRoomsWidthDevicesAsync();
                         rooms.AddRange(platformRooms);
                         IsLoaded = true;
@@ -164,9 +177,14 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                         // CCU is not reachable
                         Rooms.Clear();
                         IsLoaded = false;
-                        await ShowConnectionErrorMessageAsync();
+						connectionErrorOccured = true;                        
                     }
                 }
+
+				if (connectionErrorOccured)
+				{
+					await ShowConnectionErrorMessageAsync();
+				}
 
                 Rooms.Clear();
                 foreach (var room in rooms)
@@ -177,6 +195,27 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                 // Clear list, if no platform is available. Especially needed, after switching off demo mode.
                 Rooms.Clear();
             }
+
+			// Update status message
+			if (!Rooms.Any())
+			{
+				StatusMessage = _ResourceService.GetString("status_not_connected");
+			}
+			else if (connectionErrorOccured)
+			{
+				StatusMessage = _ResourceService.GetString("status_partially_connected");
+			}
+			else
+			{ 
+				StatusMessage = _ResourceService.GetString("status_connected");
+			}
+
+
+			if (_SettingsService.Settings.IsDemoMode)
+			{
+				// Override with "Demo Mode"
+				StatusMessage = _ResourceService.GetString("demo_mode");
+			}
 
             IsLoading = false;
 		}

@@ -32,6 +32,7 @@ namespace Thepagedot.Rhome.App.Droid
 		public SwipeRefreshLayout SlSwipeRefreshLayout { get; set; }
 		public DrawerLayout DrawerLayout { get; set; }
         public TextView TvRoomsEmpty { get; set; }
+		public TextView TvStatus { get; set; }
 
         // Bindings
         private readonly List<Binding> _Bindings = new List<Binding>();
@@ -70,7 +71,9 @@ namespace Thepagedot.Rhome.App.Droid
 
             TvRoomsEmpty = FindViewById<TextView>(Resource.Id.tvRoomsEmpty);
             _Bindings.Add(this.SetBinding(() => MainViewModel.Rooms.Count, () => TvRoomsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert));
-        }
+			TvStatus = FindViewById<TextView>(Resource.Id.tvStatus);
+			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusMessage, () => TvStatus.Text));
+		}
 
 		protected override async void OnResume()
 		{

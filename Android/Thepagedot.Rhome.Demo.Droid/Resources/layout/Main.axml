@@ -60,6 +60,34 @@
                                 android:textSize="@dimen/text_subheader"
                                 android:layout_gravity="center_horizontal" />
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_alignParentRight="true">
+                            <TextView
+                                android:id="@+id/tvStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Connected."
+                                android:textAppearance="@style/TextAppearance.Thepagedot.Tiny"
+                                android:paddingRight="@dimen/default_margin"
+                                android:paddingBottom="@dimen/default_margin"
+                                android:paddingLeft="@dimen/default_margin"
+                                android:paddingTop="@dimen/default_margin"
+                                android:gravity="right" />
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingRight="@dimen/default_margin">
+                                <ImageView
+                                    android:src="@drawable/Circle"
+                                    android:id="@+id/ivStatus"
+                                    android:layout_width="10dip"
+                                    android:layout_height="10dip"
+                                    android:layout_gravity="center_vertical" />
+                            </FrameLayout>
+                        </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:text="@string/main_rooms_header"

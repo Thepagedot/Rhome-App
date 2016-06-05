@@ -9,7 +9,7 @@
 	<string name="connection_successful_title">Connection successful</string>
 	<string name="connection_successful_message">This looks good! Your connection was successful and you can enjoy your Rhome app now.</string>
 	<string name="connection_failed_title">Connection failed</string>
-	<string name="connection_failed_message">Something went wrong. Please check if you entered a valid IP address and your CCU has the XML-API installed.</string>
+	<string name="connection_failed_message">Something went wrong. The connection to one or more home automation platform could not be established. Please check if you entered a valid IP address.</string>
 	<string name="add_home_control_system_title">Add new home control system</string>
 	<string name="edit_home_control_system_title">Edit home control system</string>
 	<string name="delete">Delete</string>
@@ -27,4 +27,10 @@
   <string name="settings_homesystems_empty">No Home control systems have been added yet. You can add one using the button below or discover the app in Demo Mode.</string>
   <string name="main_rooms_header">Rooms</string>
   <string name="main_rooms_empty">Wondering why it is lonely here? Add a Home Control system in the settings to see your rooms here or create some at the rooms section!</string>
+  <string name="status_loading_settings">Loading settings</string>
+  <string name="status_loading_platform">Loading {0}</string>
+  <string name="status_partially_connected">Partially connected</string>
+  <string name="status_connected">Connected</string>	
+	<string name="status_not_connected">Not connected</string>
+	<string name="demo_mode">Demo Mode</string>	
 </resources>

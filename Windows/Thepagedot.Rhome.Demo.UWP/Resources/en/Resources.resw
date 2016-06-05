@@ -121,7 +121,7 @@
     <value>Rhome</value>
   </data>
   <data name="connection_failed_message" xml:space="preserve">
-    <value>Unfortunately we could not connect with your Home Control system. Please check your connection and try again.</value>
+    <value>Something went wrong. The connection to one or more home automation platform could not be established. Please check if you entered a valid IP address.</value>
   </data>
   <data name="connection_failed_title" xml:space="preserve">
     <value>Connection Error</value>
@@ -146,5 +146,23 @@
   </data>
   <data name="settings_misc_header.Text" xml:space="preserve">
     <value>Miscellaneous</value>
+  </data>
+  <data name="status_loading_settings" xml:space="preserve">
+    <value>Loading settings</value>
+  </data>
+  <data name="status_loading_platform" xml:space="preserve">
+    <value>Loading {0}</value>
+  </data>
+  <data name="status_partially_connected" xml:space="preserve">
+    <value>Partially connected</value>
+  </data>
+  <data name="status_connected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="status_not_connected" xml:space="preserve">
+    <value>Not connected</value>
+  </data>
+  <data name="demo_mode" xml:space="preserve">
+    <value>Demo mode</value>
   </data>
 </root>
