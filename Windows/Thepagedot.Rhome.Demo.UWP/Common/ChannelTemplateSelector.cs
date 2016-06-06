@@ -10,6 +10,7 @@ namespace Thepagedot.Rhome.App.UWP.Common
         public DataTemplate DoorHandleTemplate { get; set; }
         public DataTemplate ShutterTemplate { get; set; }
         public DataTemplate TemperatureSliderTemplate { get; set; }
+        public DataTemplate InformationTemplate { get; set; }
 
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
@@ -24,6 +25,8 @@ namespace Thepagedot.Rhome.App.UWP.Common
                 return ShutterTemplate;
             if (item is HomeMatic.Models.TemperatureSlider)
                 return TemperatureSliderTemplate;
+            if (item is HomeMatic.Models.Information)
+                return InformationTemplate;
 
             return base.SelectTemplateCore(item, container);
         }

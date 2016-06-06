@@ -22,13 +22,13 @@ namespace Thepagedot.Rhome.App.Droid
             {
                 var homeMaticDevice = (HomeMaticDevice)device;
 
-                // Show low battery indicator, when at leat one channel has low battery
+                // Show low battery indicator, when at least one channel has low battery
                 if (homeMaticDevice.Channels.FirstOrDefault(c => c.IsLowBattery == true) != null)
                     view.FindViewById<ImageView>(Resource.Id.ivLowBat).Visibility = ViewStates.Visible;
 
                 // Add channels to the list
-                var channels = homeMaticDevice.Channels.Where(c => c.IsVisible).ToList();
-                var adapter = new HomeMaticChannelAdapter(App.Context, 0, channels);
+                var visibleChannels = homeMaticDevice.Channels.Where(c => c.IsVisible).ToList();
+                var adapter = new HomeMaticChannelAdapter(App.Context, 0, visibleChannels);
                 var lvChannels = view.FindViewById<ListView>(Resource.Id.lvChannels);
                 lvChannels.Adapter = adapter;
                 ScollingHelpers.SetListViewHeightBasedOnChildren(lvChannels, 0);

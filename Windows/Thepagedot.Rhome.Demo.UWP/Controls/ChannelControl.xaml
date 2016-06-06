@@ -208,10 +208,18 @@
                 </Grid>
             </DataTemplate>
 
+            <DataTemplate x:Name="InformationTemplate">
+
+                <Grid>
+                    <TextBlock Text="{Binding Content}" />
+                </Grid>
+            </DataTemplate>
+
             <common:ChannelTemplateSelector
                 x:Key="ChannelTemplateSelector"
                 ContactTemplate="{StaticResource ContactDataTemplate}"
                 DoorHandleTemplate="{StaticResource DoorHandleDataTemplate}"
+                InformationTemplate="{StaticResource InformationTemplate}"
                 ShutterTemplate="{StaticResource ShutterDataTemplate}"
                 SwitcherTemplate="{StaticResource SwitcherDataTemplate}"
                 TemperatureSliderTemplate="{StaticResource TemperatureSliderTemplate}" />
