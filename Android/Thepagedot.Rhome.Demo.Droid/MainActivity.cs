@@ -15,6 +15,7 @@ using HockeyApp;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using System.Collections.Generic;
 using Thepagedot.Tools.Xamarin.Android.Converters;
+using Android.Content;
 
 #if (!DEBUG)
 using HockeyApp.Metrics;
@@ -116,7 +117,7 @@ namespace Thepagedot.Rhome.App.Droid
 			// User selected a room. Navigate to it.
 			var room = MainViewModel.Rooms.ElementAt(e.Position);
 			MainViewModel.NavigateToRoomCommand.Execute(room);
-		}
+        }
 
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{

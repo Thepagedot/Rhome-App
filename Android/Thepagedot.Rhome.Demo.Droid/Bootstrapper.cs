@@ -23,7 +23,7 @@ namespace Thepagedot.Rhome.App.Droid
 			SimpleIoc.Default.Register<IDialogService, AppCompatDialogService>();
 			SimpleIoc.Default.Register<INavigationService>(() => CreateNavigationService());
 
-			// Register platform indipendent serivces
+			// Register platform independent services
 			SimpleIoc.Default.Register<SettingsService>();
 			SimpleIoc.Default.Register<HomeControlService>();
 
@@ -61,7 +61,6 @@ namespace Thepagedot.Rhome.App.Droid
 			navigationService.Configure(ViewNames.SystemVariable, typeof(SystemVariableActivity));
 			navigationService.Configure(ViewNames.Program, typeof(ProgramActivity));
 			navigationService.Configure(ViewNames.About, typeof(AboutActivity));
-
 			return navigationService;
 		}
 	}

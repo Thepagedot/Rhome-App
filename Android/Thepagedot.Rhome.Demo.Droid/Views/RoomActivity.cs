@@ -21,7 +21,7 @@ using JimBobBennett.MvvmLight.AppCompat;
 
 namespace Thepagedot.Rhome.App.Droid
 {
-	[Activity(Label = "Room", ParentActivity = typeof(MainActivity))]
+	[Activity(Label = "Room", ParentActivity = typeof(MainActivity), NoHistory = true)]
 	public class RoomActivity : AppCompatActivityBase
 	{
 		ListView lvDevices;
@@ -59,7 +59,13 @@ namespace Thepagedot.Rhome.App.Droid
 			}
 		}
 
-		public override bool OnCreateOptionsMenu(IMenu menu)
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+            //ActivityS
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
 		{
 			//MenuInflater.Inflate(Resource.Menu.RoomMenu, menu);
 			return base.OnCreateOptionsMenu(menu);
