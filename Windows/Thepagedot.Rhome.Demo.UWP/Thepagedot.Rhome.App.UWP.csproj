@@ -196,6 +196,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Tools\Thepagedot.Tools.Windows.Universal\Thepagedot.Tools.Windows.Universal.csproj">
+      <Project>{32366032-de11-47c1-9042-fc4944966ebc}</Project>
+      <Name>Thepagedot.Tools.Windows.Universal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Tools\Thepagedot.Tools\Thepagedot.Tools.csproj">
       <Project>{96b6e816-b443-458c-99c0-8158f45d71c1}</Project>
       <Name>Thepagedot.Tools</Name>
@@ -211,10 +215,6 @@
     <ProjectReference Include="..\..\..\Rhome-Framework\HomeControl\Thepagedot.Rhome.HomeMatic\Thepagedot.Rhome.HomeMatic.csproj">
       <Project>{ef0e99df-41e4-4cb3-a6db-b8d911e6a3bb}</Project>
       <Name>Thepagedot.Rhome.HomeMatic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Thepagedot.Tools.UWP\Thepagedot.Tools.UWP.csproj">
-      <Project>{f980ec6c-7e23-4385-85d3-3dd645279257}</Project>
-      <Name>Thepagedot.Tools.UWP</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

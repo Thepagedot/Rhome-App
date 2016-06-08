@@ -62,5 +62,16 @@ namespace Thepagedot.Rhome.App.UWP.Views
             var flyout = FlyoutBase.GetAttachedFlyout(element);
             flyout.ShowAt(element);
         }
+
+        private void tbIpAddress_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (textBox != null)
+            {
+                textBox.Text = (sender as TextBox).Text.Replace(',', '.');
+                textBox.SelectionStart = textBox.Text.Length;
+                textBox.SelectionLength = 0;
+            }
+        }
     }
 }

@@ -48,9 +48,12 @@
                     Header="Name"
                     Text="{Binding NewCentralUnitName, Mode=TwoWay}" />
                 <TextBox
+                    x:Name="tbIpAddress"
                     Margin="0,0,0,0"
                     Header="IP-Address"
-                    Text="{Binding NewCentralUnitAddress, Mode=TwoWay}" />
+                    InputScope="Digits"
+                    Text="{Binding NewCentralUnitAddress, Mode=TwoWay}"
+                    TextChanged="tbIpAddress_TextChanged" />
 
                 <ComboBox
                     x:Name="BrandComboBox"
