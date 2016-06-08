@@ -14,7 +14,7 @@ namespace Thepagedot.Rhome.App.Shared.Services
 	{
 		private readonly SettingsService _SettingsService;
 
-		public Dictionary<string, IHomeControlPlatform> Platforms;
+		public Dictionary<string, IHomeControlAdapter> Platforms;
 
 		public HomeControlService(SettingsService settingsService)
 		{
@@ -38,20 +38,20 @@ namespace Thepagedot.Rhome.App.Shared.Services
 			}
 
 			// Load central units
-			Platforms = new Dictionary<string, IHomeControlPlatform>();
+			Platforms = new Dictionary<string, IHomeControlAdapter>();
 			if (config.CentralUnits != null)
 			{
 				if (isDemoMode)
 				{
 					// Demo Mode
-					Platforms.Add("HomeMatic", new HomeMaticXmlApi(new Ccu("Mock", "localhost"), true));
+					Platforms.Add("HomeMatic", new HomeMaticXmlApiAdapter(new Ccu("Mock", "localhost"), true));
 				}
 				else
 				{
 					// HomeMatic
 					var homeMaticCentral = config.CentralUnits.FirstOrDefault(c => c.Brand == Base.Models.CentralUnitBrand.HomeMatic);
 					if (homeMaticCentral != null && homeMaticCentral is Ccu)
-						Platforms.Add("HomeMatic", new HomeMaticXmlApi(homeMaticCentral as Ccu));
+						Platforms.Add("HomeMatic", new HomeMaticXmlApiAdapter(homeMaticCentral as Ccu));
 				}
 			}
 		}

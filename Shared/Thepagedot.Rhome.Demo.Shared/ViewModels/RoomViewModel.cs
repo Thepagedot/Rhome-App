@@ -17,8 +17,6 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class RoomViewModel : AsyncViewModelBase
     {
-        private HomeControlService _HomeControlService;
-
         private MergedRoom _CurrentRoom;
         public MergedRoom CurrentRoom
         {
@@ -48,11 +46,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         public RoomViewModel(
             INavigationService navigationService,
             IResourceService resourceService,
-            IDialogService dialogService,
-            HomeControlService homeControlService) : base(navigationService, resourceService, dialogService)
+            IDialogService dialogService) : base(navigationService, resourceService, dialogService)
         {
-            _HomeControlService = homeControlService;
-
             Devices = new ObservableCollection<Device>();
 
             if (IsInDesignMode)
@@ -67,22 +62,22 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
             IsLoading = true;
             var devices = new List<Device>();
 
+            // Add devices for each of the merged rooms
+            foreach (var room in CurrentRoom.Rooms)
+                foreach (var device in room.Devices)
+                    devices.Add(device);
+
+            Devices.Clear();
+            foreach (var device in devices)
+                Devices.Add(device);
+
             try
             {
-                // HACK: Every platform checks every room here. This is not necessary!
-                foreach (var platform in _HomeControlService.Platforms)
+                // Update states
+                foreach (var room in CurrentRoom.Rooms)
                 {
-                    foreach (var room in CurrentRoom.Rooms)
-                    {
-                        await platform.Value.UpdateStatesForRoomAsync(room);
-                        foreach (var device in room.Devices)
-                            devices.Add(device);
-                    }
+                    await room.UpdateStatesAsync();
                 }
-
-                Devices.Clear();
-                foreach (var device in devices)
-                    Devices.Add(device);
 
                 IsLoaded = true;
             }

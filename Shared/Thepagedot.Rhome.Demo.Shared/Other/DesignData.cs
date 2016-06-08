@@ -41,7 +41,7 @@ namespace Thepagedot.Rhome.App.Shared.Other
                     }
                 };
 
-            var homeMaticRoom = new HomeMaticRoom("Living room", 0, null);
+            var homeMaticRoom = new HomeMaticRoom("Living room", 0, null, null);
             homeMaticRoom.Devices = devices;
 
             return room;
