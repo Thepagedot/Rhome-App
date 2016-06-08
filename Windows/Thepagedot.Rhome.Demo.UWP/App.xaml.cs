@@ -6,10 +6,12 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.HomeMatic.Services;
+using Thepagedot.Tools.UWP.Helper;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -85,6 +87,18 @@ namespace Thepagedot.Rhome.App.UWP
                 // visibility of the Back button
                 SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+
+                // Paint StatusBar if available (on Mobile)
+                if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    var accentColor = (Color)App.Current.Resources["SystemAccentColor"];
+                    var darkenedColor = accentColor.ChangeBrightness(-0.3f);
+
+                    var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+                    statusBar.BackgroundColor = darkenedColor;
+                    statusBar.ForegroundColor = Colors.White;
+                    statusBar.BackgroundOpacity = 1;
+                }
             }
 
             if (rootFrame.Content == null)
