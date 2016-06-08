@@ -55,30 +55,5 @@ namespace Thepagedot.Rhome.App.Shared.Services
 				}
 			}
 		}
-
-		public async Task<List<MergedRoom>> MergeRooms()
-		{
-			var mergedRooms = new List<MergedRoom>();
-
-			// Check for every home control service
-			foreach (var homeControl in Platforms)
-			{
-				var rooms = await homeControl.Value.GetRoomsWidthDevicesAsync();
-				foreach (var room in rooms)
-				{
-					var exisitngRoom = mergedRooms.FirstOrDefault(r => r.Name == room.Name);
-					if (exisitngRoom == null)
-					{
-						exisitngRoom = new MergedRoom { Name = room.Name };
-					}
-
-					//TODO: Add Room ID
-					//exisitngRoom.RoomIds.Add(room.Id);
-
-				}
-			}
-
-			return mergedRooms;
-		}
 	}
 }

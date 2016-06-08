@@ -11,7 +11,7 @@ namespace Thepagedot.Rhome.App.Droid
 {
     public class RoomAdapter
     {
-        public static View GetView(int position, Room room, View convertView)
+        public static View GetView(int position, MergedRoom room, View convertView)
         {
             var view = convertView;
             if (view == null)

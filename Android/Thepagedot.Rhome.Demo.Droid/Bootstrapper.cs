@@ -8,6 +8,7 @@ using JimBobBennett.MvvmLight.AppCompat;
 using Thepagedot.Rhome.App.Droid.Views;
 using Thepagedot.Tools;
 using Thepagedot.Tools.Xamarin.Android;
+using Thepagedot.Rhome.Base.Services;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -26,9 +27,10 @@ namespace Thepagedot.Rhome.App.Droid
 			// Register platform independent services
 			SimpleIoc.Default.Register<SettingsService>();
 			SimpleIoc.Default.Register<HomeControlService>();
+			SimpleIoc.Default.Register<RoomService>();
 
-			// Register ViewModels
-			SimpleIoc.Default.Register<MainViewModel>();
+            // Register ViewModels
+            SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<RoomViewModel>();
 			SimpleIoc.Default.Register<SettingsViewModel>();
 			SimpleIoc.Default.Register<SystemVariableViewModel>();

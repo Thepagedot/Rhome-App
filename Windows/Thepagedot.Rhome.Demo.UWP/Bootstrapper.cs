@@ -6,6 +6,7 @@ using Thepagedot.Rhome.App.Shared.Services;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.App.UWP.Services;
 using Thepagedot.Rhome.App.UWP.Views;
+using Thepagedot.Rhome.Base.Services;
 using Thepagedot.Tools;
 
 namespace Thepagedot.Rhome.App.UWP
@@ -23,6 +24,7 @@ namespace Thepagedot.Rhome.App.UWP
 
             SimpleIoc.Default.Register<SettingsService>();
             SimpleIoc.Default.Register<HomeControlService>();
+            SimpleIoc.Default.Register<RoomService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<RoomViewModel>();

@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,11 +19,18 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
     {
         private HomeControlService _HomeControlService;
 
-        private Room _CurrentRoom;
-        public Room CurrentRoom
+        private MergedRoom _CurrentRoom;
+        public MergedRoom CurrentRoom
         {
             get { return _CurrentRoom; }
             set { _CurrentRoom = value; RaisePropertyChanged(); }
+        }
+
+        private ObservableCollection<Device> _Devices;
+        public ObservableCollection<Device> Devices
+        {
+            get { return _Devices; }
+            set { _Devices = value; RaisePropertyChanged(); }
         }
 
         private RelayCommand _RefreshCommand;
@@ -45,6 +53,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         {
             _HomeControlService = homeControlService;
 
+            Devices = new ObservableCollection<Device>();
+
             if (IsInDesignMode)
             {
                 CurrentRoom = DesignData.GetDemoRoom();
@@ -55,13 +65,25 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         {
             IsLoaded = false;
             IsLoading = true;
+            var devices = new List<Device>();
 
             try
             {
+                // HACK: Every platform checks every room here. This is not necessary!
                 foreach (var platform in _HomeControlService.Platforms)
                 {
-                    await platform.Value.UpdateStatesForRoomAsync(_CurrentRoom);
+                    foreach (var room in CurrentRoom.Rooms)
+                    {
+                        await platform.Value.UpdateStatesForRoomAsync(room);
+                        foreach (var device in room.Devices)
+                            devices.Add(device);
+                    }
                 }
+
+                Devices.Clear();
+                foreach (var device in devices)
+                    Devices.Add(device);
+
                 IsLoaded = true;
             }
             catch (HttpRequestException)
