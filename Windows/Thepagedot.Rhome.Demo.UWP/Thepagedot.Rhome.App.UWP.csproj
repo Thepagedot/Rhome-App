@@ -212,8 +212,16 @@
       <Project>{ef0e99df-41e4-4cb3-a6db-b8d911e6a3bb}</Project>
       <Name>Thepagedot.Rhome.HomeMatic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Thepagedot.Tools.UWP\Thepagedot.Tools.UWP.csproj">
+      <Project>{f980ec6c-7e23-4385-85d3-3dd645279257}</Project>
+      <Name>Thepagedot.Tools.UWP</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

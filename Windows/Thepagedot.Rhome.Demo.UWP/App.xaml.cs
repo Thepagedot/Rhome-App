@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Rhome.HomeMatic.Services;
-using Thepagedot.Tools.UWP.Helper;
+using Thepagedot.Tools.Windows.Universal.Helper;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
