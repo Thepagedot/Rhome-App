@@ -163,11 +163,12 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
                 foreach (var platform in _HomeControlService.Platforms)
                 {
+                    StatusMessage = string.Format(_ResourceService.GetString("status_loading_platform"), platform.Value.GetName());
+
                     // Check connection
                     if (await platform.Value.CheckConnectionAsync())
                     {
 						// Load rooms
-						StatusMessage = string.Format(_ResourceService.GetString("status_loading_platform"), platform.Value.GetName());
                         var platformRooms = await platform.Value.GetRoomsWidthDevicesAsync();
                         rooms.AddRange(platformRooms);
                         IsLoaded = true;
@@ -177,7 +178,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                         // CCU is not reachable
                         Rooms.Clear();
                         IsLoaded = false;
-						connectionErrorOccured = true;                        
+						connectionErrorOccured = true;
                     }
                 }
 
@@ -206,10 +207,9 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 				StatusMessage = _ResourceService.GetString("status_partially_connected");
 			}
 			else
-			{ 
+			{
 				StatusMessage = _ResourceService.GetString("status_connected");
 			}
-
 
 			if (_SettingsService.Settings.IsDemoMode)
 			{
