@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
 using Thepagedot.Tools;
 using Thepagedot.Rhome.HomeMatic.Services;
+using Thepagedot.Rhome.Base.Services;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -21,10 +22,11 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 	{
 		private SettingsService _SettingsService;
 		private HomeControlService _HomeControlService;
-		private RoomViewModel _RoomViewModel;
+		private RoomService _RoomService;
+        private RoomViewModel _RoomViewModel;
 
-		private ObservableCollection<Room> _Rooms;
-		public ObservableCollection<Room> Rooms
+		private ObservableCollection<MergedRoom> _Rooms;
+		public ObservableCollection<MergedRoom> Rooms
 		{
 			get { return _Rooms; }
 			set { _Rooms = value; RaisePropertyChanged(); }
@@ -51,16 +53,16 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 
 		#region Navigation Commands
 
-		private RelayCommand<Room> _NavigateToRoomCommand;
-		public RelayCommand<Room> NavigateToRoomCommand
+		private RelayCommand<MergedRoom> _NavigateToRoomCommand;
+		public RelayCommand<MergedRoom> NavigateToRoomCommand
 		{
 			get
 			{
-				return _NavigateToRoomCommand ?? (_NavigateToRoomCommand = new RelayCommand<Room>((Room room) =>
+				return _NavigateToRoomCommand ?? (_NavigateToRoomCommand = new RelayCommand<MergedRoom>((MergedRoom room) =>
 				{
 					// TODO: Check if linking to the RoomViewModel may be a bad practice.
 					// Alternative would be to navigate to the room page with the current room as parameter
-					// The roompage then can set the current room of the room view model
+					// The room page then can set the current room of the room view model
 					_RoomViewModel.CurrentRoom = room;
 					_NavigationService.NavigateTo(ViewNames.Room);
 				}));
@@ -117,13 +119,15 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			IDialogService dialogService,
 			SettingsService settingsService,
 			HomeControlService homeControlService,
-			RoomViewModel roomViewModel) : base(navigationService, resourceService, dialogService)
+            RoomService roomService,
+            RoomViewModel roomViewModel) : base(navigationService, resourceService, dialogService)
 		{
 			_SettingsService = settingsService;
 			_HomeControlService = homeControlService;
-			_RoomViewModel = roomViewModel;
+            _RoomService = roomService;
+            _RoomViewModel = roomViewModel;
 
-			Rooms = new ObservableCollection<Room>();
+			Rooms = new ObservableCollection<MergedRoom>();
 
 			if (IsInDesignMode)
 			{
@@ -187,8 +191,9 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 					await ShowConnectionErrorMessageAsync();
 				}
 
+                var mergedRooms = _RoomService.MergeRooms(rooms);
                 Rooms.Clear();
-                foreach (var room in rooms)
+                foreach (var room in mergedRooms)
                     Rooms.Add(room);
             }
             else
