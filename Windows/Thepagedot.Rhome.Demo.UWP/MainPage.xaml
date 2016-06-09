@@ -13,6 +13,7 @@
 
     <Page.Resources>
         <Converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter" />
+        <Converters:WindowsColorConverter x:Key="WindowsColorConverter" />
     </Page.Resources>
     <Page.DataContext>
         <Binding Path="MainViewModel" Source="{StaticResource Bootstrapper}" />
@@ -256,10 +257,13 @@
                                     Margin="3,0,0,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Background="#FFCCCCCC"
                                     BorderBrush="Black"
                                     BorderThickness="1"
-                                    CornerRadius="5" />
+                                    CornerRadius="5">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{Binding StatusColor, Converter={StaticResource WindowsColorConverter}}" />
+                                    </Border.Background>
+                                </Border>
                             </Grid>
                         </Grid>
 
