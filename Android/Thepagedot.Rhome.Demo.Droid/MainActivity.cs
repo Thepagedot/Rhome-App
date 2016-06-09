@@ -16,6 +16,7 @@ using Thepagedot.Rhome.App.Shared.ViewModels;
 using System.Collections.Generic;
 using Thepagedot.Tools.Xamarin.Android.Converters;
 using Android.Content;
+using Android.Graphics.Drawables;
 
 #if (!DEBUG)
 using HockeyApp.Metrics;
@@ -34,6 +35,7 @@ namespace Thepagedot.Rhome.App.Droid
 		public DrawerLayout DrawerLayout { get; set; }
         public TextView TvRoomsEmpty { get; set; }
 		public TextView TvStatus { get; set; }
+        public ImageView IvStatus { get; set; }
 
         // Bindings
         private readonly List<Binding> _Bindings = new List<Binding>();
@@ -74,6 +76,8 @@ namespace Thepagedot.Rhome.App.Droid
             _Bindings.Add(this.SetBinding(() => MainViewModel.Rooms.Count, () => TvRoomsEmpty.Visibility).ConvertSourceToTarget(BoolToNegatedVisibilityConverter.Convert));
 			TvStatus = FindViewById<TextView>(Resource.Id.tvStatus);
 			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusMessage, () => TvStatus.Text));
+            IvStatus = FindViewById<ImageView>(Resource.Id.ivStatus);
+            _Bindings.Add(this.SetBinding(() => MainViewModel.StatusColor, () => ((ShapeDrawable)IvStatus.Background).Paint.Color));
 		}
 
 		protected override async void OnResume()

@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.Views;
 using System.Collections.ObjectModel;
 using Thepagedot.Tools;
 using Thepagedot.Rhome.HomeMatic.Services;
+using System.Drawing;
 
 namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
@@ -37,7 +38,16 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			set { _StatusMessage = value; RaisePropertyChanged(); }
 		}
 
-		private RelayCommand _RefreshCommand;
+        private Color _SatusColor;
+        public Color StatusColor
+        {
+            get { return _SatusColor; }
+            set { _SatusColor = value; RaisePropertyChanged(); }
+        }
+
+
+
+        private RelayCommand _RefreshCommand;
 		public RelayCommand RefreshCommand
 		{
 			get
@@ -150,7 +160,8 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			if (!_SettingsService.IsLoaded)
 			{
 				StatusMessage = _ResourceService.GetString("status_loading_settings");
-				await _SettingsService.LoadSettingsAsync();
+                StatusColor = Color.FromKnownColor(KnownColor.Gray);
+                await _SettingsService.LoadSettingsAsync();
 			}
 
             // Init HomeControlService
@@ -164,6 +175,7 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
                 foreach (var platform in _HomeControlService.Platforms)
                 {
                     StatusMessage = string.Format(_ResourceService.GetString("status_loading_platform"), platform.Value.GetName());
+                    StatusColor = Color.FromKnownColor(KnownColor.Gray);
 
                     // Check connection
                     if (await platform.Value.CheckConnectionAsync())
@@ -201,15 +213,18 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 			if (!Rooms.Any())
 			{
 				StatusMessage = _ResourceService.GetString("status_not_connected");
-			}
+                StatusColor = Color.FromKnownColor(KnownColor.Red);
+            }
 			else if (connectionErrorOccured)
 			{
 				StatusMessage = _ResourceService.GetString("status_partially_connected");
-			}
+                StatusColor = Color.FromKnownColor(KnownColor.Yellow);
+            }
 			else
 			{
 				StatusMessage = _ResourceService.GetString("status_connected");
-			}
+                StatusColor = Color.FromKnownColor(KnownColor.Green);
+            }
 
 			if (_SettingsService.Settings.IsDemoMode)
 			{
