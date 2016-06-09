@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using Thepagedot.Tools.Xamarin.Android.Converters;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Android.Graphics;
 
 #if (!DEBUG)
 using HockeyApp.Metrics;
@@ -36,6 +37,7 @@ namespace Thepagedot.Rhome.App.Droid
         public TextView TvRoomsEmpty { get; set; }
 		public TextView TvStatus { get; set; }
         public ImageView IvStatus { get; set; }
+        public ShapeDrawable IvStatusDrawable { get; set; }
 
         // Bindings
         private readonly List<Binding> _Bindings = new List<Binding>();
@@ -77,7 +79,7 @@ namespace Thepagedot.Rhome.App.Droid
 			TvStatus = FindViewById<TextView>(Resource.Id.tvStatus);
 			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusMessage, () => TvStatus.Text));
             IvStatus = FindViewById<ImageView>(Resource.Id.ivStatus);
-            _Bindings.Add(this.SetBinding(() => MainViewModel.StatusColor, () => ((ShapeDrawable)IvStatus.Background).Paint.Color));
+            _Bindings.Add(this.SetBinding(() => MainViewModel.StatusColor).WhenSourceChanges(() => { ((GradientDrawable)IvStatus.Background).SetColor(Color.Argb(MainViewModel.StatusColor.A, MainViewModel.StatusColor.R, MainViewModel.StatusColor.G, MainViewModel.StatusColor.B)); }));
 		}
 
 		protected override async void OnResume()
@@ -89,9 +91,6 @@ namespace Thepagedot.Rhome.App.Droid
             // Init GridView (after ViewModel is loaded)
             var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);
 			gvRooms.Adapter = MainViewModel.Rooms.GetAdapter(RoomAdapter.GetView);
-            var a = App.Bootstrapper.SystemVariableViewModel.SystemVariables.GetAdapter(SystemVariableAdapter.GetView);
-            var b = App.Bootstrapper.MainViewModel.Rooms.GetAdapter(RoomAdapter.GetView);
-
             gvRooms.ItemClick += GvRooms_ItemClick;
 			gvRooms.IsExpanded = true;
 		}

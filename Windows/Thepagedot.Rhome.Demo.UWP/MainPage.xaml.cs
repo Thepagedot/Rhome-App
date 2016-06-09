@@ -67,7 +67,7 @@ namespace Thepagedot.Rhome.App.UWP
 
         private void gvRooms_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var room = e.ClickedItem as Room;
+            var room = e.ClickedItem as MergedRoom;
             App.Bootstrapper.MainViewModel.NavigateToRoomCommand.Execute(room);
         }
 

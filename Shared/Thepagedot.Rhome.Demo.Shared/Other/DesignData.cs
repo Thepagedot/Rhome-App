@@ -11,10 +11,10 @@ namespace Thepagedot.Rhome.App.Shared.Other
 {
     public static class DesignData
     {
-        public static Room GetDemoRoom()
+        public static MergedRoom GetDemoRoom()
         {
-            var room = new HomeMaticRoom("Living room", 0, new List<int>());
-            room.Devices = new List<Device>
+            var room = new MergedRoom { Name = "Living room", Floor = 0 };
+            var devices = new List<Device>
                 {
                     new HomeMaticDevice("Testdevice 1", 0, "")
                     {
@@ -40,16 +40,20 @@ namespace Thepagedot.Rhome.App.Shared.Other
                         }
                     }
                 };
+
+            var homeMaticRoom = new HomeMaticRoom("Living room", 0, null, null);
+            homeMaticRoom.Devices = devices;
+
             return room;
         }
 
-        public static ObservableCollection<Room> GetDemoRooms()
+        public static ObservableCollection<MergedRoom> GetDemoRooms()
         {
-            return new ObservableCollection<Room>
+            return new ObservableCollection<MergedRoom>
                 {
-                    new HomeMaticRoom("Bedroom", 0, new List<int>()),
-                    new HomeMaticRoom("Living room", 0, new List<int>()),
-                    new HomeMaticRoom("Kitchen", 0, new List<int>())
+                    new MergedRoom { Name = "Bedroom", Floor = 0 },
+                    new MergedRoom { Name = "Living room", Floor = 0 },
+                    new MergedRoom { Name = "Kitchen", Floor = 0 },
                 };
         }
 

@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -16,13 +17,18 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
 {
     public class RoomViewModel : AsyncViewModelBase
     {
-        private HomeControlService _HomeControlService;
-
-        private Room _CurrentRoom;
-        public Room CurrentRoom
+        private MergedRoom _CurrentRoom;
+        public MergedRoom CurrentRoom
         {
             get { return _CurrentRoom; }
             set { _CurrentRoom = value; RaisePropertyChanged(); }
+        }
+
+        private ObservableCollection<Device> _Devices;
+        public ObservableCollection<Device> Devices
+        {
+            get { return _Devices; }
+            set { _Devices = value; RaisePropertyChanged(); }
         }
 
         private RelayCommand _RefreshCommand;
@@ -40,10 +46,9 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         public RoomViewModel(
             INavigationService navigationService,
             IResourceService resourceService,
-            IDialogService dialogService,
-            HomeControlService homeControlService) : base(navigationService, resourceService, dialogService)
+            IDialogService dialogService) : base(navigationService, resourceService, dialogService)
         {
-            _HomeControlService = homeControlService;
+            Devices = new ObservableCollection<Device>();
 
             if (IsInDesignMode)
             {
@@ -55,13 +60,25 @@ namespace Thepagedot.Rhome.App.Shared.ViewModels
         {
             IsLoaded = false;
             IsLoading = true;
+            var devices = new List<Device>();
+
+            // Add devices for each of the merged rooms
+            foreach (var room in CurrentRoom.Rooms)
+                foreach (var device in room.Devices)
+                    devices.Add(device);
+
+            Devices.Clear();
+            foreach (var device in devices)
+                Devices.Add(device);
 
             try
             {
-                foreach (var platform in _HomeControlService.Platforms)
+                // Update states
+                foreach (var room in CurrentRoom.Rooms)
                 {
-                    await platform.Value.UpdateStatesForRoomAsync(_CurrentRoom);
+                    await room.UpdateStatesAsync();
                 }
+
                 IsLoaded = true;
             }
             catch (HttpRequestException)
