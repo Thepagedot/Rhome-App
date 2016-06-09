@@ -106,11 +106,8 @@
     <Compile Include="Controls\ChannelControl.xaml.cs">
       <DependentUpon>ChannelControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DoorHandleStateToVisibilityConverter.cs" />
     <Compile Include="Converters\HideEmptyChannelsConverter.cs" />
-    <Compile Include="Converters\IntToVisibilityConverter.cs" />
-    <Compile Include="Converters\WindowsColorConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
