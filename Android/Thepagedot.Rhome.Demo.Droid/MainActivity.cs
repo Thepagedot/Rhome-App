@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using Thepagedot.Tools.Xamarin.Android.Converters;
 using Android.Content;
 using Android.Graphics.Drawables;
-using Android.Graphics;
+
 
 #if (!DEBUG)
 using HockeyApp.Metrics;
@@ -79,7 +79,7 @@ namespace Thepagedot.Rhome.App.Droid
 			TvStatus = FindViewById<TextView>(Resource.Id.tvStatus);
 			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusMessage, () => TvStatus.Text));
             IvStatus = FindViewById<ImageView>(Resource.Id.ivStatus);
-            _Bindings.Add(this.SetBinding(() => MainViewModel.StatusColor).WhenSourceChanges(() => { ((GradientDrawable)IvStatus.Background).SetColor(Color.Argb(MainViewModel.StatusColor.A, MainViewModel.StatusColor.R, MainViewModel.StatusColor.G, MainViewModel.StatusColor.B)); }));
+			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusColor).WhenSourceChanges(() => { ((GradientDrawable)IvStatus.Background).SetColor(Android.Graphics.Color.Argb(MainViewModel.StatusColor.A, MainViewModel.StatusColor.R, MainViewModel.StatusColor.G, MainViewModel.StatusColor.B)); }));
 		}
 
 		protected override async void OnResume()
@@ -109,7 +109,7 @@ namespace Thepagedot.Rhome.App.Droid
 
 		async void SlSwipeContainer_Refresh(object sender, EventArgs e)
 		{
-			var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
+			//var gvRooms = FindViewById<GridView>(Resource.Id.gvRooms);
 			//ScollingHelpers.SetListViewHeightBasedOnChildren(gvRooms, Resources.GetDimension(Resource.Dimension.default_margin)); //TODO: Check if still needed
 			await App.Bootstrapper.MainViewModel.RefreshAsync(true);
 			(sender as SwipeRefreshLayout).Refreshing = false;

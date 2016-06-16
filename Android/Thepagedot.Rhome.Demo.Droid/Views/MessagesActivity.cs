@@ -18,8 +18,6 @@ namespace Thepagedot.Rhome.App.Droid.Views
     [Activity(Label = "Messages", ParentActivity = typeof(MainActivity))]
     public class MessagesActivity : AppCompatActivity
     {
-        ListView lvMessages;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,8 +33,6 @@ namespace Thepagedot.Rhome.App.Droid.Views
             var slSwipeContainer = FindViewById<SwipeRefreshLayout>(Resource.Id.slSwipeContainer);
             slSwipeContainer.SetColorSchemeResources(Android.Resource.Color.HoloBlueBright, Android.Resource.Color.HoloGreenLight, Android.Resource.Color.HoloOrangeLight, Android.Resource.Color.HoloRedLight);
             slSwipeContainer.Refresh += SlSwipeContainer_Refresh;
-
-            lvMessages = FindViewById<ListView>(Resource.Id.lvMessages);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
