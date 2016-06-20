@@ -17,20 +17,35 @@ namespace Thepagedot.Rhome.App.Droid.UITests
         public void BeforeEachTest()
         {
             app = ConfigureApp.Android.StartApp();
+
+			// Ensure demo mode is enabled
+			EnableDemoMode();
         }
 
         [Test]
         public void ClickingButtonTwiceShouldChangeItsLabel()
         {
-            Func<AppQuery, AppQuery> MyButton = c => c.Button("myButton");
-
-            app.Tap(MyButton);
-            app.Tap(MyButton);
-            AppResult[] results = app.Query(MyButton);
-            app.Screenshot("Button clicked twice.");
-
-            Assert.AreEqual("2 clicks!", results[0].Text);
+			app.Repl();
         }
+
+		private void EnableDemoMode()
+		{
+			// Open settings menu
+			app.Tap(x => x.Marked("Open drawer"));
+			app.ScrollDown(x => x.Marked("Settings"));
+			app.Tap(x => x.Marked("Settings"));
+			app.WaitForElement(x => x.Id("swDemoMode"));
+
+			// Enable demo mode if not already done
+			var switchValue = app.Query(c => c.Id("swDemoMode").Invoke("isChecked").Value<bool>()).First();
+			if (switchValue == false)
+			{
+				app.Tap(x => x.Id("swDemoMode"));
+			}
+
+			// Navigate back to main menu
+			app.Tap(x => x.Marked("Navigate up"));
+			app.WaitForElement(x => x.Id("tvStatus"));
+		}
     }
 }
-
