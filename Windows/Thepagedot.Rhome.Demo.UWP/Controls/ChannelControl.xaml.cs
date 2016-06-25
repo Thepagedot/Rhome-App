@@ -49,7 +49,8 @@ namespace Thepagedot.Rhome.App.UWP.Controls
                 if (switcher != null)
                 {
                     toggleSwitch.IsEnabled = false;
-                    await switcher.SetStateAsync((sender as ToggleSwitch).IsOn);
+                    if (switcher.State != toggleSwitch.IsOn)
+                        await switcher.SetStateAsync(toggleSwitch.IsOn);
                     toggleSwitch.IsEnabled = true;
                 }
             }

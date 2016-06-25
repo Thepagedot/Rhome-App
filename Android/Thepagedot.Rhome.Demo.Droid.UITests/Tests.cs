@@ -16,23 +16,30 @@ namespace Thepagedot.Rhome.App.Droid.UITests
         [SetUp]
         public void BeforeEachTest()
         {
-            app = ConfigureApp.Android.StartApp();
+            app = ConfigureApp
+				.Android
+				.EnableLocalScreenshots()
+			    .StartApp();
 
 			// Ensure demo mode is enabled
 			EnableDemoMode();
         }
 
         [Test]
-        public void ClickingButtonTwiceShouldChangeItsLabel()
+        public void ListOfRoomsShouldBeFilled()
         {
-			app.Repl();
+			var roomCount = app.Query(x => x.Id("flRoomItemContainer")).Count();
+			app.Screenshot("List of rooms shpuld be filled.");
+			Assert.IsTrue(roomCount > 0);
         }
+
+		#region Helpers
 
 		private void EnableDemoMode()
 		{
 			// Open settings menu
 			app.Tap(x => x.Marked("Open drawer"));
-			app.ScrollDown(x => x.Marked("Settings"));
+			app.ScrollDownTo("Settings", strategy: ScrollStrategy.Gesture);
 			app.Tap(x => x.Marked("Settings"));
 			app.WaitForElement(x => x.Id("swDemoMode"));
 
@@ -47,5 +54,7 @@ namespace Thepagedot.Rhome.App.Droid.UITests
 			app.Tap(x => x.Marked("Navigate up"));
 			app.WaitForElement(x => x.Id("tvStatus"));
 		}
+
+		#endregion
     }
 }
