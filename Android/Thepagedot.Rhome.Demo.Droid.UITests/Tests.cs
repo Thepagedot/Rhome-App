@@ -29,7 +29,7 @@ namespace Thepagedot.Rhome.App.Droid.UITests
         public void ListOfRoomsShouldBeFilled()
         {
 			var roomCount = app.Query(x => x.Id("flRoomItemContainer")).Count();
-			app.Screenshot("List of rooms shpuld be filled.");
+			app.Screenshot("List of rooms should be filled.");
 			Assert.IsTrue(roomCount > 0);
         }
 

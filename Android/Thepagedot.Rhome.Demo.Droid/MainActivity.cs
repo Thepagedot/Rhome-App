@@ -17,6 +17,9 @@ using System.Collections.Generic;
 using Thepagedot.Tools.Xamarin.Android.Converters;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 
 #if (!DEBUG)
@@ -57,13 +60,16 @@ namespace Thepagedot.Rhome.App.Droid
 
 #if (!DEBUG)
             // Register Hockey App if not in Debug mode
-            CrashManager.Register(this, App.HockeyAppKey);
-            MetricsManager.Register(this, Application, App.HockeyAppKey);
-            UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
-#endif
+            //CrashManager.Register(this, App.HockeyAppKey);
+            //MetricsManager.Register(this, Application, App.HockeyAppKey);
+            //UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
 
-			// Init navigation drawer
-			FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
+            MobileCenter.Start(App.MobileCenterKey, typeof(Analytics), typeof(Crashes));
+#endif
+            MobileCenter.Start(App.MobileCenterKey, typeof(Analytics), typeof(Crashes));
+
+            // Init navigation drawer
+            FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;
 			var drawerToggle = new ActionBarDrawerToggle(this, DrawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
 			DrawerLayout.AddDrawerListener(drawerToggle);
 			drawerToggle.SyncState();
@@ -80,13 +86,17 @@ namespace Thepagedot.Rhome.App.Droid
 			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusMessage, () => TvStatus.Text));
             IvStatus = FindViewById<ImageView>(Resource.Id.ivStatus);
 			_Bindings.Add(this.SetBinding(() => MainViewModel.StatusColor).WhenSourceChanges(() => { ((GradientDrawable)IvStatus.Background).SetColor(Android.Graphics.Color.Argb(MainViewModel.StatusColor.A, MainViewModel.StatusColor.R, MainViewModel.StatusColor.G, MainViewModel.StatusColor.B)); }));
-		}
+
+            Analytics.TrackEvent("Application started");
+        }
 
 		protected override async void OnResume()
 		{
 			base.OnResume();
 
-			await MainViewModel.RefreshAsync();
+            Analytics.TrackEvent("Page visited", new Dictionary<string, string> { { "Page", "MainPage" } });
+
+            await MainViewModel.RefreshAsync();
 
             // Init GridView (after ViewModel is loaded)
             var gvRooms = FindViewById<ExpandableHeightGridView>(Resource.Id.gvRooms);

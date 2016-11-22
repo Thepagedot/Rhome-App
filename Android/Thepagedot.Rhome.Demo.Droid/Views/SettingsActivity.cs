@@ -26,6 +26,7 @@ using Thepagedot.Rhome.App.Shared.ViewModels;
 using Thepagedot.Tools.Xamarin.Android;
 using Thepagedot.Tools.Xamarin.Android.Converters;
 using Android.Support.Design.Widget;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace Thepagedot.Rhome.App.Droid
 {
@@ -72,6 +73,13 @@ namespace Thepagedot.Rhome.App.Droid
 			LvCentralUnits.Adapter = App.Bootstrapper.SettingsViewModel.CentralUnits.GetAdapter(CentralUnitAdapter.GetView);
 			LvCentralUnits.ItemLongClick += LvCentralUnits_ItemLongClick;
 		}
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            Analytics.TrackEvent("Page visited", new Dictionary<string, string> { { "Page", "Settings" } });
+        }
 
         private void LvCentralUnits_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
 		{
