@@ -59,14 +59,14 @@ namespace Thepagedot.Rhome.App.Droid
 			MainViewModel = App.Bootstrapper.MainViewModel;
 
 #if (!DEBUG)
-            // Register Hockey App if not in Debug mode
-            //CrashManager.Register(this, App.HockeyAppKey);
-            //MetricsManager.Register(this, Application, App.HockeyAppKey);
-            //UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
+            // Register Hockey App
+            CrashManager.Register(this, App.HockeyAppKey);
+            MetricsManager.Register(this, Application, App.HockeyAppKey);
+            UpdateManager.Register(this, App.HockeyAppKey); // Remove this for store builds!
 
+            // Register Visual Studio Mobile Center
             MobileCenter.Start(App.MobileCenterKey, typeof(Analytics), typeof(Crashes));
 #endif
-            MobileCenter.Start(App.MobileCenterKey, typeof(Analytics), typeof(Crashes));
 
             // Init navigation drawer
             FindViewById<NavigationView>(Resource.Id.nav_view).NavigationItemSelected += NavigationView_NavigationItemSelected;

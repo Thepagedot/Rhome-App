@@ -38,6 +38,10 @@ namespace Thepagedot.Rhome.App.Droid.Views
 			// Feedback button
 			var btnFeedback = FindViewById<Button>(Resource.Id.btnFeedback);
 			btnFeedback.Click += (sender, e) => FeedbackManager.ShowFeedbackActivity(this);
+
+            // Simulate crash button
+            var btnSimulateCrash = FindViewById<Button>(Resource.Id.btnSimulateCrash);
+            btnSimulateCrash.Click += (sender, e) => { throw new Exception("Test Exception"); };
 		}
 	}
 }

@@ -78,7 +78,7 @@ namespace Thepagedot.Rhome.App.Droid
         {
             base.OnResume();
 
-            Analytics.TrackEvent("Page visited", new Dictionary<string, string> { { "Page", "Settings" } });
+            Analytics.TrackEvent("Page visited", new Dictionary<string, string> {{ "Page", "Settings" }});
         }
 
         private void LvCentralUnits_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)

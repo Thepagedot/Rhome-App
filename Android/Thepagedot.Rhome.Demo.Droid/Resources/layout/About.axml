@@ -29,5 +29,12 @@
             android:layout_below="@id/tvVersionLabel"
             android:text="@string/feedback"
             android:layout_marginTop="@dimen/default_margin" />
+        <Button
+            android:id="@+id/btnSimulateCrash"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/btnFeedback"
+            android:text="@string/simulateCrash"
+            android:layout_marginTop="@dimen/default_margin" />
     </RelativeLayout>
 </RelativeLayout>
